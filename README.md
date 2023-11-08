@@ -2,5 +2,5 @@
 
 Članovi tima:
 
-* ...
+* Boris Gozdenovic RA-119/2021
 * ...
