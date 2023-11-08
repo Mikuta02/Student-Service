@@ -1,12 +1,15 @@
-﻿using System;
+﻿using CLI.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    internal class Adresa
+    internal class Adresa : ISerializable
     {
 
         public string Ulica {  get; set; }
@@ -30,6 +33,25 @@ namespace CLI.Model
             sb.Append("GRAD: {Grad}, ");
             sb.Append("DRZAVA: {Drzava}");
             return base.ToString();
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValues =
+            {
+            Ulica,
+            Broj.ToString(),
+            Grad,
+            Drzava
+        };
+            return csvValues;
+        }
+        public void FromCSV(string[] values)
+        {
+            Ulica = values[0];
+            Broj = int.Parse(values[1]);
+            Grad = values[2];
+            Drzava = values[3];
         }
     }
 }

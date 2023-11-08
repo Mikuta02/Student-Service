@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    internal class Indeks
+    internal class Indeks : ISerializable
     {
 
         public string OznakaSmera {  get; set; }
@@ -29,6 +30,23 @@ namespace CLI.Model
             sb.Append("BROJ UPISA: {BrojUpisa}, ");
             sb.Append("GODINA UPISA: {GodinaUpisa}");
             return base.ToString();
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValues =
+            {
+            OznakaSmera,
+            BrojUpisa.ToString(),
+            GodinaUpisa.ToString()
+        };
+            return csvValues;
+        }
+        public void FromCSV(string[] values)
+        {
+            OznakaSmera = values[0];
+            BrojUpisa = int.Parse(values[1]);
+            GodinaUpisa = int.Parse(values[2]);
         }
     }
 }

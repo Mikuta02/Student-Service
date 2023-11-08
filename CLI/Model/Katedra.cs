@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    internal class Katedra
+    internal class Katedra : ISerializable
     {
         public int SifraKatedre { get; set; }
         public string NazivKatedre { get; set; }
@@ -38,7 +39,23 @@ namespace CLI.Model
 
             return sb.ToString();
         }
+        public string[] ToCSV()
+        {
+            string[] csvValues =
+            {
+            SifraKatedre.ToString(),
+            NazivKatedre,
+            Sef
+        };
+            return csvValues;
+        }
 
+        public void FromCSV(string[] values)
+        {
+            SifraKatedre = int.Parse(values[0]);
+            NazivKatedre = values[1];
+            Sef = values[2];
+        }
 
 
     }
