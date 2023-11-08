@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CLI.Model
 {
 
-    public class Student
+    class Student : Serialization.ISerializable
     {
 
         public string Ime { get; set; }
@@ -68,6 +68,41 @@ namespace CLI.Model
                 sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
             }
             return sb.ToString();
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValues =
+            {
+            Ime,
+            Prezime,
+            DatumRodjenja,
+            Adresa,
+            KontaktTelefon,
+            Email, 
+            BrojIndeksa,
+            TrenutnaGodinaStudija.ToString(),
+            StatusStudenta.ToString(),
+            ProsecnaOcena.ToString()
+        };
+            return csvValues;
+        }
+
+        public void FromCSV(string[] values)
+        {
+            Ime = values[0];
+            Prezime = values[1];
+            DatumRodjenja = values[2];
+            Adresa = values[3];
+            KontaktTelefon = values[4];
+            Email = values[5];
+            BrojIndeksa = values[6];
+            TrenutnaGodinaStudija = int.Parse(values[7]);
+            if (values[8] == "S")
+                StatusStudenta = EnumUt.StatusType.S;
+            else
+                StatusStudenta = EnumUt.StatusType.B;
+            ProsecnaOcena = float.Parse(values[9]);
         }
     }
 }

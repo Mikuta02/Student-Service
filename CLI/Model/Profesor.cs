@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    internal class Profesor
+    class Profesor : Serialization.ISerializable
     {
         public string Ime { get; set; }
         public string Prezime { get; set; }
@@ -53,6 +53,36 @@ namespace CLI.Model
             //     sb.Append($"{s.Name}, ");
             // }
             return sb.ToString();
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValues =
+            {
+            Ime,
+            Prezime,
+            DatumRodjenja,
+            Adresa,
+            KontaktTelefon,
+            Email,
+            BrojLicneKarte.ToString(),
+            Zvanje,
+            GodineStaza.ToString()
+        };
+            return csvValues;
+        }
+
+        public void FromCSV(string[] values)
+        {
+            Ime = values[0];
+            Prezime = values[1];
+            DatumRodjenja = values[2];
+            Adresa = values[3];
+            KontaktTelefon = values[4];
+            Email = values[5];
+            BrojLicneKarte = int.Parse(values[6]);
+            Zvanje = values[7];
+            GodineStaza = int.Parse(values[8]);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    internal class Indeks : ISerializable
+    class Indeks : Serialization.ISerializable
     {
 
         public string OznakaSmera {  get; set; }

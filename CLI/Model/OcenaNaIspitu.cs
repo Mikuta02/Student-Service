@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    internal class OcenaNaIspitu : ISerializable
+    class OcenaNaIspitu : Serialization.ISerializable
     {
         public int StudentId { get; set; }
         public int ProfesorId { get; set; }

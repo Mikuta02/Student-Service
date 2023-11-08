@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    internal class Adresa : ISerializable
+    class Adresa : Serialization.ISerializable
     {
 
         public string Ulica {  get; set; }
@@ -53,5 +53,6 @@ namespace CLI.Model
             Grad = values[2];
             Drzava = values[3];
         }
+
     }
 }

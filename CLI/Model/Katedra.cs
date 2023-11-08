@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    internal class Katedra : ISerializable
+    class Katedra : Serialization.ISerializable
     {
         public int SifraKatedre { get; set; }
         public string NazivKatedre { get; set; }
