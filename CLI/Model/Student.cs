@@ -58,10 +58,10 @@ namespace CLI.Model
             }
             sb.Append("PROSECNA OCENA: " + ProsecnaOcena + ", ");
             sb.Append("SPISAK POLOZENIH ISPITA: ");
-             foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
-             {
-                 sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
-             }
+            foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
+            {
+                sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
+            }
             sb.Append("SPISAK NEPOLOZENIH ISPITA: ");
             foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
             {
@@ -69,4 +69,5 @@ namespace CLI.Model
             }
             return sb.ToString();
         }
+    }
 }
