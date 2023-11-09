@@ -9,7 +9,7 @@ namespace CLI.Model
 
     class Student : Serialization.ISerializable
     {
-
+        public int StudentId { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
         public string DatumRodjenja { get; set; }
@@ -35,6 +35,21 @@ namespace CLI.Model
             TrenutnaGodinaStudija = trenutnaGodinaStudija;
             StatusStudenta = statusStudenta;
             ProsecnaOcena = prosecnaOcena;
+        }
+
+        public Student()
+        {
+        }
+
+        public Student(string ime, string prezime, string datumRodjenja, string adresa, string kontaktTelefon, string email, string brojIndeksa)
+        {
+            Ime = ime;
+            Prezime = prezime;
+            DatumRodjenja = datumRodjenja;
+            Adresa = adresa;
+            KontaktTelefon = kontaktTelefon;
+            Email = email;
+            BrojIndeksa = brojIndeksa;
         }
 
         public override string ToString()
@@ -74,6 +89,7 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
+            StudentId.ToString(),
             Ime,
             Prezime,
             DatumRodjenja,
@@ -90,19 +106,20 @@ namespace CLI.Model
 
         public void FromCSV(string[] values)
         {
-            Ime = values[0];
-            Prezime = values[1];
-            DatumRodjenja = values[2];
-            Adresa = values[3];
-            KontaktTelefon = values[4];
-            Email = values[5];
-            BrojIndeksa = values[6];
-            TrenutnaGodinaStudija = int.Parse(values[7]);
-            if (values[8] == "S")
+            StudentId = int.Parse(values[0]);
+            Ime = values[1];
+            Prezime = values[2];
+            DatumRodjenja = values[3];
+            Adresa = values[4];
+            KontaktTelefon = values[5];
+            Email = values[6];
+            BrojIndeksa = values[7];
+            TrenutnaGodinaStudija = int.Parse(values[8]);
+            if (values[9] == "S")
                 StatusStudenta = EnumUt.StatusType.S;
             else
                 StatusStudenta = EnumUt.StatusType.B;
-            ProsecnaOcena = float.Parse(values[9]);
+            ProsecnaOcena = float.Parse(values[10]);
         }
     }
 }
