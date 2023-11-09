@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using CLI.Console;
 using CLI.DAO;
+using CLI.Model;
+using System.Data;
 
 class Program
 {
