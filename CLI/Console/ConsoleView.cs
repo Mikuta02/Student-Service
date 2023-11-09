@@ -20,7 +20,7 @@ namespace CLI.Console
         private void PrintStudents(List<Student> students)
         {
             System.Console.WriteLine("Studenti: ");
-            string header = $"Ime {"",21} | Prezime {"",21} | Datum Rodjenja {"",6} | Adresa {"",12} | Kontakt {"",12} | Email {"",12} | Broj Indeksa {"",7} |"; 
+            string header = $"Ime {"",21} | Prezime {"",21} | Datum Rodjenja {"",6} | Adresa {"",12} | Kontakt {"",12} | Email {"",12} | Broj Indeksa {"",7} | Trenutna Godina {"",8} | Status Studenta {"",6} | Prosecna Ocena {"",5} |";
             System.Console.WriteLine(header);
             foreach (Student student in students)
             {
@@ -51,7 +51,13 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti indeks studenta: ");
             string Indeks = System.Console.ReadLine() ?? string.Empty;
 
-            return new Student(Ime,Prezime,DatumRodjena, Adresa, Kontakt, Email, Indeks);
+            System.Console.WriteLine("Uneti godinu studija studenta: ");
+            int Godina = ConsoleViewUtils.SafeInputInt();
+
+            System.Console.WriteLine("Uneti prosecnu ocenu studenta: ");
+            float Prosjecna = ConsoleViewUtils.SafeInputFloat();
+
+            return new Student(Ime,Prezime,DatumRodjena, Adresa, Kontakt, Email, Indeks, Godina, Prosjecna);
         }
 
         private int InputId()

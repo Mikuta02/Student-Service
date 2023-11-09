@@ -20,43 +20,6 @@ namespace CLI.DAO
             _students = _storage.Load();
         }
 
-        private void PrintStudents(List<Student> students)
-        {
-            System.Console.WriteLine("Studenti: ");
-            string header = $"Ime {"",21} | Prezime {"",21} | Datum Rodjenja {"",6} | Adresa {"",12} | Kontakt {"",12} | Email {"",12} | Broj Indeksa {"",7} |";
-            System.Console.WriteLine(header);
-            foreach (Student s in students)
-            {
-                System.Console.WriteLine(s);
-            }
-        }
-
-        private Student InputStudent()
-        {
-            System.Console.WriteLine("Unesite ime studenta: ");
-            string name = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Unesite prezime studenta: ");
-            string lastName = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Unesite Datum rodjenja studenta: ");
-            string date = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Unesite adresu studenta: ");
-            string adress = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Unesite kontakt studenta: ");
-            string contact = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Unesite email studenta: ");
-            string email = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Unesite indeks studenta: ");
-            string index = System.Console.ReadLine() ?? string.Empty;
-
-            return new Student(name, lastName, date, adress, contact, email, index);
-        }
-
         private int GenerateId()
         {
             if (_students.Count == 0) return 0;
@@ -83,6 +46,8 @@ namespace CLI.DAO
             oldStudent.KontaktTelefon = student.KontaktTelefon;
             oldStudent.Email = student.Email;
             oldStudent.BrojIndeksa = student.BrojIndeksa;
+            oldStudent.TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
+            oldStudent.ProsecnaOcena = student.ProsecnaOcena;
 
             _storage.Save(_students);
             return oldStudent;

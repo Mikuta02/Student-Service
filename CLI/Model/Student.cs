@@ -41,7 +41,7 @@ namespace CLI.Model
         {
         }
 
-        public Student(string ime, string prezime, string datumRodjenja, string adresa, string kontaktTelefon, string email, string brojIndeksa)
+        public Student(string ime, string prezime, string datumRodjenja, string adresa, string kontaktTelefon, string email, string brojIndeksa, int trenutnaGodinaStudija, float prosecnaOcena)
         {
             Ime = ime;
             Prezime = prezime;
@@ -50,6 +50,9 @@ namespace CLI.Model
             KontaktTelefon = kontaktTelefon;
             Email = email;
             BrojIndeksa = brojIndeksa;
+            TrenutnaGodinaStudija = trenutnaGodinaStudija;
+            this.StatusStudenta = EnumUt.StatusType.B;
+            ProsecnaOcena = prosecnaOcena;
         }
 
         public override string ToString()
@@ -72,7 +75,7 @@ namespace CLI.Model
                 sb.Append("STATUS STUDENTA: " + "Budzet" + ", ");
             }
             sb.Append("PROSECNA OCENA: " + ProsecnaOcena + ", ");
-            sb.Append("SPISAK POLOZENIH ISPITA: ");
+/*            sb.Append("SPISAK POLOZENIH ISPITA: ");
             foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
             {
                 sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
@@ -81,7 +84,7 @@ namespace CLI.Model
             foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
             {
                 sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
-            }
+            }*/
             return sb.ToString();
         }
 
