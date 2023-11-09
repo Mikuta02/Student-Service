@@ -22,11 +22,19 @@ class Program
 
         Katedra katedra1 = new Katedra("MN", "Departman za opšte discipline u tehnici", "Rale");
         DepartmentsDAO departments = new DepartmentsDAO();
-        departments.AddKatedra(katedra1);
+       // departments.AddKatedra(katedra1);
 
         Adresa adresa1 = new Adresa("Rade Kondica",9,"Derventa","Republika Srpska");
         AdressesDAO adresses = new AdressesDAO();
-        adresses.AddAdresa(adresa1);
+        ///  adresses.AddAdresa(adresa1);
+        ///  
+        OcenaNaIspitu ocena1 = new OcenaNaIspitu(0, 0, 7, "06.03.1945");
+        ExamGradesDAO grades = new ExamGradesDAO();
+        grades.AddOcenaNaIspitu(ocena1);
+
+        Indeks indeks1 = new Indeks("rarara",666,1945);
+        IndexesDAO indexes = new IndexesDAO();
+        indexes.AddIndeks(indeks1);
 
     }
 }

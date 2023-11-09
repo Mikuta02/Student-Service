@@ -10,7 +10,7 @@ namespace CLI.Model
 {
     class Indeks : Serialization.ISerializable
     {
-
+        public int IndeksId { get; set; }
         public string OznakaSmera {  get; set; }
         public int BrojUpisa { get; set; }
         public int GodinaUpisa { get; set; }
@@ -22,7 +22,8 @@ namespace CLI.Model
             BrojUpisa = brojUpisa;
             GodinaUpisa = godinaUpisa;
         }
-
+        
+        public Indeks() { }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -36,6 +37,7 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
+            IndeksId.ToString(),
             OznakaSmera,
             BrojUpisa.ToString(),
             GodinaUpisa.ToString()
@@ -44,9 +46,10 @@ namespace CLI.Model
         }
         public void FromCSV(string[] values)
         {
-            OznakaSmera = values[0];
-            BrojUpisa = int.Parse(values[1]);
-            GodinaUpisa = int.Parse(values[2]);
+            IndeksId = int.Parse(values[0]);
+            OznakaSmera = values[1];
+            BrojUpisa = int.Parse(values[2]);
+            GodinaUpisa = int.Parse(values[3]);
         }
     }
 }

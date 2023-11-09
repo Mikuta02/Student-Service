@@ -10,8 +10,9 @@ namespace CLI.Model
 {
     class OcenaNaIspitu : Serialization.ISerializable
     {
+        public int OcenaNaIspituId { get; set; }
         public int StudentId { get; set; }
-        public int ProfesorId { get; set; }
+        public int PredmetId { get; set; }
 
         public Student StudentPolozio {  get; set; }
         public Predmet PredmetStudenta { get; set; }
@@ -25,8 +26,18 @@ namespace CLI.Model
             Ocena = ocena;
             DatumPolaganja = datum; 
             StudentId = studentID;
-            ProfesorId = profaId;
+            PredmetId = profaId;
 
+        }
+
+        public OcenaNaIspitu() { }
+
+        public OcenaNaIspitu(int studentId, int predmetId, int ocena, string datumPolaganja)
+        {
+            StudentId = studentId;
+            PredmetId = predmetId;
+            Ocena = ocena;
+            DatumPolaganja = datumPolaganja;
         }
 
         public override string ToString()
@@ -43,20 +54,22 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
+            OcenaNaIspituId.ToString(),
             Ocena.ToString(),
             DatumPolaganja,
             StudentId.ToString(),
-            ProfesorId.ToString()
+            PredmetId.ToString()
         };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            Ocena = int.Parse(values[0]);
-            DatumPolaganja = values[1];
-            StudentId = int.Parse(values[2]);
-            ProfesorId = int.Parse(values[3]);
+            OcenaNaIspituId = int.Parse(values[0]);
+            Ocena = int.Parse(values[1]);
+            DatumPolaganja = values[2];
+            StudentId = int.Parse(values[3]);
+            PredmetId = int.Parse(values[4]);
         }
 
     }
