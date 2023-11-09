@@ -14,8 +14,8 @@ class Program
 
         Profesor profesor1 = new Profesor("Nebojsa","ralevic","12.10.1011","New Now","091237","Rcma123@gmail.com",123123,"Kurton",123);
         Profesor profesor2 = new Profesor("Srdjan", "Popov", "01.10.2011", "Big Obarska", "dsads", "dyunimakaroni@gmail.com", 333, "Kuriton", 123);
-        ProfessorsDAO profesors = new ProfessorsDAO();
-       //profesors.AddProfesor(profesor2);
+        ProfessorsDAO professors = new ProfessorsDAO();
+       //professors.AddProfesor(profesor2);
 
         Predmet predmet1 = new Predmet("A1", "Analiza 1", "prva", 0, 9);
         Predmet predmet2 = new Predmet("PJISP", "Programski jezici i strukture podataka", "prva", 1, 9);
@@ -38,7 +38,7 @@ class Program
         IndexesDAO indexes = new IndexesDAO();
         //indexes.AddIndeks(indeks1);
 
-        ConsoleView view = new ConsoleView(students, profesors, subjects, grades, indexes, adresses, departments);
+        ConsoleView view = new ConsoleView(students, professors, subjects, grades, indexes, adresses, departments);
         view.RunMenu();
     }
 }
