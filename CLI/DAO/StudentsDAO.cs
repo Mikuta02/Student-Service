@@ -88,7 +88,7 @@ namespace CLI.DAO
             return oldStudent;
         }
 
-        public Student? Removestudent(int id)
+        public Student? RemoveStudent(int id)
         {
             Student? student = GetStudentById(id);
             if (student == null) return null;
