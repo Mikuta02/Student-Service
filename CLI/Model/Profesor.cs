@@ -9,6 +9,7 @@ namespace CLI.Model
 {
     class Profesor : Serialization.ISerializable
     {
+        public int ProfesorId {  get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
         public string DatumRodjenja { get; set; }
@@ -59,6 +60,7 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
+            ProfesorId.ToString(),
             Ime,
             Prezime,
             DatumRodjenja,
@@ -72,17 +74,23 @@ namespace CLI.Model
             return csvValues;
         }
 
+        public Profesor()
+        {
+
+        }
+
         public void FromCSV(string[] values)
         {
-            Ime = values[0];
-            Prezime = values[1];
-            DatumRodjenja = values[2];
-            Adresa = values[3];
-            KontaktTelefon = values[4];
-            Email = values[5];
-            BrojLicneKarte = int.Parse(values[6]);
-            Zvanje = values[7];
-            GodineStaza = int.Parse(values[8]);
+            ProfesorId = int.Parse(values[0]);
+            Ime = values[1];
+            Prezime = values[2];
+            DatumRodjenja = values[3];
+            Adresa = values[4];
+            KontaktTelefon = values[5];
+            Email = values[6];
+            BrojLicneKarte = int.Parse(values[7]);
+            Zvanje = values[8];
+            GodineStaza = int.Parse(values[9]);
         }
     }
 }
