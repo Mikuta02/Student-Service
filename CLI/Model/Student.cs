@@ -55,38 +55,46 @@ namespace CLI.Model
             ProsecnaOcena = prosecnaOcena;
         }
 
-        public override string ToString()
+        public override string? ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("IME: " + Ime + ", ");
-            sb.Append("PREZIME: " + Prezime + ", ");
-            sb.Append("DATUM RODJENJA: " + DatumRodjenja + ", ");
-            sb.Append("ADRESA: " + Adresa + ", ");
-            sb.Append("KONTAKT TELEFON: " + KontaktTelefon + ", ");
-            sb.Append("EMAIL: " + Email + ", ");
-            sb.Append("BROJ INDEKSA: " + BrojIndeksa + ", ");
-            sb.Append("TRENUTNA GODINA STUDIJA: " + TrenutnaGodinaStudija + ", ");
-            if (StatusStudenta.Equals(EnumUt.StatusType.S))
-            {
-                sb.Append("STATUS STUDENTA: " + "Samofinansiranje" + ", ");
-            }
-            else
-            {
-                sb.Append("STATUS STUDENTA: " + "Budzet" + ", ");
-            }
-            sb.Append("PROSECNA OCENA: " + ProsecnaOcena + ", ");
-/*            sb.Append("SPISAK POLOZENIH ISPITA: ");
-            foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
-            {
-                sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
-            }
-            sb.Append("SPISAK NEPOLOZENIH ISPITA: ");
-            foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
-            {
-                sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
-            }*/
-            return sb.ToString();
+            return $"ID: {StudentId,2} | Ime {Ime,21} | Prezime {Prezime,21} | Datum Rodjenja {DatumRodjenja,6} | Adresa {Adresa,8} | Kontakt {KontaktTelefon,10} | Email {Email,12} | Broj Indeksa {BrojIndeksa,7} | Trenutna Godina {TrenutnaGodinaStudija,2}";
         }
+
+
+
+        /* public override string ToString()
+         {
+             StringBuilder sb = new StringBuilder();
+             sb.Append("IME: " + Ime + ", ");
+             sb.Append("PREZIME: " + Prezime + ", ");
+             sb.Append("DATUM RODJENJA: " + DatumRodjenja + ", ");
+             sb.Append("ADRESA: " + Adresa + ", ");
+             sb.Append("KONTAKT TELEFON: " + KontaktTelefon + ", ");
+             sb.Append("EMAIL: " + Email + ", ");
+             sb.Append("BROJ INDEKSA: " + BrojIndeksa + ", ");
+             sb.Append("TRENUTNA GODINA STUDIJA: " + TrenutnaGodinaStudija + ", ");
+             if (StatusStudenta.Equals(EnumUt.StatusType.S))
+             {
+                 sb.Append("STATUS STUDENTA: " + "Samofinansiranje" + ", ");
+             }
+             else
+             {
+                 sb.Append("STATUS STUDENTA: " + "Budzet" + ", ");
+             }
+             sb.Append("PROSECNA OCENA: " + ProsecnaOcena + ", ");
+ /*            sb.Append("SPISAK POLOZENIH ISPITA: ");
+             foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
+             {
+                 sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
+             }
+             sb.Append("SPISAK NEPOLOZENIH ISPITA: ");
+             foreach (OcenaNaIspitu oni in SpisakPolozenihIspita)
+             {
+                 sb.Append($"{oni.PredmetStudenta.Naziv}, {oni.Ocena}");
+             }
+             return sb.ToString();
+         }
+     */
 
         public string[] ToCSV()
         {
