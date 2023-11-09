@@ -14,7 +14,11 @@ class Program
 
         Profesor profesor1 = new Profesor("Nebojsa","ralevic","12.10.1011","New Now","091237","Rcma123@gmail.com",123123,"Kurton",123);
         ProfesorsDAO profesors = new ProfesorsDAO();
-        profesors.AddProfesor(profesor1);
+       // profesors.AddProfesor(profesor1);
+
+        Predmet predmet1 = new Predmet("A1", "Analiza 1", "prva", 0, 9);
+        SubjectsDAO subjects = new SubjectsDAO();
+        //subjects.AddPredmet(predmet1);
 
     }
 }

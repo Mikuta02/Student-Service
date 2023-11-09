@@ -8,6 +8,7 @@ namespace CLI.Model
 {
     class Predmet : Serialization.ISerializable
     {
+        public int PredmetId { get; set; } 
         public string SifraPredmeta { get; set; }
         public string Naziv { get; set; }
         public EnumUt.SemestarType Semestar { get; set; }
@@ -27,6 +28,20 @@ namespace CLI.Model
             ProfesorPredmeta = profesorPredmeta;
             ProfesorID = profesorId;
             ESPB = eSPB;
+        }
+
+        public Predmet(string sifraPredmeta, string naziv, string godinaStudija, int profesorID, int eSPB)
+        {
+            SifraPredmeta = sifraPredmeta;
+            Naziv = naziv;
+            GodinaStudija = godinaStudija;
+            ProfesorID = profesorID;
+            ESPB = eSPB;
+            Semestar = EnumUt.SemestarType.Letnji;
+        }
+
+        public Predmet()
+        {
         }
 
         public override string? ToString()
@@ -61,6 +76,7 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
+            PredmetId.ToString(),
              SifraPredmeta,
              Naziv,
              Semestar.ToString(),
@@ -73,15 +89,16 @@ namespace CLI.Model
 
         public void FromCSV(string[] values)
         {
-            SifraPredmeta = values[0];
-            Naziv = values[1];
-            if (values[2] == "Letnji")
+            PredmetId = int.Parse(values[0]);
+            SifraPredmeta = values[1];
+            Naziv = values[2];
+            if (values[3] == "Letnji")
                 Semestar = EnumUt.SemestarType.Letnji;
             else
                 Semestar = EnumUt.SemestarType.Zimski;
-            GodinaStudija = values[3];
-            ESPB = int.Parse(values[4]);
-            ProfesorID = int.Parse(values[5]);
+            GodinaStudija = values[4];
+            ESPB = int.Parse(values[5]);
+            ProfesorID = int.Parse(values[6]);
         }
     }
 }
