@@ -1,5 +1,4 @@
 ﻿using CLI.DAO;
-using CLI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,65 +9,28 @@ namespace CLI.Console
 {
     class ConsoleView
     {
-
         private readonly StudentsDAO _studentsDao;
+        private readonly ProfessorsDAO _profesDao;
+        private readonly SubjectsDAO _subjectsDao;
+        private readonly ExamGradesDAO _examGradesDao;
+        private readonly IndexesDAO _indexesDao;
+        private readonly AdressesDAO _addressesDao;
+        private readonly DepartmentsDAO _departmentsDao;
 
-        public ConsoleView(StudentsDAO studentsDao )
+        public ConsoleView(StudentsDAO studentsDao, ProfessorsDAO profesDao, SubjectsDAO subjectsDao, ExamGradesDAO examGradesDao, IndexesDAO indexesDao, AdressesDAO addressesDao, DepartmentsDAO departmentsDao)
         {
             _studentsDao = studentsDao;
-        }
-        private void PrintStudents(List<Student> students)
-        {
-            System.Console.WriteLine("Studenti: ");
-            string header = $"Ime {"",21} | Prezime {"",21} | Datum Rodjenja {"",6} | Adresa {"",12} | Kontakt {"",12} | Email {"",12} | Broj Indeksa {"",7} | Trenutna Godina {"",8} | Status Studenta {"",6} | Prosecna Ocena {"",5} |";
-            System.Console.WriteLine(header);
-            foreach (Student student in students)
-            {
-                System.Console.WriteLine(student);
-            }
-        }
-
-        private Student InputStudent()
-        {
-            System.Console.WriteLine("Uneti ime studenta: ");
-            string Ime = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Uneti prezime studenta: ");
-            string Prezime = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Uneti datum rodjena studenta: ");
-            string DatumRodjena = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Uneti adresu studenta: ");
-            string Adresa = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Uneti kontakt studenta: ");
-            string Kontakt = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Uneti email studenta: ");
-            string Email = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Uneti indeks studenta: ");
-            string Indeks = System.Console.ReadLine() ?? string.Empty;
-
-            System.Console.WriteLine("Uneti godinu studija studenta: ");
-            int Godina = ConsoleViewUtils.SafeInputInt();
-
-            System.Console.WriteLine("Uneti prosecnu ocenu studenta: ");
-            float Prosjecna = ConsoleViewUtils.SafeInputFloat();
-
-            return new Student(Ime,Prezime,DatumRodjena, Adresa, Kontakt, Email, Indeks, Godina, Prosjecna);
-        }
-
-        private int InputId()
-        {
-            System.Console.WriteLine("Uneti ID studenta: ");
-            return ConsoleViewUtils.SafeInputInt();
+            _profesDao = profesDao;
+            _subjectsDao = subjectsDao;
+            _examGradesDao = examGradesDao;
+            _indexesDao = indexesDao;
+            _addressesDao = addressesDao;
+            _departmentsDao = departmentsDao;
         }
 
         public void RunMenu()
         {
-            while(true)
+            while (true)
             {
                 ShowMenu();
                 string userInput = System.Console.ReadLine() ?? "0";
@@ -83,68 +45,33 @@ namespace CLI.Console
             switch (input)
             {
                 case "1":
-                    ShowAllStudents();
+                    StudentConsoleView viewStudent = new StudentConsoleView(_studentsDao);
+                    viewStudent.RunStudentMenu();
                     break;
                 case "2":
-                    AddStudent();
+                    ProfessorConsoleView viewProfessor = new ProfessorConsoleView(_profesDao); //itd
+                    viewProfessor.RunProfessorMenu();
                     break;
-                case "3":
-                    UpdateStudent();
-                    break;
-                case "4":
-                    RemoveStudent();
-                    break;
+                    /*        case "3":
+                               UpdateStudent();
+                               break;
+                           case "4":
+                               RemoveStudent();
+                               break;*/
             }
         }
 
-        private void ShowAllStudents()
-        {
-            PrintStudents(_studentsDao.GetAllStudents());
-        }
-
-        private void RemoveStudent()
-        {
-            int id = InputId();
-            Student? removedStuden = _studentsDao.RemoveStudent(id);
-            if (removedStuden is null) 
-            {
-                System.Console.WriteLine("Student nije pronadjen");
-                return;
-            }
-            System.Console.WriteLine("Student  izbrisan");
-
-        }
-
-        private void UpdateStudent()
-        {
-            int id = InputId();
-            Student student = InputStudent();
-            student.StudentId = id;
-            Student? updateStudent = _studentsDao.UpdateStudent(student);
-            if (updateStudent == null)
-            {
-                System.Console.WriteLine("Student nije pronadjen");
-                return;
-            }
-
-            System.Console.WriteLine("Student azuriran");
-        }
-
-        private void AddStudent()
-        {
-            Student student = InputStudent();
-            _studentsDao.AddStudent(student);
-            System.Console.WriteLine("Student dodat");
-        }
         private void ShowMenu()
         {
             System.Console.WriteLine("\nIzaberite opciju: ");
             System.Console.WriteLine("1: Prikazati studente");
-            System.Console.WriteLine("2: Dodati studenta");
-            System.Console.WriteLine("3: Azurirati studenta");
-            System.Console.WriteLine("4: Izbrisati studenta");
+            System.Console.WriteLine("2: Prikazati profesore");
+            System.Console.WriteLine("3: Prikazati predmete");
+            System.Console.WriteLine("4: Prikazati ocene");
+            System.Console.WriteLine("5: Prikazati indekse");
+            System.Console.WriteLine("6: Prikazati katedre");
+            System.Console.WriteLine("7: Prikazati adrese");
             System.Console.WriteLine("0: Close");
         }
-
     }
 }

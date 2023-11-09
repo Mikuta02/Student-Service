@@ -32,9 +32,6 @@ namespace CLI.DAO
             predmet.PredmetId = GenerateId();
             _subjects.Add(predmet);
             _storage.Save(_subjects);
-
-
-
             return predmet;
         }
 

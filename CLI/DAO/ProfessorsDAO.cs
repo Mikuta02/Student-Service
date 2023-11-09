@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CLI.DAO
 {
-    class ProfesorsDAO
+    class ProfessorsDAO
     {
         private readonly List<Profesor> _profesors;
         private readonly Storage<Profesor> _storage;
 
-        public ProfesorsDAO()
+        public ProfessorsDAO()
         {
             _storage = new Storage<Profesor>("profesors.txt");
             _profesors = _storage.Load();
@@ -25,7 +25,7 @@ namespace CLI.DAO
             return _profesors[^1].ProfesorId + 1;
         }
 
-        public Profesor AddProfesor(Profesor profesor)
+        public Profesor AddProfessor(Profesor profesor)
         {
             profesor.ProfesorId = GenerateId();
             _profesors.Add(profesor);
@@ -33,9 +33,9 @@ namespace CLI.DAO
             return profesor;
         }
 
-        public Profesor? UpdateProfesor(Profesor profesor)
+        public Profesor? UpdateProfessor(Profesor profesor)
         {
-            Profesor? oldProfesor = GetProfesorById(profesor.ProfesorId);
+            Profesor? oldProfesor = GetProfessorById(profesor.ProfesorId);
             if (oldProfesor is null) return null;
 
             oldProfesor.Ime = profesor.Ime;
@@ -51,20 +51,20 @@ namespace CLI.DAO
             _storage.Save(_profesors);
             return oldProfesor;
         }
-        public Profesor? RemoveProfesor(int id)
+        public Profesor? RemoveProfessor(int id)
         {
-            Profesor? profesor = GetProfesorById(id);
+            Profesor? profesor = GetProfessorById(id);
             if (profesor == null) return null;
 
             _profesors.Remove(profesor);
             _storage.Save(_profesors);
             return profesor;
         }
-        private Profesor? GetProfesorById(int id)
+        private Profesor? GetProfessorById(int id)
         {
             return _profesors.Find(s => s.ProfesorId == id);
         }
-        public List<Profesor> GetAllProfesors()
+        public List<Profesor> GetAllProfessors()
         {
             return _profesors;
         }
