@@ -10,7 +10,8 @@ namespace CLI.Model
 {
     class Katedra : Serialization.ISerializable
     {
-        public int SifraKatedre { get; set; }
+        public int KatedraId { get; set; }  
+        public string SifraKatedre { get; set; }
         public string NazivKatedre { get; set; }
 
         public string Sef {  get; set; } //Pitati asistente sta dodje sef
@@ -21,7 +22,14 @@ namespace CLI.Model
             Profesori = new List<Profesor>();
         }
 
-        public Katedra(int sifra, string nazivKatedre)
+        public Katedra(string sifraKatedre, string nazivKatedre, string sef)
+        {
+            SifraKatedre = sifraKatedre;
+            NazivKatedre = nazivKatedre;
+            Sef = sef;
+        }
+
+        public Katedra(string sifra, string nazivKatedre)
         {
             SifraKatedre = sifra;
             NazivKatedre = nazivKatedre;
@@ -43,7 +51,8 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
-            SifraKatedre.ToString(),
+            KatedraId.ToString(),
+            SifraKatedre,
             NazivKatedre,
             Sef
         };
@@ -52,9 +61,10 @@ namespace CLI.Model
 
         public void FromCSV(string[] values)
         {
-            SifraKatedre = int.Parse(values[0]);
-            NazivKatedre = values[1];
-            Sef = values[2];
+            KatedraId = int.Parse(values[0]);
+            SifraKatedre = values[1];
+            NazivKatedre = values[2];
+            Sef = values[3];
         }
 
 

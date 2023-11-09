@@ -20,5 +20,13 @@ class Program
         SubjectsDAO subjects = new SubjectsDAO();
         //subjects.AddPredmet(predmet1);
 
+        Katedra katedra1 = new Katedra("MN", "Departman za opšte discipline u tehnici", "Rale");
+        DepartmentsDAO departments = new DepartmentsDAO();
+        departments.AddKatedra(katedra1);
+
+        Adresa adresa1 = new Adresa("Rade Kondica",9,"Derventa","Republika Srpska");
+        AdressesDAO adresses = new AdressesDAO();
+        adresses.AddAdresa(adresa1);
+
     }
 }

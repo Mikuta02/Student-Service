@@ -11,7 +11,7 @@ namespace CLI.Model
 {
     class Adresa : Serialization.ISerializable
     {
-
+        public int AdresaId { get; set; }   
         public string Ulica {  get; set; }
         public int Broj { get; set; }
         public string Grad {  get; set; }
@@ -24,6 +24,8 @@ namespace CLI.Model
             Grad = grad;
             Drzava = drzava;
         }
+
+        public Adresa() { }
 
         public override string ToString()
         {
@@ -39,6 +41,7 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
+            AdresaId.ToString(),
             Ulica,
             Broj.ToString(),
             Grad,
@@ -48,10 +51,11 @@ namespace CLI.Model
         }
         public void FromCSV(string[] values)
         {
-            Ulica = values[0];
-            Broj = int.Parse(values[1]);
-            Grad = values[2];
-            Drzava = values[3];
+            AdresaId = int.Parse(values[0]);
+            Ulica = values[1];
+            Broj = int.Parse(values[2]);
+            Grad = values[3];
+            Drzava = values[4];
         }
 
     }
