@@ -1,1 +1,2 @@
 0|A1|Analiza 1|Letnji|prva|9|0
+1|PJISP|Programski jezici i strukture podataka|Letnji|prva|9|1
