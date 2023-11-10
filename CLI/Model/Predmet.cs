@@ -28,6 +28,8 @@ namespace CLI.Model
             ProfesorPredmeta = profesorPredmeta;
             ProfesorID = profesorId;
             ESPB = eSPB;
+            StudentiPolozili = new List<Student>();
+            StudentiNepolozili = new List<Student>();
         }
 
         public Predmet(string sifraPredmeta, string naziv, string godinaStudija, int profesorID, int eSPB)
@@ -38,39 +40,50 @@ namespace CLI.Model
             ProfesorID = profesorID;
             ESPB = eSPB;
             Semestar = EnumUt.SemestarType.Letnji;
+            StudentiPolozili = new List<Student>();
+            StudentiNepolozili = new List<Student>();
         }
 
         public Predmet()
         {
+            StudentiPolozili = new List<Student>();
+            StudentiNepolozili = new List<Student>();
         }
 
         public override string? ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("SIFRA PREDMETA: " + SifraPredmeta + ", ");
-            sb.Append("NAZIV: " + Naziv + ", ");
-            if (Semestar.Equals(EnumUt.SemestarType.Letnji))
-            {
-                sb.Append("STATUS STUDENTA: " + "Letnji" + ", ");
-            }
-            else
-            {
-                sb.Append("STATUS STUDENTA: " + "Zimski" + ", ");
-            }
-            sb.Append("PROFESOR: " + ProfesorPredmeta.Ime + " " + ProfesorPredmeta.Prezime + ", ");
-            sb.Append("ESPB: " + ESPB + ", ");
-            sb.Append("SPISAK STUDENATA KOJI SU POLOZILI: ");
-            foreach (Student s in StudentiPolozili)
-            {
-                sb.Append($"{s.Ime}, {s.Prezime}");
-            }
-            sb.Append("SPISAK STUDENATA KOJI SU NISU POLOZILI: ");
-            foreach (Student s in StudentiNepolozili)
-            {
-                sb.Append($"{s.Ime}, {s.Prezime}");
-            }
-            return sb.ToString();
+            return $"Sifra {SifraPredmeta,5} | Naziv {Naziv,30} | Godina {GodinaStudija,6} | ProfID {ProfesorID,2} | ESPB {ESPB,2} |";
         }
+
+
+
+        /*        public override string? ToString()
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("SIFRA PREDMETA: " + SifraPredmeta + ", ");
+                    sb.Append("NAZIV: " + Naziv + ", ");
+                    if (Semestar.Equals(EnumUt.SemestarType.Letnji))
+                    {
+                        sb.Append("STATUS STUDENTA: " + "Letnji" + ", ");
+                    }
+                    else
+                    {
+                        sb.Append("STATUS STUDENTA: " + "Zimski" + ", ");
+                    }
+                    sb.Append("PROFESOR: " + ProfesorPredmeta.Ime + " " + ProfesorPredmeta.Prezime + ", ");
+                    sb.Append("ESPB: " + ESPB + ", ");
+                    sb.Append("SPISAK STUDENATA KOJI SU POLOZILI: ");
+                    foreach (Student s in StudentiPolozili)
+                    {
+                        sb.Append($"{s.Ime}, {s.Prezime}");
+                    }
+                    sb.Append("SPISAK STUDENATA KOJI SU NISU POLOZILI: ");
+                    foreach (Student s in StudentiNepolozili)
+                    {
+                        sb.Append($"{s.Ime}, {s.Prezime}");
+                    }
+                    return sb.ToString();
+                }*/
 
         public string[] ToCSV()
         {

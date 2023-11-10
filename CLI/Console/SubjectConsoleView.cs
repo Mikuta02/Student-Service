@@ -20,11 +20,11 @@ namespace CLI.Console
         private void PrintSubjects(List<Predmet> subjects)
         {
             System.Console.WriteLine("Predmeti: ");
-            string header = $"Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",13} | Kontakt {"",10} | Email {"",20} | Broj Licne {"",7} | Zvanje {"",8} | Godina Staza {"",3} |";
+            string header = $"Sifra {"",5} | Naziv {"",30} | Godina {"",6} | ProfID {"",2} | ESPB {"",2} |";
             System.Console.WriteLine(header);
             foreach (Predmet subject in subjects)
             {
-                System.Console.WriteLine(subjects);
+                System.Console.WriteLine(subject);
             }
         }
 

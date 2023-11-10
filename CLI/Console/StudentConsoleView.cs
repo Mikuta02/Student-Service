@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CLI.Console
 {
-    class StudentConsoleView
+    class StudentConsoleView //implementirati dodaj studenta na predmet, i ukloni
     {
 
         private readonly StudentsDAO _studentsDao;

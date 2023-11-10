@@ -38,22 +38,19 @@ namespace CLI.DAO
             return predmet;
         }
 
-        public void UveziSaProfesorom(Predmet predmet)
+/*        public void UveziSaProfesorom(Predmet predmet)
         {
             List<Profesor> _professors;
             ProfessorsDAO professorsDAO = new ProfessorsDAO();
             _professors = professorsDAO.GetAllProfessors();
-            foreach(Profesor p in _professors)
-            {
-                System.Console.WriteLine(p);
-            }
-/*            foreach (Predmet s in _subjects)
+ 
+           foreach (Predmet s in _subjects)
             {
             Profesor profesor = _professors.Find(p => p.ProfesorId == s.ProfesorID);
                 profesor.Predmeti.Add(s);
                 s.ProfesorPredmeta = profesor;
-            }*/
-        }
+            }
+        }*/
 
         public Predmet? UpdatePredmet(Predmet predmet)
         {
