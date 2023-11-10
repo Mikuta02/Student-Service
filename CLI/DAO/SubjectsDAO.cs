@@ -33,7 +33,7 @@ namespace CLI.DAO
             _subjects.Add(predmet);
             _storage.Save(_subjects);
 
-            UveziSaProfesorom(predmet);
+            //UveziSaProfesorom(predmet);
 
             return predmet;
         }
