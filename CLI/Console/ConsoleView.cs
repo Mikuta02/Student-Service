@@ -52,12 +52,13 @@ namespace CLI.Console
                     ProfessorConsoleView viewProfessor = new ProfessorConsoleView(_profesDao); //itd
                     viewProfessor.RunProfessorMenu();
                     break;
-                    /*        case "3":
-                               UpdateStudent();
-                               break;
-                           case "4":
-                               RemoveStudent();
-                               break;*/
+                case "3":
+                    SubjectConsoleView viewSubject = new SubjectConsoleView(_subjectsDao); //itd
+                    viewSubject.RunSubjectMenu();
+                    break;
+/*                case "4":
+                    RemoveStudent();
+                    break;*/
             }
         }
 
