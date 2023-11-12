@@ -27,7 +27,7 @@ namespace CLI.DAO
             return _departments[^1].KatedraId + 1;
         }
 
-        public Katedra AddKatedra(Katedra katedra)
+        public Katedra AddDepartment(Katedra katedra)
         {
             katedra.KatedraId = GenerateId();
             _departments.Add(katedra);
@@ -35,9 +35,9 @@ namespace CLI.DAO
             return katedra;
         }
 
-        public Katedra? UpdateKatedra(Katedra katedra)
+        public Katedra? UpdateDepartment(Katedra katedra)
         {
-            Katedra? oldKatedra = GetKatedraById(katedra.KatedraId);
+            Katedra? oldKatedra = GetDepartmentById(katedra.KatedraId);
             if (oldKatedra is null) return null;
 
             oldKatedra.SifraKatedre = katedra.SifraKatedre;
@@ -48,9 +48,9 @@ namespace CLI.DAO
             return oldKatedra;
         }
 
-        public Katedra? RemoveKatedra(int id)
+        public Katedra? RemoveDepartment(int id)
         {
-            Katedra? katedra = GetKatedraById(id);
+            Katedra? katedra = GetDepartmentById(id);
             if (katedra == null) return null;
 
             _departments.Remove(katedra);
@@ -58,12 +58,12 @@ namespace CLI.DAO
             return katedra;
         }
 
-        private Katedra? GetKatedraById(int id)
+        private Katedra? GetDepartmentById(int id)
         {
             return _departments.Find(s => s.KatedraId == id);
         }
 
-        public List<Katedra> GetAllKatedras()
+        public List<Katedra> GetAllDepartments()
         {
             return _departments;
         }

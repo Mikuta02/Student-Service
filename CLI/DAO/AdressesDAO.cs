@@ -27,7 +27,7 @@ namespace CLI.DAO
             return _adresses[^1].AdresaId + 1;
         }
 
-        public Adresa AddAdresa(Adresa adresa)
+        public Adresa AddAdress(Adresa adresa)
         {
             adresa.AdresaId = GenerateId();
             _adresses.Add(adresa);
@@ -35,9 +35,9 @@ namespace CLI.DAO
             return adresa;
         }
 
-        public Adresa? UpdateAdresa(Adresa adresa)
+        public Adresa? UpdateAdress(Adresa adresa)
         {
-            Adresa? oldAdresa = GetAdresaById(adresa.AdresaId);
+            Adresa? oldAdresa = GetAdressById(adresa.AdresaId);
             if (oldAdresa is null) return null;
 
             oldAdresa.Ulica = adresa.Ulica;
@@ -49,9 +49,9 @@ namespace CLI.DAO
             return oldAdresa;
         }
 
-        public Adresa? RemoveAdresa(int id)
+        public Adresa? RemoveAdress(int id)
         {
-            Adresa? adresa = GetAdresaById(id);
+            Adresa? adresa = GetAdressById(id);
             if (adresa == null) return null;
 
             _adresses.Remove(adresa);
@@ -59,12 +59,12 @@ namespace CLI.DAO
             return adresa;
         }
 
-        private Adresa? GetAdresaById(int id)
+        private Adresa? GetAdressById(int id)
         {
             return _adresses.Find(s => s.AdresaId == id);
         }
 
-        public List<Adresa> GetAllAdresas()
+        public List<Adresa> GetAllAdress()
         {
             return _adresses;
         }

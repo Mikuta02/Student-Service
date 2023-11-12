@@ -26,14 +26,14 @@ namespace CLI.DAO
             return _ocene[^1].OcenaNaIspituId + 1;
         }
 
-        public OcenaNaIspitu AddOcenaNaIspitu(OcenaNaIspitu ocena)
+        public OcenaNaIspitu AddExamGrade(OcenaNaIspitu ocena)
         {
             ocena.OcenaNaIspituId = GenerateId();
             _ocene.Add(ocena);
             _storage.Save(_ocene);
             return ocena;
         }
-        public OcenaNaIspitu? UpdateOcenaNaIspitu(OcenaNaIspitu ocena)
+        public OcenaNaIspitu? UpdateExamGrade(OcenaNaIspitu ocena)
         {
             OcenaNaIspitu? oldOcenaNaIspitu = GetGradeById(ocena.OcenaNaIspituId);
             if (oldOcenaNaIspitu is null) return null;
@@ -46,7 +46,7 @@ namespace CLI.DAO
             _storage.Save(_ocene);
             return oldOcenaNaIspitu;
         }
-        public OcenaNaIspitu? RemoveGrade(int id)
+        public OcenaNaIspitu? RemoveExamGrade(int id)
         {
             OcenaNaIspitu? ocena = GetGradeById(id);
             if (ocena == null) return null;
