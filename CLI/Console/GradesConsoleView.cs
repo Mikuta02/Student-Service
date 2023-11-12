@@ -19,8 +19,8 @@ namespace CLI.Console
         }
         private void PrintExamGrades(List<OcenaNaIspitu> examgrades)
         {
-            System.Console.WriteLine("Profesori: ");
-            string header = $"Student id {"",12} | Predmet id {"",12} | Ocena {"",11} | Datum polaganja{"",13}";
+            System.Console.WriteLine("Ocene na ispitu: ");
+            string header = $"Student id {"",2} | Predmet id {"",2} | Ocena {"",2} | Datum polaganja{"",10}";
             System.Console.WriteLine(header);
             foreach (OcenaNaIspitu examgrade in examgrades)
             {
@@ -121,7 +121,7 @@ namespace CLI.Console
         private void AddExamGrade()
         {
             OcenaNaIspitu grade = InputExamGrade();
-            _examgradesDAO.UpdateExamGrade(grade);
+            _examgradesDAO.AddExamGrade(grade);
             System.Console.WriteLine("Ocena dodata");
         }
         private void ShowExamGradeMenu()

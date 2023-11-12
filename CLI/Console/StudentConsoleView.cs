@@ -11,16 +11,16 @@ namespace CLI.Console
     class StudentConsoleView //implementirati dodaj studenta na predmet, i ukloni
     {
 
-        private readonly StudentsDAO _studentsDao;
+        private readonly StudentDAO _studentsDao;
 
-        public StudentConsoleView(StudentsDAO studentsDao )
+        public StudentConsoleView(StudentDAO studentsDao )
         {
             _studentsDao = studentsDao;
         }
         private void PrintStudents(List<Student> students)
         {
             System.Console.WriteLine("Studenti: ");
-            string header = $"Ime {"",21} | Prezime {"",21} | Datum Rodjenja {"",6} | Adresa {"",12} | Kontakt {"",12} | Email {"",12} | Broj Indeksa {"",7} | Trenutna Godina {"",8} | Status Studenta {"",2} | Prosecna Ocena {"",5} |";
+            string header = $"Ime {"",21} | Prezime {"",21} | Datum Rodjenja {"",10} | Adresa {"",12} | Kontakt {"",12} | Email {"",12} | Broj Indeksa {"",7} | Trenutna Godina {"",8} | Status Studenta {"",2} | Prosecna Ocena {"",5} |";
             System.Console.WriteLine(header);
             foreach (Student student in students)
             {

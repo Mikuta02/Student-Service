@@ -37,7 +37,7 @@ namespace CLI.Model
 
         public override string? ToString()
         {
-            return $"Ime {Ime,12} | Prezime {Prezime,12} | Datum Rodjenja {DatumRodjenja,11} | Adresa {Adresa,13} | Kontakt {KontaktTelefon,10} | Email {Email,20} | Broj Licne {BrojLicneKarte,7} | Zvanje {Zvanje,8} | Godina Staza {GodineStaza,3} |";
+            return $"Ime {Ime,12} | Prezime {Prezime,12} | Datum Rodjenja {DatumRodjenja.ToString("dd/MM/yyyy"),11} | Adresa {Adresa,13} | Kontakt {KontaktTelefon,10} | Email {Email,20} | Broj Licne {BrojLicneKarte,7} | Zvanje {Zvanje,8} | Godina Staza {GodineStaza,3} |";
         }
 
 

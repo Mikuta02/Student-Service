@@ -1,2 +1,0 @@
-0|Milos|MATUnovic|12.12.2021. 0:00:00|Kraljevo|666|mutavi123|RA-121/2021|3|B|900
-1|Lazar|Mitrovic|12.10.0202. 0:00:00|Kraljevo|4234234|barca@gmail.com|RA-124/2021|3|B|792

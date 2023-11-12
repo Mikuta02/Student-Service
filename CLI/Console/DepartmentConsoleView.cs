@@ -11,16 +11,16 @@ namespace CLI.Console
     class DepartmentConsoleView
     {
 
-        private readonly DepartmentsDAO _departmentsDAO;
+        private readonly DepartmentDAO _departmentsDAO;
 
-        public DepartmentConsoleView(DepartmentsDAO departmentsDAO)
+        public DepartmentConsoleView(DepartmentDAO departmentsDAO)
         {
             _departmentsDAO = departmentsDAO;
         }
         private void PrintDepartments(List<Katedra> deparments)
         {
-            System.Console.WriteLine("Profesori: ");
-            string header = $"Sifra katedre {"",12} | Naziv katedre {"",12} | Sef {"",2}";
+            System.Console.WriteLine("Katedre: ");
+            string header = $"Sifra katedre {"",5} | Naziv katedre {"",25} | Sef {"",2}";
             System.Console.WriteLine(header);
             foreach (Katedra department in deparments)
             {
@@ -36,11 +36,8 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti naziv katedre: ");
             string Naziv = System.Console.ReadLine() ?? string.Empty;
 
-
             System.Console.WriteLine("Uneti Id sefa: ");
             int SefId = ConsoleViewUtils.SafeInputInt();
-
-          
 
             return new Katedra(Sifra, Naziv, SefId);
         }
@@ -120,7 +117,7 @@ namespace CLI.Console
         private void AddDepartment()
         {
             Katedra department = InputDepartment();
-            _departmentsDAO.UpdateDepartment(department);
+            _departmentsDAO.AddDepartment(department);
             System.Console.WriteLine("Katedra dodana");
         }
         private void ShowDepartmentMenu()

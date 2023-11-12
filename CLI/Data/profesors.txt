@@ -1,2 +1,0 @@
-0|Nebojsa|Ralevic|24.02.1968.|Kovlij|231231|neso@gmail.com|122|profa|2
-1|Srdjan|Popov|12.12.1912|Begec|231231|srki@gmail.com|123|profa|3

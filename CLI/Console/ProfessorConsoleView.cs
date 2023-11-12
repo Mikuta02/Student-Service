@@ -11,9 +11,9 @@ namespace CLI.Console
     class ProfessorConsoleView
     {
 
-        private readonly ProfessorsDAO _professorsDAO;
+        private readonly ProfessorDAO _professorsDAO;
 
-        public ProfessorConsoleView(ProfessorsDAO professorsDAO)
+        public ProfessorConsoleView(ProfessorDAO professorsDAO)
         {
             _professorsDAO = professorsDAO;
         }

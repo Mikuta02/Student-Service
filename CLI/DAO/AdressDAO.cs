@@ -9,13 +9,13 @@ using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    class AdressesDAO
+    class AdressDAO
     {
         private readonly List<Adresa> _adresses;
         private readonly Storage<Adresa> _storage;
 
 
-        public AdressesDAO()
+        public AdressDAO()
         {
             _storage = new Storage<Adresa>("adresses.txt");
             _adresses = _storage.Load();

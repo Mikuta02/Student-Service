@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CLI.DAO
 {
-    class ProfessorsDAO
+    class ProfessorDAO
     {
         private readonly List<Profesor> _profesors;
         private readonly Storage<Profesor> _storage;
 
-        public ProfessorsDAO()
+        public ProfessorDAO()
         {
             _storage = new Storage<Profesor>("profesors.txt");
             _profesors = _storage.Load();

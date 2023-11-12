@@ -29,12 +29,7 @@ namespace CLI.Model
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("ULICA: {Ulica}, ");
-            sb.Append("BROJ: {Broj}, ");
-            sb.Append("GRAD: {Grad}, ");
-            sb.Append("DRZAVA: {Drzava}");
-            return base.ToString();
+            return $"Ulica {Ulica,12} | Broj {Broj,4} | Grad {Grad,11} | Drzava {Drzava,13}";
         }
 
         public string[] ToCSV()

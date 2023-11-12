@@ -5,16 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    class StudentsDAO
+    class StudentDAO
     {
         private readonly List<Student> _students;
         private readonly Storage<Student> _storage;
 
 
-        public StudentsDAO()
+        public StudentDAO()
         {
             _storage = new Storage<Student>("students.txt");
             _students = _storage.Load();
@@ -33,6 +34,20 @@ namespace CLI.DAO
             _storage.Save(_students);
             return student;
         }
+
+/*        public void AddSubjectToStudent()
+        {
+            StudentSubjectDAO studentSubjectDAO = new StudentSubjectDAO();
+            List<StudentPredmet> studentSubjects = studentSubjectDAO.GetAllStudentSubject();
+            SubjectDAO subjectDAO = new SubjectDAO();
+            List<Predmet> _subjects = subjectDAO.GetAllPredmets();
+
+            Student student = _students.Find(s => s.StudentId == studentSubject.StudentId);
+            Predmet subject = _subjects.Find(s => s.PredmetId == studentSubject.SubjectId);
+            student.Nepolo.Add(subject);
+            subject.Students.Add(student);
+            
+        }*/
 
         public Student? UpdateStudent(Student student)
         {

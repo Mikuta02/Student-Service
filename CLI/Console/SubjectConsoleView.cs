@@ -11,9 +11,9 @@ namespace CLI.Console
     class SubjectConsoleView
     {
 
-        private readonly SubjectsDAO _subjectsDAO;
+        private readonly SubjectDAO _subjectsDAO;
 
-        public SubjectConsoleView(SubjectsDAO subjectsDAO)
+        public SubjectConsoleView(SubjectDAO subjectsDAO)
         {
             _subjectsDAO = subjectsDAO;
         }

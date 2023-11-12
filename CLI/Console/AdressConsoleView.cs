@@ -11,16 +11,16 @@ namespace CLI.Console
     internal class AdressConsoleView
     {
 
-        private readonly AdressesDAO _adressesDAO;
+        private readonly AdressDAO _adressesDAO;
 
-        public AdressConsoleView(AdressesDAO adressesDAO)
+        public AdressConsoleView(AdressDAO adressesDAO)
         {
             _adressesDAO = adressesDAO;
         }
         private void PrintAdresses(List<Adresa> adresses)
         {
             System.Console.WriteLine("Adrese: ");
-            string header = $"Ulica {"",12} | Broj {"",12} | Grad {"",11} | Drzava {"",13}";
+            string header = $"Ulica {"",12} | Broj {"",4} | Grad {"",11} | Drzava {"",13}";
             System.Console.WriteLine(header);
             foreach (Adresa adresa in adresses)
             {

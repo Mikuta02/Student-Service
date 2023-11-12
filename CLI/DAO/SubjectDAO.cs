@@ -9,13 +9,13 @@ using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    class SubjectsDAO
+    class SubjectDAO
     {
         private readonly List<Predmet> _subjects;
         private readonly Storage<Predmet> _storage;
 
 
-        public SubjectsDAO()
+        public SubjectDAO()
         {
             _storage = new Storage<Predmet>("predmet.txt");
             _subjects = _storage.Load();
@@ -33,15 +33,15 @@ namespace CLI.DAO
             _subjects.Add(predmet);
             _storage.Save(_subjects);
 
-            UveziSaProfesorom(predmet);
+            AddProfessorToSubject(predmet);
 
             return predmet;
         }
 
-       public void UveziSaProfesorom(Predmet predmet)
+       public void AddProfessorToSubject(Predmet predmet)
         {
             List<Profesor> _professors;
-            ProfessorsDAO professorsDAO = new ProfessorsDAO();
+            ProfessorDAO professorsDAO = new ProfessorDAO();
             _professors = professorsDAO.GetAllProfessors();
 
             foreach (Predmet s in _subjects)
@@ -50,13 +50,6 @@ namespace CLI.DAO
                 profesor.Predmeti.Add(s);
                 s.ProfesorPredmeta = profesor;
             }
-
-/*           foreach (Predmet s in _subjects)
-            {
-            Profesor profesor = _professors.Find(p => p.ProfesorId == s.ProfesorID);
-                profesor.Predmeti.Add(s);
-                s.ProfesorPredmeta = profesor;
-            }*/
         }
 
         public Predmet? UpdatePredmet(Predmet predmet)
@@ -66,12 +59,13 @@ namespace CLI.DAO
 
             oldPredmet.SifraPredmeta = predmet.SifraPredmeta;
             oldPredmet.Naziv = predmet.Naziv;
-            //oldPredmet.Semestar = predmet.Semestar;
+            oldPredmet.Semestar = predmet.Semestar;
             oldPredmet.GodinaStudija = predmet.GodinaStudija;
             oldPredmet.ProfesorID = predmet.ProfesorID;
             oldPredmet.ESPB = predmet.ESPB;
 
             _storage.Save(_subjects);
+            AddProfessorToSubject(predmet);
             return oldPredmet;
         }
 

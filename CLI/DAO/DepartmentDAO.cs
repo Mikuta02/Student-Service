@@ -9,13 +9,13 @@ using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    class DepartmentsDAO
+    class DepartmentDAO
     {
         private readonly List<Katedra> _departments;
         private readonly Storage<Katedra> _storage;
 
 
-        public DepartmentsDAO()
+        public DepartmentDAO()
         {
             _storage = new Storage<Katedra>("departments.txt");
             _departments = _storage.Load();
@@ -30,9 +30,31 @@ namespace CLI.DAO
         public Katedra AddDepartment(Katedra katedra)
         {
             katedra.KatedraId = GenerateId();
+            if (!AddHeadOfDepartment(katedra)) return null;
             _departments.Add(katedra);
             _storage.Save(_departments);
             return katedra;
+        }
+
+        public bool AddHeadOfDepartment(Katedra katedra)
+        {
+            List<Profesor> _professors;
+            ProfessorDAO professorsDAO = new ProfessorDAO();
+            _professors = professorsDAO.GetAllProfessors();
+
+
+            Profesor? sef = _professors.Find(p => p.ProfesorId == katedra.SefId);
+            if (sef != null)
+            {
+                katedra.Sef = sef;
+                return true;
+            }
+            else
+            {
+                System.Console.WriteLine("Error: Professor not found");
+                return false;
+            }
+           
         }
 
         public Katedra? UpdateDepartment(Katedra katedra)
@@ -42,8 +64,10 @@ namespace CLI.DAO
 
             oldKatedra.SifraKatedre = katedra.SifraKatedre;
             oldKatedra.NazivKatedre = katedra.NazivKatedre;
+            oldKatedra.SefId = katedra.SefId;
             oldKatedra.Sef = katedra.Sef;
 
+            if (!AddHeadOfDepartment(katedra)) return null;
             _storage.Save(_departments);
             return oldKatedra;
         }

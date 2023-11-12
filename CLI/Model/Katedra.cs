@@ -40,14 +40,7 @@ namespace CLI.Model
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("SIFRA KATEDRE: " + SifraKatedre + ", ");
-            sb.Append("NAZIV KATEDRE: " + NazivKatedre + ", ");
-            sb.Append("PROFESORI: ");
-            sb.AppendJoin(", ", Profesori.Select(profesor => profesor.Ime));
-           
-
-            return sb.ToString();
+            return $"Sifra katedre {SifraKatedre,5} | Naziv katedre {NazivKatedre,25} | SefID {SefId,2}";
         }
         public string[] ToCSV()
         {
