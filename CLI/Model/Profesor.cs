@@ -79,7 +79,7 @@ namespace CLI.Model
 
         public Profesor()
         {
-
+            Predmeti = new List<Predmet>();
         }
 
         public void FromCSV(string[] values)

@@ -54,7 +54,7 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti zvanje profesora: ");
             string Zvanje = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Uneti prosecnu ocenu profesora: ");
+            System.Console.WriteLine("Uneti staz profesora: ");
             int Staz = ConsoleViewUtils.SafeInputInt();
 
             return new Profesor(Ime, Prezime, DatumRodjena, Adresa, Kontakt, Email, Licna, Zvanje, Staz);

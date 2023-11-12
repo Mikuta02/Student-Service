@@ -39,6 +39,9 @@ class Program
         //indexes.AddIndeks(indeks1);
 
         ConsoleView view = new ConsoleView(students, professors, subjects, grades, indexes, adresses, departments);
-        view.RunMenu();
+        //view.RunMenu();
+
+
+
     }
 }

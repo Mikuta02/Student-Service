@@ -1,2 +1,2 @@
-0|Nebojsa|ralevic|12.10.1011|New Now|091237|Rcma123@gmail.com|123123|Kurton|123
-1|Srdjan|Popov|01.10.2011|Big Obarska|dsads|dyunimakaroni@gmail.com|333|Kuriton|123
+0|Nebojsa|Ralevic|24.02.1968.|Kovlij|231231|neso@gmail.com|122|profa|2
+1|Srdjan|Popov|12.12.1912|Begec|231231|srki@gmail.com|123|profa|3
