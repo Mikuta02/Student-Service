@@ -36,6 +36,9 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti naziv predmeta: ");
             string Naziv = System.Console.ReadLine() ?? string.Empty;
 
+            System.Console.WriteLine("Uneti semestar (Letnji ili Zimski)");
+            Enum.TryParse(System.Console.ReadLine(), out EnumUt.SemestarType Semestar);
+
             System.Console.WriteLine("Uneti godinu: ");
             string Godina = System.Console.ReadLine() ?? string.Empty;
 
@@ -45,7 +48,7 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti espb: ");
             int ESPB = ConsoleViewUtils.SafeInputInt();
 
-            return new Predmet(Sifra, Naziv, Godina, ProfID, ESPB);
+            return new Predmet(Sifra, Naziv, Semestar, Godina, ProfID, ESPB);
         }
 
         private int InputId()

@@ -14,7 +14,8 @@ namespace CLI.Model
         public string SifraKatedre { get; set; }
         public string NazivKatedre { get; set; }
 
-        public string Sef {  get; set; } //Pitati asistente sta dodje sef
+        public Profesor Sef {  get; set; } //Pitati asistente sta dodje sef
+        public int SefId;
         public List<Profesor> Profesori { get; set; }
 
         public Katedra()
@@ -22,11 +23,12 @@ namespace CLI.Model
             Profesori = new List<Profesor>();
         }
 
-        public Katedra(string sifraKatedre, string nazivKatedre, string sef)
+        public Katedra(string sifraKatedre, string nazivKatedre, int sefId)
         {
             SifraKatedre = sifraKatedre;
             NazivKatedre = nazivKatedre;
-            Sef = sef;
+            SefId = sefId;
+            Profesori = new List<Profesor>();
         }
 
         public Katedra(string sifra, string nazivKatedre)
@@ -54,7 +56,7 @@ namespace CLI.Model
             KatedraId.ToString(),
             SifraKatedre,
             NazivKatedre,
-            Sef
+            SefId.ToString(),
         };
             return csvValues;
         }
@@ -64,7 +66,7 @@ namespace CLI.Model
             KatedraId = int.Parse(values[0]);
             SifraKatedre = values[1];
             NazivKatedre = values[2];
-            Sef = values[3];
+            SefId = int.Parse(values[3]);
         }
 
 

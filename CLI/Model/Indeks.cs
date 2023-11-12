@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    class Indeks : Serialization.ISerializable
+    class Indeks
     {
         public int IndeksId { get; set; }
         public string OznakaSmera {  get; set; }
@@ -26,18 +26,13 @@ namespace CLI.Model
         public Indeks() { }
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("OZNAKA SMERA: {OznakaSmera}, ");
-            sb.Append("BROJ UPISA: {BrojUpisa}, ");
-            sb.Append("GODINA UPISA: {GodinaUpisa}");
-            return base.ToString();
+            return $"{OznakaSmera}-{BrojUpisa}/{GodinaUpisa}";
         }
 
-        public string[] ToCSV()
+/*        public string[] ToCSV()
         {
             string[] csvValues =
             {
-            IndeksId.ToString(),
             OznakaSmera,
             BrojUpisa.ToString(),
             GodinaUpisa.ToString()
@@ -46,10 +41,9 @@ namespace CLI.Model
         }
         public void FromCSV(string[] values)
         {
-            IndeksId = int.Parse(values[0]);
-            OznakaSmera = values[1];
-            BrojUpisa = int.Parse(values[2]);
-            GodinaUpisa = int.Parse(values[3]);
-        }
+            OznakaSmera = values[0];
+            BrojUpisa = int.Parse(values[1]);
+            GodinaUpisa = int.Parse(values[2s]);
+        }*/
     }
 }

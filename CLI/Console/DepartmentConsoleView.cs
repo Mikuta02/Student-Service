@@ -20,7 +20,7 @@ namespace CLI.Console
         private void PrintDepartments(List<Katedra> deparments)
         {
             System.Console.WriteLine("Profesori: ");
-            string header = $"Sifra katedre {"",12} | Naziv katedre {"",12} | Sef {"",11}";
+            string header = $"Sifra katedre {"",12} | Naziv katedre {"",12} | Sef {"",2}";
             System.Console.WriteLine(header);
             foreach (Katedra department in deparments)
             {

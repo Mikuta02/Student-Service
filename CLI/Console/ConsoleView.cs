@@ -13,17 +13,15 @@ namespace CLI.Console
         private readonly ProfessorsDAO _profesDao;
         private readonly SubjectsDAO _subjectsDao;
         private readonly ExamGradesDAO _examGradesDao;
-        private readonly IndexesDAO _indexesDao;
         private readonly AdressesDAO _addressesDao;
         private readonly DepartmentsDAO _departmentsDao;
 
-        public ConsoleView(StudentsDAO studentsDao, ProfessorsDAO profesDao, SubjectsDAO subjectsDao, ExamGradesDAO examGradesDao, IndexesDAO indexesDao, AdressesDAO addressesDao, DepartmentsDAO departmentsDao)
+        public ConsoleView(StudentsDAO studentsDao, ProfessorsDAO profesDao, SubjectsDAO subjectsDao, ExamGradesDAO examGradesDao, AdressesDAO addressesDao, DepartmentsDAO departmentsDao)
         {
             _studentsDao = studentsDao;
             _profesDao = profesDao;
             _subjectsDao = subjectsDao;
             _examGradesDao = examGradesDao;
-            _indexesDao = indexesDao;
             _addressesDao = addressesDao;
             _departmentsDao = departmentsDao;
         }

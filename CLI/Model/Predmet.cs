@@ -19,13 +19,12 @@ namespace CLI.Model
         public List<Student> StudentiPolozili { get; set; }
         public List<Student> StudentiNepolozili { get; set; }
 
-        public Predmet(string sifraPredmeta, string naziv, EnumUt.SemestarType semestar, string godinaStudija, Profesor profesorPredmeta, int profesorId, int eSPB)
+        public Predmet(string sifraPredmeta, string naziv, EnumUt.SemestarType semestar, string godinaStudija, int profesorId, int eSPB)
         {
             SifraPredmeta = sifraPredmeta;
             Naziv = naziv;
             Semestar = semestar;
             GodinaStudija = godinaStudija;
-            ProfesorPredmeta = profesorPredmeta;
             ProfesorID = profesorId;
             ESPB = eSPB;
             StudentiPolozili = new List<Student>();

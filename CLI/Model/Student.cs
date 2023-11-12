@@ -16,14 +16,14 @@ namespace CLI.Model
         public string Adresa { get; set; }
         public string KontaktTelefon { get; set; }
         public string Email { get; set; }
-        public string BrojIndeksa { get; set; }
+        public Indeks BrojIndeksa { get; set; }
         public int TrenutnaGodinaStudija { get; set; }
         public EnumUt.StatusType StatusStudenta { get; set; }
         public float ProsecnaOcena { get; set; }
         List<OcenaNaIspitu> SpisakPolozenihIspita { get; set; }
         List<OcenaNaIspitu> SpisakNepolozenihIspita { get; set; }
 
-        public Student(string ime, string prezime, string datumRodjenja, string adresa, string kontaktTelefon, string email, string brojIndeksa, int trenutnaGodinaStudija, EnumUt statusStudenta, float prosecnaOcena)
+        public Student(string ime, string prezime, string datumRodjenja, string adresa, string kontaktTelefon, string email, Indeks brojIndeksa, int trenutnaGodinaStudija, EnumUt.StatusType statusStudenta, float prosecnaOcena)
         {
             Ime = ime;
             Prezime = prezime;
@@ -35,29 +35,19 @@ namespace CLI.Model
             TrenutnaGodinaStudija = trenutnaGodinaStudija;
             StatusStudenta = statusStudenta;
             ProsecnaOcena = prosecnaOcena;
+            SpisakPolozenihIspita = new List<OcenaNaIspitu>();
+            SpisakNepolozenihIspita = new List<OcenaNaIspitu>();
         }
 
         public Student()
         {
-        }
-
-        public Student(string ime, string prezime, string datumRodjenja, string adresa, string kontaktTelefon, string email, string brojIndeksa, int trenutnaGodinaStudija, float prosecnaOcena)
-        {
-            Ime = ime;
-            Prezime = prezime;
-            DatumRodjenja = DateTime.Parse(datumRodjenja);
-            Adresa = adresa;
-            KontaktTelefon = kontaktTelefon;
-            Email = email;
-            BrojIndeksa = brojIndeksa;
-            TrenutnaGodinaStudija = trenutnaGodinaStudija;
-            this.StatusStudenta = EnumUt.StatusType.B;
-            ProsecnaOcena = prosecnaOcena;
+            SpisakPolozenihIspita = new List<OcenaNaIspitu>();
+            SpisakNepolozenihIspita = new List<OcenaNaIspitu>();
         }
 
         public override string? ToString()
         {
-            return $"ID: {StudentId,2} | Ime {Ime,21} | Prezime {Prezime,21} | Datum Rodjenja {DatumRodjenja,6} | Adresa {Adresa,8} | Kontakt {KontaktTelefon,10} | Email {Email,12} | Broj Indeksa {BrojIndeksa,7} | Trenutna Godina {TrenutnaGodinaStudija,2}";
+            return $"ID: {StudentId,2} | Ime {Ime,21} | Prezime {Prezime,21} | Datum Rodjenja {DatumRodjenja,6} | Adresa {Adresa,8} | Kontakt {KontaktTelefon,10} | Email {Email,12} | Broj Indeksa {BrojIndeksa,11} | Trenutna Godina {TrenutnaGodinaStudija,2} | Status Studenta {StatusStudenta,2}";
         }
 
 
@@ -106,13 +96,26 @@ namespace CLI.Model
             DatumRodjenja.ToString(),
             Adresa,
             KontaktTelefon,
-            Email, 
-            BrojIndeksa,
+            Email,
+            BrojIndeksa.ToString(),
             TrenutnaGodinaStudija.ToString(),
             StatusStudenta.ToString(),
             ProsecnaOcena.ToString()
         };
             return csvValues;
+        }
+
+        private Indeks makeIndex(string input)
+        {
+            string[] parts = input.Split('/');
+
+            string oznaka = input.Substring(0, 2);
+            int upis = int.Parse(parts[0].Substring(3)); 
+            int godina = int.Parse(parts[1]);
+
+            Indeks indeks = new Indeks(oznaka, upis, godina);
+
+            return indeks;
         }
 
         public void FromCSV(string[] values)
@@ -124,7 +127,7 @@ namespace CLI.Model
             Adresa = values[4];
             KontaktTelefon = values[5];
             Email = values[6];
-            BrojIndeksa = values[7];
+            BrojIndeksa = makeIndex(values[7]);
             TrenutnaGodinaStudija = int.Parse(values[8]);
             if (values[9] == "S")
                 StatusStudenta = EnumUt.StatusType.S;

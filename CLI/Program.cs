@@ -21,10 +21,7 @@ class Program
         Predmet predmet2 = new Predmet("PJISP", "Programski jezici i strukture podataka", "prva", 1, 9);
         SubjectsDAO subjects = new SubjectsDAO();
         //subjects.AddPredmet(predmet2);
-
-        Katedra katedra1 = new Katedra("MN", "Departman za opšte discipline u tehnici", "Rale");
         DepartmentsDAO departments = new DepartmentsDAO();
-       // departments.AddKatedra(katedra1);
 
         Adresa adresa1 = new Adresa("Rade Kondica",9,"Derventa","Republika Srpska");
         AdressesDAO adresses = new AdressesDAO();
@@ -35,10 +32,12 @@ class Program
         //grades.AddOcenaNaIspitu(ocena1);
 
         Indeks indeks1 = new Indeks("rarara",666,1945);
-        IndexesDAO indexes = new IndexesDAO();
         //indexes.AddIndeks(indeks1);
 
-        ConsoleView view = new ConsoleView(students, professors, subjects, grades, indexes, adresses, departments);
-        //view.RunMenu();
+        ConsoleView view = new ConsoleView(students, professors, subjects, grades, adresses, departments);
+        view.RunMenu();
+
+
+
     }
 }
