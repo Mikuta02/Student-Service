@@ -42,6 +42,8 @@ class Program
         //view.RunMenu();
 
 
-
+        Console.Write("Enter a date (e.g. dd.MM.yyyy: ");
+        DateTime inputtedDate = DateTime.Parse(Console.ReadLine());
+        Console.Write(inputtedDate.Month);
     }
 }

@@ -12,7 +12,7 @@ namespace CLI.Model
         public int ProfesorId {  get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
-        public string DatumRodjenja { get; set; }
+        public DateTime DatumRodjenja { get; set; }
         public string Adresa { get; set; }
         public string KontaktTelefon { get; set; }
         public string Email { get; set; }
@@ -25,7 +25,7 @@ namespace CLI.Model
         {
             Ime = ime;
             Prezime = prezime;
-            DatumRodjenja = datumRodjenja;
+            DatumRodjenja = DateTime.Parse(datumRodjenja);
             Adresa = adresa;
             KontaktTelefon = kontaktTelefon;
             Email = email;
@@ -66,7 +66,7 @@ namespace CLI.Model
             ProfesorId.ToString(),
             Ime,
             Prezime,
-            DatumRodjenja,
+            DatumRodjenja.ToString(),
             Adresa,
             KontaktTelefon,
             Email,
@@ -87,7 +87,7 @@ namespace CLI.Model
             ProfesorId = int.Parse(values[0]);
             Ime = values[1];
             Prezime = values[2];
-            DatumRodjenja = values[3];
+            DatumRodjenja = DateTime.Parse(values[3]); 
             Adresa = values[4];
             KontaktTelefon = values[5];
             Email = values[6];
