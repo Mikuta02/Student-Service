@@ -40,10 +40,5 @@ class Program
 
         ConsoleView view = new ConsoleView(students, professors, subjects, grades, indexes, adresses, departments);
         //view.RunMenu();
-
-
-        Console.Write("Enter a date (e.g. dd.MM.yyyy: ");
-        DateTime inputtedDate = DateTime.Parse(Console.ReadLine());
-        Console.Write(inputtedDate.Month);
     }
 }

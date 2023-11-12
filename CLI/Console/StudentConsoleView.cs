@@ -36,7 +36,7 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti prezime studenta: ");
             string Prezime = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Uneti datum rodjena studenta: ");
+            System.Console.WriteLine("Uneti datum rodjena (dd.MM.yyyy) studenta: ");
             string DatumRodjena = System.Console.ReadLine() ?? string.Empty;
 
             System.Console.WriteLine("Uneti adresu studenta: ");
