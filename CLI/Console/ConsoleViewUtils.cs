@@ -24,6 +24,23 @@ namespace CLI.Console
             return input;
         }
 
+        public static int SafeInputGrade()
+        {
+            int input;
+
+            string rawInput = System.Console.ReadLine() ?? string.Empty;
+           
+            while (!int.TryParse(rawInput, out input) || input < 6 || input > 10)
+            {
+                System.Console.WriteLine("Nije ispravan broj, pokusati opet: ");
+
+                rawInput = System.Console.ReadLine() ?? string.Empty;
+            }
+            
+
+            return input;
+        }
+
         public static float SafeInputFloat()
         {
             float input;

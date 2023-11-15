@@ -20,7 +20,7 @@ namespace CLI.Console
         private void PrintDepartments(List<Katedra> deparments)
         {
             System.Console.WriteLine("Katedre: ");
-            string header = $"Sifra katedre {"",5} | Naziv katedre {"",25} | Sef {"",2}";
+            string header = $"ID {"",2} | Sifra katedre {"",5} | Naziv katedre {"",25} | Sef {"",2}";
             System.Console.WriteLine(header);
             foreach (Katedra department in deparments)
             {
@@ -45,6 +45,12 @@ namespace CLI.Console
         private int InputId()
         {
             System.Console.WriteLine("Uneti ID katedre: ");
+            return ConsoleViewUtils.SafeInputInt();
+        }
+
+        private int InputProfessorId()
+        {
+            System.Console.WriteLine("Uneti ID profesora: ");
             return ConsoleViewUtils.SafeInputInt();
         }
 
@@ -75,6 +81,15 @@ namespace CLI.Console
                     break;
                 case "4":
                     RemoveDepartment();
+                    break;
+                case "5":
+                    AddProfesorToDepartment();
+                    break;
+                case "6":
+                    RemoveProfessorFromDepartment();
+                    break;
+                case "7":
+                    ShowProfessors();
                     break;
                 case "9":
                     return;
@@ -117,9 +132,48 @@ namespace CLI.Console
         private void AddDepartment()
         {
             Katedra department = InputDepartment();
-            _departmentsDAO.AddDepartment(department);
+            if (_departmentsDAO.AddDepartment(department) is null)
+            {
+                System.Console.WriteLine("Profesor nije pronadjen");
+                return;
+            }
             System.Console.WriteLine("Katedra dodana");
         }
+
+
+        private void AddProfesorToDepartment()
+        {
+            int depID = InputId();
+            int profID = InputProfessorId();
+
+            if (!_departmentsDAO.AddProfessorToDepartment(profID, depID))
+            {
+                System.Console.WriteLine("Profesor ili Katedra ne postoje ili je Profesor vec dodan");
+                return;
+            }
+            System.Console.WriteLine($"Profesor sa ID {profID} dodan na katedru sa id {depID}");
+        }
+
+        private void RemoveProfessorFromDepartment()
+        {
+            int depID = InputId();
+            int profID = InputProfessorId();
+
+            if (!_departmentsDAO.RemoveProfessorFromDepartment(profID, depID))
+            {
+                System.Console.WriteLine("Dati profesor nije na katedri ili katedra ne postoji");
+                return;
+            }
+            System.Console.WriteLine("Profesor uklonjen");
+        }
+
+        private void ShowProfessors()
+        {
+            int depID = InputId();
+
+            if(!_departmentsDAO.ShowProfessors(depID)) System.Console.WriteLine("Datakatedra ne postoji"); 
+        }
+
         private void ShowDepartmentMenu()
         {
             System.Console.WriteLine("\nIzaberite opciju: ");
@@ -127,6 +181,9 @@ namespace CLI.Console
             System.Console.WriteLine("2: Dodati katedru");
             System.Console.WriteLine("3: Azurirati katedru");
             System.Console.WriteLine("4: Izbrisati katedru");
+            System.Console.WriteLine("5: Dodati profesora na katedru");
+            System.Console.WriteLine("6: Ukloniti profesora sa katedre");
+            System.Console.WriteLine("7: Prikazati profesore na katedri");
             System.Console.WriteLine("9: Nazad");
             System.Console.WriteLine("0: Close");
         }

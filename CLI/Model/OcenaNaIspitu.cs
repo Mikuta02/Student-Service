@@ -42,7 +42,7 @@ namespace CLI.Model
 
         public override string ToString()
         {
-            return $"Student id {StudentId,2} | Predmet id {PredmetId,2} | Ocena {Ocena,2} | Datum polaganja {DatumPolaganja.ToString("dd/MM/yyyy"),10}"; ;
+            return $"ID {OcenaNaIspituId,2} | Student id {StudentId,2} | Predmet id {PredmetId,2} | Ocena {Ocena,2} | Datum polaganja {DatumPolaganja.ToString("dd/MM/yyyy"),10}"; ;
         }
 
         public string[] ToCSV()
@@ -50,10 +50,11 @@ namespace CLI.Model
             string[] csvValues =
             {
             OcenaNaIspituId.ToString(),
+            StudentId.ToString(),
+            PredmetId.ToString(),
             Ocena.ToString(),
             DatumPolaganja.ToString("dd/MM/yyyy"),
-            StudentId.ToString(),
-            PredmetId.ToString()
+
         };
             return csvValues;
         }
@@ -61,10 +62,10 @@ namespace CLI.Model
         public void FromCSV(string[] values)
         {
             OcenaNaIspituId = int.Parse(values[0]);
-            Ocena = int.Parse(values[1]);
-            DatumPolaganja = DateTime.Parse(values[2]);
-            StudentId = int.Parse(values[3]);
-            PredmetId = int.Parse(values[4]);
+            StudentId = int.Parse(values[1]);
+            PredmetId = int.Parse(values[2]);
+            Ocena = int.Parse(values[3]);
+            DatumPolaganja = DateTime.Parse(values[4]);
         }
 
     }

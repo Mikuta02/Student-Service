@@ -40,7 +40,7 @@ namespace CLI.Model
 
         public override string ToString()
         {
-            return $"Sifra katedre {SifraKatedre,5} | Naziv katedre {NazivKatedre,25} | SefID {SefId,2}";
+            return $"ID {KatedraId,2} | Sifra katedre {SifraKatedre,5} | Naziv katedre {NazivKatedre,25} | SefID {SefId,2}";
         }
         public string[] ToCSV()
         {

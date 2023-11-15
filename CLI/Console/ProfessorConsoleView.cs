@@ -20,7 +20,7 @@ namespace CLI.Console
         private void PrintProfessors(List<Profesor> professors)
         {
             System.Console.WriteLine("Profesori: ");
-            string header = $"Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",13} | Kontakt {"",10} | Email {"",20} | Broj Licne {"",7} | Zvanje {"",8} | Godina Staza {"",3} |";
+            string header = $"ID {"",2} | Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",13} | Kontakt {"",10} | Email {"",20} | Broj Licne {"",7} | Zvanje {"",8} | Godina Staza {"",3} |";
             System.Console.WriteLine(header);
             foreach (Profesor professor in professors)
             {

@@ -3,6 +3,7 @@ using CLI.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -27,7 +28,7 @@ namespace CLI.DAO
             return _departments[^1].KatedraId + 1;
         }
 
-        public Katedra AddDepartment(Katedra katedra)
+        public Katedra? AddDepartment(Katedra katedra)
         {
             katedra.KatedraId = GenerateId();
             if (!AddHeadOfDepartment(katedra)) return null;
@@ -38,9 +39,8 @@ namespace CLI.DAO
 
         public bool AddHeadOfDepartment(Katedra katedra)
         {
-            List<Profesor> _professors;
             ProfessorDAO professorsDAO = new ProfessorDAO();
-            _professors = professorsDAO.GetAllProfessors();
+            List<Profesor>  _professors = professorsDAO.GetAllProfessors();
 
 
             Profesor? sef = _professors.Find(p => p.ProfesorId == katedra.SefId);
@@ -55,6 +55,40 @@ namespace CLI.DAO
                 return false;
             }
            
+        }
+
+        public bool AddProfessorToDepartment(int profID, int depID)
+        {
+            ProfessorDAO professorsDAO = new ProfessorDAO();
+            List<Profesor> _professors = professorsDAO.GetAllProfessors();
+
+            Profesor? profesor = _professors.Find(p => p.ProfesorId == profID);
+            Katedra? katedra = _departments.Find(p => p.KatedraId == depID);
+            if (profesor != null && katedra != null)
+            {
+                if (katedra.Profesori.Find(p => p.ProfesorId == profID) == null)
+                {
+                    katedra.Profesori.Add(profesor);
+                    _storage.Save(_departments);
+                    return true;
+                }            
+            }
+            
+            return false;
+        }
+
+        public bool RemoveProfessorFromDepartment(int profID, int depID)
+        {
+            Katedra? katedra = _departments.Find(p => p.KatedraId == depID);
+            if (katedra != null)
+            {
+                int indexToRemove = katedra.Profesori.FindIndex(ss => ss.ProfesorId == profID);
+                if (indexToRemove == -1) return false;
+
+                katedra.Profesori.RemoveAt(indexToRemove);
+                _storage.Save(_departments);
+            }
+            return true;
         }
 
         public Katedra? UpdateDepartment(Katedra katedra)
@@ -90,6 +124,22 @@ namespace CLI.DAO
         public List<Katedra> GetAllDepartments()
         {
             return _departments;
+        }
+
+        internal bool ShowProfessors(int depID)
+        {
+            Katedra? katedra = GetDepartmentById(depID);
+            if (katedra != null)
+            {
+                int i = 0;
+                foreach (Profesor p in katedra.Profesori)
+                {
+                    System.Console.WriteLine($"Profesor[{i}]: {p}");
+                    i++;
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

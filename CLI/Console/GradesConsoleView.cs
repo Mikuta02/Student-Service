@@ -20,7 +20,7 @@ namespace CLI.Console
         private void PrintExamGrades(List<OcenaNaIspitu> examgrades)
         {
             System.Console.WriteLine("Ocene na ispitu: ");
-            string header = $"Student id {"",2} | Predmet id {"",2} | Ocena {"",2} | Datum polaganja{"",10}";
+            string header = $"ID {"",2} | Student id {"",2} | Predmet id {"",2} | Ocena {"",2} | Datum polaganja{"",10}";
             System.Console.WriteLine(header);
             foreach (OcenaNaIspitu examgrade in examgrades)
             {
@@ -37,7 +37,7 @@ namespace CLI.Console
             int PredId = ConsoleViewUtils.SafeInputInt();
 
             System.Console.WriteLine("Uneti ocenu: ");
-            int Ocena = ConsoleViewUtils.SafeInputInt();
+            int Ocena = ConsoleViewUtils.SafeInputGrade();
 
             System.Console.WriteLine("Uneti datum polaganja: ");
             string datum = System.Console.ReadLine() ?? string.Empty;

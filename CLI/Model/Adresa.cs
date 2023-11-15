@@ -29,7 +29,12 @@ namespace CLI.Model
 
         public override string ToString()
         {
-            return $"Ulica {Ulica,12} | Broj {Broj,4} | Grad {Grad,11} | Drzava {Drzava,13}";
+            return $"ID {AdresaId,2} | Ulica {Ulica,12} | Broj {Broj,4} | Grad {Grad,11} | Drzava {Drzava,13}";
+        }
+
+        public string toStringConsole()
+        {
+            return $"{Ulica} {Broj}, {Grad}, {Drzava}";
         }
 
         public string[] ToCSV()

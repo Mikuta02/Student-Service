@@ -20,7 +20,7 @@ namespace CLI.Console
         private void PrintAdresses(List<Adresa> adresses)
         {
             System.Console.WriteLine("Adrese: ");
-            string header = $"Ulica {"",12} | Broj {"",4} | Grad {"",11} | Drzava {"",13}";
+            string header = $"ID {"",2} | Ulica {"",12} | Broj {"",4} | Grad {"",11} | Drzava {"",13}";
             System.Console.WriteLine(header);
             foreach (Adresa adresa in adresses)
             {
