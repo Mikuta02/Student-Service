@@ -27,25 +27,55 @@ namespace CLI.DAO
             return _students[^1].StudentId + 1;
         }
 
-        public Student AddStudent(Student student)
+        public Student? AddStudent(Student student)
         {
             student.StudentId = GenerateId();
+
+            Adresa? adresa = AddAdresaToStudent(student);
+            if (adresa == null)
+            {
+                return null;
+            }
+            student.Adresa = adresa;
             _students.Add(student);
             _storage.Save(_students);
             return student;
         }
 
+        private Adresa? AddAdresaToStudent(Student student)
+        {
+            AdressDAO adressDAO = new AdressDAO();
+            List<Adresa> adresses = adressDAO.GetAllAdress();
 
+            Adresa? adresa = adresses.Find(p => p.AdresaId == student.AdresaId);
+            if (adresa != null)
+            {
+                return adresa;
+            }
+            else
+            {
+                System.Console.WriteLine("Error: Address not found");
+                return null;
+            }
+
+        }
 
         public Student? UpdateStudent(Student student)
         {
             Student? oldStudent = GetStudentById(student.StudentId);
             if (oldStudent is null) return null;
 
+            Adresa? adresa = AddAdresaToStudent(student);
+            if (adresa == null)
+            {
+                return null;
+            }
+
             oldStudent.Ime = student.Ime;
             oldStudent.Prezime = student.Prezime;
             oldStudent.DatumRodjenja = student.DatumRodjenja;
-            oldStudent.Adresa = student.Adresa;
+            oldStudent.AdresaId = student.AdresaId;
+            oldStudent.Adresa = adresa;
             oldStudent.KontaktTelefon = student.KontaktTelefon;
             oldStudent.Email = student.Email;
             oldStudent.BrojIndeksa = student.BrojIndeksa;
@@ -74,49 +104,6 @@ namespace CLI.DAO
         public List<Student> GetAllStudents()
         {
             return _students;
-        }
-
-        public List<Student> GetAllStudents(int page, int pageSize, string sortCriteria)
-        {
-            IEnumerable<Student> students = _students;
-
-            // sortiraj vehicles ukoliko je sortCriteria naveden
-            switch (sortCriteria)
-            {
-                case "Id":
-                    students = _students.OrderBy(x => x.StudentId);
-                    break;
-                case "Ime":
-                    students = _students.OrderBy(x => x.Ime);
-                    break;
-                case "Prezime":
-                    students = _students.OrderBy(x => x.Prezime);
-                    break;
-                case "Datum Rodjenja":
-                    students = _students.OrderBy(x => x.DatumRodjenja);
-                    break;
-                case "Adresa":
-                    students = _students.OrderBy(x => x.Adresa);
-                    break;
-                case "Kontakt":
-                    students = _students.OrderBy(x => x.KontaktTelefon);
-                    break;
-                case "Email":
-                    students = _students.OrderBy(x => x.Email);
-                    break;
-                case "Indeks":
-                    students = _students.OrderBy(x => x.BrojIndeksa);
-                    break;
-            }
-
-            // promeni redosled ukoliko ima potrebe za tim
-            //if (sortDirection == SortDirection.Descending)
-             //   vehicles = vehicles.Reverse();
-
-            // paginacija
-            students = students.Skip((page - 1) * pageSize).Take(pageSize);
-
-            return students.ToList();
         }
     }
 }

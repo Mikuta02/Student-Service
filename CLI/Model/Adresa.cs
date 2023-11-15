@@ -32,7 +32,7 @@ namespace CLI.Model
             return $"ID {AdresaId,2} | Ulica {Ulica,12} | Broj {Broj,4} | Grad {Grad,11} | Drzava {Drzava,13}";
         }
 
-        public string toStringConsole()
+        public string ToStringConsole()
         {
             return $"{Ulica} {Broj}, {Grad}, {Drzava}";
         }

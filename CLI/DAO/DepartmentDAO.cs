@@ -95,13 +95,13 @@ namespace CLI.DAO
         {
             Katedra? oldKatedra = GetDepartmentById(katedra.KatedraId);
             if (oldKatedra is null) return null;
+            if (!AddHeadOfDepartment(katedra)) return null;
 
             oldKatedra.SifraKatedre = katedra.SifraKatedre;
             oldKatedra.NazivKatedre = katedra.NazivKatedre;
             oldKatedra.SefId = katedra.SefId;
             oldKatedra.Sef = katedra.Sef;
-
-            if (!AddHeadOfDepartment(katedra)) return null;
+            
             _storage.Save(_departments);
             return oldKatedra;
         }

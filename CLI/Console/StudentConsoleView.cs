@@ -22,7 +22,7 @@ namespace CLI.Console
         private void PrintStudents(List<Student> students)
         {
             System.Console.WriteLine("Studenti: ");
-            string header = $"ID {"",2} | Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",12} | Kontakt {"",10} | Email {"",12} | Broj Indeksa {"",11} | Trenutna Godina {"",2} | Status Studenta {"",2} | Prosecna Ocena {"",5} |";
+            string header = $"ID {"",2} | Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",22} | Kontakt {"",10} | Email {"",12} | Broj Indeksa {"",11} | Trenutna Godina {"",2} | Status Studenta {"",2} | Prosecna Ocena {"",5} |";
             System.Console.WriteLine(header);
             foreach (Student student in students)
             {
@@ -41,8 +41,8 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti datum rodjena (dd.MM.yyyy) studenta: ");
             string DatumRodjena = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Uneti adresu studenta: ");
-            string Adresa = System.Console.ReadLine() ?? string.Empty;
+            System.Console.WriteLine("Uneti id adrese studenta: ");
+            int Adresa = ConsoleViewUtils.SafeInputInt();
 
             System.Console.WriteLine("Uneti kontakt studenta: ");
             string Kontakt = System.Console.ReadLine() ?? string.Empty;
@@ -170,7 +170,7 @@ namespace CLI.Console
         private void AddStudent()
         {
             Student student = InputStudent();
-            _studentsDao.AddStudent(student);
+            if(_studentsDao.AddStudent(student) is null) return;
             System.Console.WriteLine("Student dodat");
         }
 
