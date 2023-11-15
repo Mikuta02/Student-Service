@@ -35,19 +35,5 @@ class Program
         ConsoleView view = new ConsoleView(students, professors, subjects, grades, adresses, departments, studentSubjects);
         view.RunMenu();
 
-        float a = 5.4f;
-        string s = a.ToString();
-        Console.WriteLine(s);   
-
-        List<Profesor> profe = professors.GetAllProfessors();
-        foreach (Profesor profesor in profe)
-        {
-            Console.WriteLine($"Profesor: {profesor}\nnjegovi predmeti su: ");
-            foreach (Predmet p in profesor.Predmeti)
-            {
-                Console.WriteLine($"Predmet: {p}\n");
-            }
-        }
-
     }
 }

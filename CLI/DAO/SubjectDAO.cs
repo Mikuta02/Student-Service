@@ -40,8 +40,8 @@ namespace CLI.DAO
 
        public bool AddProfessorToSubject(Predmet predmet)
         {
-            ProfessorDAO professorsDAO = new ProfessorDAO();
-            List<Profesor> _professors = professorsDAO.GetAllProfessors();
+            ProfessorDAO professorsDAO = new();
+            List<Profesor> _professors = professorsDAO.GetAllProfessors(); 
 
             Profesor? profesor = _professors.Find(p => p.ProfesorId == predmet.ProfesorID);//professorsDAO.GetProfessorById(s.ProfesorID);
             if (profesor == null) return false;

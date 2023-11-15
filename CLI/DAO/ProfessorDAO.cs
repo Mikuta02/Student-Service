@@ -64,6 +64,24 @@ namespace CLI.DAO
         {
             return _profesors.Find(s => s.ProfesorId == id);
         }
+
+/*        public bool ShowSubjects(int profID)
+        {
+            Profesor? profesor = GetProfessorById(profID);
+            if (profesor != null)
+            {
+                int i = 0;
+                foreach (Predmet p in profesor.Predmeti)
+                {
+                    System.Console.WriteLine($"Predmet[{i}]: {p}");
+                    i++;
+                }
+                System.Console.WriteLine($"test!!!!!!!!!!!1\n\n\n!!!!!!!!!!!!!!!!!");
+                return true;
+            }
+            return false;
+        }*/
+
         public List<Profesor> GetAllProfessors()
         {
             return _profesors;

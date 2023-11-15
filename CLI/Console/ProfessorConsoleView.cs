@@ -94,6 +94,9 @@ namespace CLI.Console
                 case "4":
                     RemoveProfessor();
                     break;
+/*                case "5":
+                    ShowSubjects();
+                    break;*/
                 case "9":
                     return;
             }
@@ -138,6 +141,14 @@ namespace CLI.Console
             _professorsDAO.AddProfessor(professor);
             System.Console.WriteLine("Profesor dodat");
         }
+
+/*        private void ShowSubjects()
+        {
+            int profID = InputId();
+
+            if (!_professorsDAO.ShowSubjects(profID)) System.Console.WriteLine("Dati profesor ne postoji");
+        }*/
+
         private void ShowProfessorMenu()
         {
             System.Console.WriteLine("\nIzaberite opciju: ");
@@ -145,6 +156,7 @@ namespace CLI.Console
             System.Console.WriteLine("2: Dodati professora");
             System.Console.WriteLine("3: Azurirati professora");
             System.Console.WriteLine("4: Izbrisati professora");
+           // System.Console.WriteLine("5: Prikazi predmete koje profesor predaje");
             System.Console.WriteLine("9: Nazad");
             System.Console.WriteLine("0: Close");
         }
