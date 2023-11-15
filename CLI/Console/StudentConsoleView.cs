@@ -12,15 +12,17 @@ namespace CLI.Console
     {
 
         private readonly StudentDAO _studentsDao;
+        private readonly StudentSubjectDAO _studsub;
 
-        public StudentConsoleView(StudentDAO studentsDao )
+        public StudentConsoleView(StudentDAO studentsDao, StudentSubjectDAO studsub)
         {
             _studentsDao = studentsDao;
+            _studsub = studsub;
         }
         private void PrintStudents(List<Student> students)
         {
             System.Console.WriteLine("Studenti: ");
-            string header = $"Ime {"",21} | Prezime {"",21} | Datum Rodjenja {"",10} | Adresa {"",12} | Kontakt {"",12} | Email {"",12} | Broj Indeksa {"",7} | Trenutna Godina {"",8} | Status Studenta {"",2} | Prosecna Ocena {"",5} |";
+            string header = $"ID {"",2} | Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",12} | Kontakt {"",10} | Email {"",12} | Broj Indeksa {"",11} | Trenutna Godina {"",2} | Status Studenta {"",2} | Prosecna Ocena {"",5} |";
             System.Console.WriteLine(header);
             foreach (Student student in students)
             {
@@ -56,7 +58,7 @@ namespace CLI.Console
             int BrojGodine = ConsoleViewUtils.SafeInputInt();
             Indeks indeks = new Indeks(OznakaSmera, BrojUpisa, BrojGodine);
 
-            System.Console.WriteLine("Uneti godinu studija studenta: ");
+            System.Console.WriteLine("Uneti godinu studija studenta (broj): ");
             int Godina = ConsoleViewUtils.SafeInputInt();
 
             System.Console.WriteLine("Unijeti nacin finansiranja (S za samofinansiranje - B za budzet)");
@@ -71,6 +73,12 @@ namespace CLI.Console
         private int InputId()
         {
             System.Console.WriteLine("Uneti ID studenta: ");
+            return ConsoleViewUtils.SafeInputInt();
+        }
+
+        private int InputSubjectId()
+        {
+            System.Console.WriteLine("Uneti ID predmeta: ");
             return ConsoleViewUtils.SafeInputInt();
         }
 
@@ -102,6 +110,12 @@ namespace CLI.Console
                 case "4":
                     RemoveStudent();
                     break;
+                case "5":
+                    AddSubjectToStudent();
+                    break;
+                case "6":
+                    RemoveSubjectFromStudent();
+                    break;
                 case "9":
                     return;
             }
@@ -125,6 +139,19 @@ namespace CLI.Console
 
         }
 
+        private void RemoveSubjectFromStudent()
+        {
+            int studID = InputId();
+            int subjID = InputSubjectId();
+
+            if (!_studsub.RemoveSubjectFromStudent(subjID, studID))
+            {
+                System.Console.WriteLine("Student ne slusa dati predmet");
+                return;
+            }
+            System.Console.WriteLine("Predmet uklonjen");
+        }
+
         private void UpdateStudent()
         {
             int id = InputId();
@@ -146,6 +173,19 @@ namespace CLI.Console
             _studentsDao.AddStudent(student);
             System.Console.WriteLine("Student dodat");
         }
+
+        private void AddSubjectToStudent()
+        {
+            int studID = InputId();
+            int subjID = InputSubjectId();
+
+            if (!_studsub.AddSubjectToStudent(subjID, studID)) {
+                System.Console.WriteLine("Student ili Predmet ne postoje ili je Predmet vec dodan");
+                return;
+            }
+            System.Console.WriteLine($"Student sa ID  {studID} slusa predmet sa id {subjID}");
+        }
+
         private void ShowStudentMenu()
         {
             System.Console.WriteLine("\nIzaberite opciju: ");
@@ -153,6 +193,8 @@ namespace CLI.Console
             System.Console.WriteLine("2: Dodati studenta");
             System.Console.WriteLine("3: Azurirati studenta");
             System.Console.WriteLine("4: Izbrisati studenta");
+            System.Console.WriteLine("5: Dodati predmet studentu");
+            System.Console.WriteLine("6: Skloniti studenta sa premeta");
             System.Console.WriteLine("9: Nazad");
             System.Console.WriteLine("0: Close");
         }

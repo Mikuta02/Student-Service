@@ -15,8 +15,9 @@ namespace CLI.Console
         private readonly ExamGradesDAO _examGradesDao;
         private readonly AdressDAO _addressesDao;
         private readonly DepartmentDAO _departmentsDao;
+        private readonly StudentSubjectDAO _studentSubjectDao;
 
-        public ConsoleView(StudentDAO studentsDao, ProfessorDAO profesDao, SubjectDAO subjectsDao, ExamGradesDAO examGradesDao, AdressDAO addressesDao, DepartmentDAO departmentsDao)
+        public ConsoleView(StudentDAO studentsDao, ProfessorDAO profesDao, SubjectDAO subjectsDao, ExamGradesDAO examGradesDao, AdressDAO addressesDao, DepartmentDAO departmentsDao, StudentSubjectDAO studentSubjectDao)
         {
             _studentsDao = studentsDao;
             _profesDao = profesDao;
@@ -24,6 +25,7 @@ namespace CLI.Console
             _examGradesDao = examGradesDao;
             _addressesDao = addressesDao;
             _departmentsDao = departmentsDao;
+            _studentSubjectDao = studentSubjectDao;
         }
 
         public void RunMenu()
@@ -43,7 +45,7 @@ namespace CLI.Console
             switch (input)
             {
                 case "1":
-                    StudentConsoleView viewStudents = new StudentConsoleView(_studentsDao);
+                    StudentConsoleView viewStudents = new StudentConsoleView(_studentsDao, _studentSubjectDao);
                     viewStudents.RunStudentMenu();
                     break;
                 case "2":
@@ -51,7 +53,7 @@ namespace CLI.Console
                     viewProfessors.RunProfessorMenu();
                     break;
                 case "3":
-                    SubjectConsoleView viewSubjects = new SubjectConsoleView(_subjectsDao); 
+                    SubjectConsoleView viewSubjects = new SubjectConsoleView(_subjectsDao, _studentSubjectDao); 
                     viewSubjects.RunSubjectMenu();
                     break;
                 case "4":

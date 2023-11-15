@@ -27,29 +27,27 @@ namespace CLI.DAO
             return _subjects[^1].PredmetId + 1;
         }
 
-        public Predmet AddPredmet(Predmet predmet)
+        public Predmet? AddPredmet(Predmet predmet)
         {
             predmet.PredmetId = GenerateId();
+
+            if(!AddProfessorToSubject(predmet)) return null;
             _subjects.Add(predmet);
             _storage.Save(_subjects);
-
-            AddProfessorToSubject(predmet);
 
             return predmet;
         }
 
-       public void AddProfessorToSubject(Predmet predmet)
+       public bool AddProfessorToSubject(Predmet predmet)
         {
-            List<Profesor> _professors;
             ProfessorDAO professorsDAO = new ProfessorDAO();
-            _professors = professorsDAO.GetAllProfessors();
+            List<Profesor> _professors = professorsDAO.GetAllProfessors();
 
-            foreach (Predmet s in _subjects)
-            {
-                Profesor? profesor = _professors.Find(p => p.ProfesorId == s.ProfesorID);//professorsDAO.GetProfessorById(s.ProfesorID);
-                profesor.Predmeti.Add(s);
-                s.ProfesorPredmeta = profesor;
-            }
+            Profesor? profesor = _professors.Find(p => p.ProfesorId == predmet.ProfesorID);//professorsDAO.GetProfessorById(s.ProfesorID);
+            if (profesor == null) return false;
+            profesor.Predmeti.Add(predmet);
+            predmet.ProfesorPredmeta = profesor;
+            return true;
         }
 
         public Predmet? UpdatePredmet(Predmet predmet)
@@ -63,9 +61,9 @@ namespace CLI.DAO
             oldPredmet.GodinaStudija = predmet.GodinaStudija;
             oldPredmet.ProfesorID = predmet.ProfesorID;
             oldPredmet.ESPB = predmet.ESPB;
-
-            _storage.Save(_subjects);
             AddProfessorToSubject(predmet);
+            _storage.Save(_subjects);
+            
             return oldPredmet;
         }
 

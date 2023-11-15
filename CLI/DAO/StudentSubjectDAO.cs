@@ -21,48 +21,46 @@ namespace CLI.DAO
             _studsub = _storage.Load();
         }
 
+        public bool AddSubjectToStudent(int subjID, int studID)
+        {
+            SubjectDAO subjectDAO = new SubjectDAO();
+            List<Predmet> _subjects = subjectDAO.GetAllPredmets();
+            StudentDAO studentDAO = new StudentDAO();
+            List<Student> _students = studentDAO.GetAllStudents();
+
+            Predmet? predmet = _subjects.Find(s => s.PredmetId == subjID);
+            Student? student = _students.Find(s => s.StudentId == studID);
+            if (predmet is null || student is null || DoesStudSubExist(subjID, studID))
+            {
+                return false;
+            }
+            StudentPredmet studentPredmet = new StudentPredmet(studID, subjID);
+            //studentPredmet.StudentSubjectId = GenerateId();
+            _studsub.Add(studentPredmet);
+            _storage.Save(_studsub);
+            return true;
+        }
+
 /*        private int GenerateId()
         {
             if (_studsub.Count == 0) return 0;
-            return _studsub[^1].StudentPredmetId + 1;
+            return _studsub[^1].StudentSubjectId + 1;
         }*/
 
-/*        public StudentPredmet AddAdress(StudentPredmet studentPredmet)
+        public bool RemoveSubjectFromStudent(int subjID, int studID)
         {
-            studentPredmet.StudentPredmetId = GenerateId();
-            _studsub.Add(studentPredmet);
+            int indexToRemove = _studsub.FindIndex(ss => ss.StudentId == studID && ss.SubjectId == subjID);
+            if (indexToRemove == -1) return false;
+
+            _studsub.RemoveAt(indexToRemove);
             _storage.Save(_studsub);
-            return studentPredmet;
-        }*/
+            return true;
+        }
 
-/*        public StudentPredmet? UpdateAdress(StudentPredmet studentPredmet)
-        {
-            StudentPredmet? oldStudentPredmet = GetAdressById(studentPredmet.StudentPredmetId);
-            if (oldStudentPredmet is null) return null;
-
-            oldStudentPredmet.Ulica = studentPredmet.Ulica;
-            oldStudentPredmet.Broj = studentPredmet.Broj;
-            oldStudentPredmet.Grad = studentPredmet.Grad;
-            oldStudentPredmet.Drzava = studentPredmet.Drzava;
-
-            _storage.Save(_studsub);
-            return oldStudentPredmet;
-        }*/
-
-/*        public StudentPredmet? RemoveAdress(int id)
-        {
-            StudentPredmet? studentPredmet = GetAdressById(id);
-            if (studentPredmet == null) return null;
-
-            _studsub.Remove(studentPredmet);
-            _storage.Save(_studsub);
-            return studentPredmet;
-        }*/
-
-/*        private StudentPredmet? GetAdressById(int id)
-        {
-            return _studsub.Find(s => s.StudentPredmetId == id);
-        }*/
+        private bool DoesStudSubExist(int studID, int subjID)
+         {
+            return _studsub.Any(ss => ss.StudentId == studID && ss.SubjectId == subjID);
+         }
 
         public List<StudentPredmet> GetAllStudentSubject()
         {

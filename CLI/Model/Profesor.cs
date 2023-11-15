@@ -35,29 +35,15 @@ namespace CLI.Model
             Predmeti = new List<Predmet>();
         }
 
+        public void addPredmet(Predmet predmet)
+        {
+            Predmeti.Add(predmet);
+        }
+
         public override string? ToString()
         {
             return $"Ime {Ime,12} | Prezime {Prezime,12} | Datum Rodjenja {DatumRodjenja.ToString("dd/MM/yyyy"),11} | Adresa {Adresa,13} | Kontakt {KontaktTelefon,10} | Email {Email,20} | Broj Licne {BrojLicneKarte,7} | Zvanje {Zvanje,8} | Godina Staza {GodineStaza,3} |";
         }
-
-
-
-        /*   public override string ToString()
-           {
-               StringBuilder sb = new StringBuilder();
-               sb.Append("IME: " + Ime + ", ");
-               sb.Append("PREZIME: " + Prezime + ", ");
-               sb.Append("DATUM RODJENJA: " + DatumRodjenja + ", ");
-               sb.Append("ADRESA: " + Adresa + ", ");
-               sb.Append("KONTAKT TELEFON: " + KontaktTelefon + ", ");
-               sb.Append("EMAIL: " + Email + ", ");
-               sb.Append("BROJ LICNE KARTE: " + BrojLicneKarte + ", ");
-               sb.Append("ZVANJE: " + Zvanje + ", ");
-               sb.Append("GODINE STAZA: " + GodineStaza + ", ");
-               //sb.Append("SUBJECTS: ");
-               //sb.AppendJoin(", ", Predmeti.Select(predmet => predmet.Naziv));
-               return sb.ToString();
-           }*/
 
         public string[] ToCSV()
         {
@@ -66,7 +52,7 @@ namespace CLI.Model
             ProfesorId.ToString(),
             Ime,
             Prezime,
-            DatumRodjenja.ToString(),
+            DatumRodjenja.ToString("dd/MM/yyyy"),
             Adresa,
             KontaktTelefon,
             Email,

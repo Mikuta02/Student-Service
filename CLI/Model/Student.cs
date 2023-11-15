@@ -20,6 +20,7 @@ namespace CLI.Model
         public int TrenutnaGodinaStudija { get; set; }
         public EnumUt.StatusType StatusStudenta { get; set; }
         public float ProsecnaOcena { get; set; }
+
         List<OcenaNaIspitu> SpisakPolozenihIspita { get; set; }
         List<OcenaNaIspitu> SpisakNepolozenihIspita { get; set; }
 
@@ -47,7 +48,7 @@ namespace CLI.Model
 
         public override string? ToString()
         {
-            return $"ID: {StudentId,2} | Ime {Ime,21} | Prezime {Prezime,21} | Datum Rodjenja {DatumRodjenja.ToString("dd/MM/yyyy"),11} | Adresa {Adresa,8} | Kontakt {KontaktTelefon,10} | Email {Email,12} | Broj Indeksa {BrojIndeksa,11} | Trenutna Godina {TrenutnaGodinaStudija,2} | Status Studenta {StatusStudenta,2}";
+            return $"ID {StudentId,2} | Ime {Ime,12} | Prezime {Prezime,12} | Datum Rodjenja {DatumRodjenja.ToString("dd/MM/yyyy"),11} | Adresa {Adresa,12} | Kontakt {KontaktTelefon,10} | Email {Email,12} | Broj Indeksa {BrojIndeksa,11} | Trenutna Godina {TrenutnaGodinaStudija,2} | Status Studenta {StatusStudenta,2} | Prosecna Ocena {ProsecnaOcena,5} |";
         }
 
 
@@ -93,7 +94,7 @@ namespace CLI.Model
             StudentId.ToString(),
             Ime,
             Prezime,
-            DatumRodjenja.ToString(),
+            DatumRodjenja.ToString("dd/MM/yyyy"),
             Adresa,
             KontaktTelefon,
             Email,

@@ -51,7 +51,7 @@ namespace CLI.Model
             {
             OcenaNaIspituId.ToString(),
             Ocena.ToString(),
-            DatumPolaganja.ToString(),
+            DatumPolaganja.ToString("dd/MM/yyyy"),
             StudentId.ToString(),
             PredmetId.ToString()
         };

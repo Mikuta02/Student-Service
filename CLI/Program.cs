@@ -17,8 +17,8 @@ class Program
         ProfessorDAO professors = new ProfessorDAO();
        //professors.AddProfesor(profesor2);
 
-        Predmet predmet1 = new Predmet("A1", "Analiza 1", "prva", 0, 9);
-        Predmet predmet2 = new Predmet("PJISP", "Programski jezici i strukture podataka", "prva", 1, 9);
+       // Predmet predmet1 = new Predmet("A1", "Analiza 1", "prva", 0, 9);
+        //Predmet predmet2 = new Predmet("PJISP", "Programski jezici i strukture podataka", "prva", 1, 9);
         SubjectDAO subjects = new SubjectDAO();
         //subjects.AddPredmet(predmet2);
         DepartmentDAO departments = new DepartmentDAO();
@@ -29,12 +29,25 @@ class Program
         ///  
         OcenaNaIspitu ocena1 = new OcenaNaIspitu(0, 0, 7, "06.03.1945");
         ExamGradesDAO grades = new ExamGradesDAO();
+        StudentSubjectDAO studentSubjects = new StudentSubjectDAO();
         //grades.AddOcenaNaIspitu(ocena1);
 
-        ConsoleView view = new ConsoleView(students, professors, subjects, grades, adresses, departments);
+        ConsoleView view = new ConsoleView(students, professors, subjects, grades, adresses, departments, studentSubjects);
         view.RunMenu();
 
+        float a = 5.4f;
+        string s = a.ToString();
+        Console.WriteLine(s);   
 
+        List<Profesor> profe = professors.GetAllProfessors();
+        foreach (Profesor profesor in profe)
+        {
+            Console.WriteLine($"Profesor: {profesor}\nnjegovi predmeti su: ");
+            foreach (Predmet p in profesor.Predmeti)
+            {
+                Console.WriteLine($"Predmet: {p}\n");
+            }
+        }
 
     }
 }

@@ -35,19 +35,7 @@ namespace CLI.DAO
             return student;
         }
 
-/*        public void AddSubjectToStudent()
-        {
-            StudentSubjectDAO studentSubjectDAO = new StudentSubjectDAO();
-            List<StudentPredmet> studentSubjects = studentSubjectDAO.GetAllStudentSubject();
-            SubjectDAO subjectDAO = new SubjectDAO();
-            List<Predmet> _subjects = subjectDAO.GetAllPredmets();
 
-            Student student = _students.Find(s => s.StudentId == studentSubject.StudentId);
-            Predmet subject = _subjects.Find(s => s.PredmetId == studentSubject.SubjectId);
-            student.Nepolo.Add(subject);
-            subject.Students.Add(student);
-            
-        }*/
 
         public Student? UpdateStudent(Student student)
         {

@@ -9,6 +9,7 @@ namespace CLI.Model
 {
     class StudentPredmet : ISerializable
     {
+        public int StudentSubjectId { get; set; }
         public int StudentId { get; set; }
 
         public int SubjectId { get; set; }

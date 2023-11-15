@@ -12,14 +12,14 @@ namespace CLI.Model
         public string SifraPredmeta { get; set; }
         public string Naziv { get; set; }
         public EnumUt.SemestarType Semestar { get; set; }
-        public string GodinaStudija { get; set; }
+        public int GodinaStudija { get; set; }
         public Profesor ProfesorPredmeta { get; set; }
         public int ProfesorID { get; set; } 
         public int ESPB { get; set; }
         public List<Student> StudentiPolozili { get; set; }
         public List<Student> StudentiNepolozili { get; set; }
 
-        public Predmet(string sifraPredmeta, string naziv, EnumUt.SemestarType semestar, string godinaStudija, int profesorId, int eSPB)
+        public Predmet(string sifraPredmeta, string naziv, EnumUt.SemestarType semestar, int godinaStudija, int profesorId, int eSPB)
         {
             SifraPredmeta = sifraPredmeta;
             Naziv = naziv;
@@ -31,7 +31,7 @@ namespace CLI.Model
             StudentiNepolozili = new List<Student>();
         }
 
-        public Predmet(string sifraPredmeta, string naziv, string godinaStudija, int profesorID, int eSPB)
+        public Predmet(string sifraPredmeta, string naziv, int godinaStudija, int profesorID, int eSPB)
         {
             SifraPredmeta = sifraPredmeta;
             Naziv = naziv;
@@ -51,7 +51,7 @@ namespace CLI.Model
 
         public override string? ToString()
         {
-            return $"Sifra {SifraPredmeta,5} | Naziv {Naziv,30} | Godina {GodinaStudija,6} | ProfID {ProfesorID,2} | ESPB {ESPB,2} |";
+            return $"Sifra {SifraPredmeta,5} | Naziv {Naziv,30} | Godina {GodinaStudija,2} | ProfID {ProfesorID,2} | ESPB {ESPB,2} |";
         }
 
 
@@ -92,7 +92,7 @@ namespace CLI.Model
              SifraPredmeta,
              Naziv,
              Semestar.ToString(),
-             GodinaStudija,
+             GodinaStudija.ToString(),
              ESPB.ToString(),
              ProfesorID.ToString()
         };
@@ -108,7 +108,7 @@ namespace CLI.Model
                 Semestar = EnumUt.SemestarType.Letnji;
             else
                 Semestar = EnumUt.SemestarType.Zimski;
-            GodinaStudija = values[4];
+            GodinaStudija = int.Parse(values[4]);
             ESPB = int.Parse(values[5]);
             ProfesorID = int.Parse(values[6]);
         }
