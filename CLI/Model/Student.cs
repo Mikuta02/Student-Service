@@ -49,7 +49,7 @@ namespace CLI.Model
 
         public override string? ToString()
         {
-            return $"ID {StudentId,2} | Ime {Ime,12} | Prezime {Prezime,12} | Datum Rodjenja {DatumRodjenja.ToString("dd/MM/yyyy"),11} | Adresa {Adresa.ToStringConsole(),22} | Kontakt {KontaktTelefon,10} | Email {Email,12} | Broj Indeksa {BrojIndeksa,11} | Trenutna Godina {TrenutnaGodinaStudija,2} | Status Studenta {StatusStudenta,2} | Prosecna Ocena {ProsecnaOcena,5} |";
+            return $"ID {StudentId,2} | Ime {Ime,12} | Prezime {Prezime,12} | Datum Rodjenja {DatumRodjenja.ToString("dd/MM/yyyy"),11} | Adresa {AdresaId,2} | Kontakt {KontaktTelefon,10} | Email {Email,12} | Broj Indeksa {BrojIndeksa,11} | Trenutna Godina {TrenutnaGodinaStudija,2} | Status Studenta {StatusStudenta,2} | Prosecna Ocena {ProsecnaOcena,5} |";
         }
 
         public string[] ToCSV()

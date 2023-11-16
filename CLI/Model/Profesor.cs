@@ -13,7 +13,8 @@ namespace CLI.Model
         public string Ime { get; set; }
         public string Prezime { get; set; }
         public DateTime DatumRodjenja { get; set; }
-        public string Adresa { get; set; }
+        public Adresa Adresa { get; set; }
+        public int AdresaId {  get; set; }
         public string KontaktTelefon { get; set; }
         public string Email { get; set; }
         public int BrojLicneKarte { get; set; }
@@ -21,12 +22,12 @@ namespace CLI.Model
         public int GodineStaza { get; set; }
         public List<Predmet> Predmeti { get; set; }
 
-        public Profesor(string ime, string prezime, string datumRodjenja, string adresa, string kontaktTelefon, string email, int brojLicneKarte, string zvanje, int godineStaza)
+        public Profesor(string ime, string prezime, string datumRodjenja, int adresaId, string kontaktTelefon, string email, int brojLicneKarte, string zvanje, int godineStaza)
         {
             Ime = ime;
             Prezime = prezime;
             DatumRodjenja = DateTime.Parse(datumRodjenja);
-            Adresa = adresa;
+            AdresaId = adresaId;
             KontaktTelefon = kontaktTelefon;
             Email = email;
             BrojLicneKarte = brojLicneKarte;
@@ -42,7 +43,7 @@ namespace CLI.Model
 
         public override string? ToString()
         {
-            return $"ID {ProfesorId,2} | Ime {Ime,12} | Prezime {Prezime,12} | Datum Rodjenja {DatumRodjenja.ToString("dd/MM/yyyy"),11} | Adresa {Adresa,13} | Kontakt {KontaktTelefon,10} | Email {Email,20} | Broj Licne {BrojLicneKarte,7} | Zvanje {Zvanje,8} | Godina Staza {GodineStaza,3} |";
+            return $"ID {ProfesorId,2} | Ime {Ime,12} | Prezime {Prezime,12} | Datum Rodjenja {DatumRodjenja.ToString("dd/MM/yyyy"),11} | Adresa {AdresaId,2} | Kontakt {KontaktTelefon,10} | Email {Email,20} | Broj Licne {BrojLicneKarte,7} | Zvanje {Zvanje,8} | Godina Staza {GodineStaza,3} |";
         }
 
         public string[] ToCSV()
@@ -53,7 +54,7 @@ namespace CLI.Model
             Ime,
             Prezime,
             DatumRodjenja.ToString("dd/MM/yyyy"),
-            Adresa,
+            AdresaId.ToString(),
             KontaktTelefon,
             Email,
             BrojLicneKarte.ToString(),
@@ -74,7 +75,7 @@ namespace CLI.Model
             Ime = values[1];
             Prezime = values[2];
             DatumRodjenja = DateTime.Parse(values[3]); 
-            Adresa = values[4];
+            AdresaId = int.Parse(values[4]);
             KontaktTelefon = values[5];
             Email = values[6];
             BrojLicneKarte = int.Parse(values[7]);

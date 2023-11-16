@@ -25,12 +25,38 @@ namespace CLI.DAO
             return _profesors[^1].ProfesorId + 1;
         }
 
-        public Profesor AddProfessor(Profesor profesor)
+        public Profesor? AddProfessor(Profesor profesor)
         {
             profesor.ProfesorId = GenerateId();
+
+            Adresa? adresa = AddAdresaToProfessor(profesor);
+            if (adresa == null)
+            {
+                return null;
+            }
+            profesor.Adresa = adresa;
+
             _profesors.Add(profesor);
             _storage.Save(_profesors);
             return profesor;
+        }
+
+        private Adresa? AddAdresaToProfessor(Profesor profesor)
+        {
+            AdressDAO adressDAO = new AdressDAO();
+            List<Adresa> adresses = adressDAO.GetAllAdress();
+
+            Adresa? adresa = adresses.Find(p => p.AdresaId == profesor.AdresaId);
+            if (adresa != null)
+            {
+                return adresa;
+            }
+            else
+            {
+                System.Console.WriteLine("Error: Address not found");
+                return null;
+            }
+
         }
 
         public Profesor? UpdateProfessor(Profesor profesor)
@@ -38,10 +64,17 @@ namespace CLI.DAO
             Profesor? oldProfesor = GetProfessorById(profesor.ProfesorId);
             if (oldProfesor is null) return null;
 
+            Adresa? adresa = AddAdresaToProfessor(profesor);
+            if (adresa == null)
+            {
+                return null;
+            }
+
             oldProfesor.Ime = profesor.Ime;
             oldProfesor.Prezime = profesor.Prezime;
             oldProfesor.DatumRodjenja = profesor.DatumRodjenja;
-            oldProfesor.Adresa = profesor.Adresa;
+            oldProfesor.Adresa = adresa;
+            oldProfesor.AdresaId = profesor.AdresaId;
             oldProfesor.KontaktTelefon = profesor.KontaktTelefon;
             oldProfesor.Email = profesor.Email;
             oldProfesor.BrojLicneKarte = profesor.BrojLicneKarte;

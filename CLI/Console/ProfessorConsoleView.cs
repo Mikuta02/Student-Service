@@ -20,7 +20,7 @@ namespace CLI.Console
         private void PrintProfessors(List<Profesor> professors)
         {
             System.Console.WriteLine("Profesori: ");
-            string header = $"ID {"",2} | Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",13} | Kontakt {"",10} | Email {"",20} | Broj Licne {"",7} | Zvanje {"",8} | Godina Staza {"",3} |";
+            string header = $"ID {"",2} | Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",2} | Kontakt {"",10} | Email {"",20} | Broj Licne {"",7} | Zvanje {"",8} | Godina Staza {"",3} |";
             System.Console.WriteLine(header);
             foreach (Profesor professor in professors)
             {
@@ -39,8 +39,8 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti datum rodjena (dd.MM.yyyy) profesora: ");
             string DatumRodjena = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Uneti adresu profesora: ");
-            string Adresa = System.Console.ReadLine() ?? string.Empty;
+            System.Console.WriteLine("Uneti id adrese profesora: ");
+            int Adresa = ConsoleViewUtils.SafeInputInt();
 
             System.Console.WriteLine("Uneti kontakt profesora: ");
             string Kontakt = System.Console.ReadLine() ?? string.Empty;
@@ -138,7 +138,7 @@ namespace CLI.Console
         private void AddProfessor()
         {
             Profesor professor = InputProfessor();
-            _professorsDAO.AddProfessor(professor);
+            if(_professorsDAO.AddProfessor(professor) is null) return;
             System.Console.WriteLine("Profesor dodat");
         }
 

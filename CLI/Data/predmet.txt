@@ -1,3 +1,0 @@
-0|a1|Analiza1|Letnji|1|9|0
-1|a2|analiza2|Letnji|2|9|0
-2|a|aa|Letnji|2|9|0

@@ -22,7 +22,7 @@ namespace CLI.Console
         private void PrintStudents(List<Student> students)
         {
             System.Console.WriteLine("Studenti: ");
-            string header = $"ID {"",2} | Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",22} | Kontakt {"",10} | Email {"",12} | Broj Indeksa {"",11} | Trenutna Godina {"",2} | Status Studenta {"",2} | Prosecna Ocena {"",5} |";
+            string header = $"ID {"",2} | Ime {"",12} | Prezime {"",12} | Datum Rodjenja {"",11} | Adresa {"",2} | Kontakt {"",10} | Email {"",12} | Broj Indeksa {"",11} | Trenutna Godina {"",2} | Status Studenta {"",2} | Prosecna Ocena {"",5} |";
             System.Console.WriteLine(header);
             foreach (Student student in students)
             {
