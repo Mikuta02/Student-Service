@@ -7,6 +7,37 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="New" Click="AddNewEntity"></MenuItem>
+                    <MenuItem Header="Save" Click="SaveApp"></MenuItem>
+                    <MenuItem Header="Open">
+                        <MenuItem Header="Studenti"></MenuItem>
+                        <MenuItem Header="Predmeti"></MenuItem>
+                        <MenuItem Header="Profesori"></MenuItem>
+                        <MenuItem Header="Katedre"></MenuItem>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem x:Name="CLOSE" Header="Close" Click="CloseApp_Execution" InputGestureText="ALT + F4"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Edit"></MenuItem>
+                    <MenuItem Header="Delete"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="About" Click="OpenAboutWindow"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <Button>KURAC</Button>
+                </ToolBar>
+            </ToolBarTray>
+            <StatusBar DockPanel.Dock="Bottom">
+                
+            </StatusBar>
+        </DockPanel>
 
     </Grid>
 </Window>

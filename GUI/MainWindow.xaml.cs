@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUI.View.MenuBar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,27 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        private void AddNewEntity(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveApp(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CloseApp_Execution(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void OpenAboutWindow(object sender, RoutedEventArgs e)
+        {
+            About about = new About();
+            about.Show();
+        }
+
     }
 }
