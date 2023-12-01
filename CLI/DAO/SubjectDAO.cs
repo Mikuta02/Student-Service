@@ -86,5 +86,41 @@ namespace CLI.DAO
         {
             return _subjects;
         }
+
+        internal void fillObjectsAndLists(StudentDAO studentsDao, StudentSubjectDAO studentSubjectDao, ProfessorDAO profesDao)
+        {
+            List<Student> students = studentsDao.GetAllStudents();
+            List<StudentPredmet> studentSubjects = studentSubjectDao.GetAllStudentSubject();
+            List<Profesor> professors = profesDao.GetAllProfessors();
+
+            //spisak koji nisu polozili
+            foreach (StudentPredmet sp in studentSubjects)
+            {
+                Predmet? predmet = GetPredmetById(sp.SubjectId);
+                Student? student = students.Find(s => s.StudentId == sp.StudentId);
+                if (student != null && predmet != null)
+                {
+                    predmet.StudentiNepolozili.Add(student);
+                }
+            }
+            //profesor
+            foreach(Predmet pred in _subjects)
+            {
+                Profesor? profesor = professors.Find(p => p.ProfesorId == pred.ProfesorID);
+                if (profesor == null) continue;
+                pred.ProfesorPredmeta = profesor;
+            }
+        }
+
+/*        internal void showall()
+        {
+            foreach(Predmet sub in _subjects)
+            {
+                foreach(Student stud in sub.StudentiNepolozili)
+                {
+                    System.Console.WriteLine($"ID OVOG PREDMETA{sub.PredmetId}\t{stud}\n");
+                }
+            }
+        }*/
     }
 }

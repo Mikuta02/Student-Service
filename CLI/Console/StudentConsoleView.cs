@@ -135,6 +135,7 @@ namespace CLI.Console
                 System.Console.WriteLine("Student nije pronadjen");
                 return;
             }
+            _studsub.RemoveByStudentID(id);
             System.Console.WriteLine("Student  izbrisan");
 
         }

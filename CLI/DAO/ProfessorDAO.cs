@@ -119,5 +119,27 @@ namespace CLI.DAO
         {
             return _profesors;
         }
+
+        internal void fillObjectsAndLists(SubjectDAO subjectsDao, AdressDAO addressesDao)
+        {
+            List<Predmet> subjects = subjectsDao.GetAllPredmets();
+            List<Adresa> adresses = addressesDao.GetAllAdress();
+
+            //adresa
+            foreach (Profesor prof in _profesors)
+            {
+                Adresa? adresa = adresses.Find(p => p.AdresaId == prof.AdresaId);
+                if(adresa == null) continue;
+                prof.Adresa = adresa;
+            }
+
+            //predmeti
+            foreach(Predmet predmet in subjects)
+            {
+                Profesor? profesor = GetProfessorById(predmet.ProfesorID);
+                if(profesor == null) continue;
+                profesor.Predmeti.Add(predmet);
+            }
+        }
     }   
 }

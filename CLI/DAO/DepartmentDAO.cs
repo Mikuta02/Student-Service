@@ -141,5 +141,17 @@ namespace CLI.DAO
             }
             return false;
         }
+
+        internal void fillObjectsAndLists(ProfessorDAO profesDao)
+        {
+            List<Profesor> professors = profesDao.GetAllProfessors();
+
+            foreach(Katedra dep in _departments)
+            {
+                Profesor? sef = professors.Find(p => p.ProfesorId == dep.SefId);
+                if (sef == null) continue;
+                dep.Sef = sef;
+            }
+        }
     }
 }

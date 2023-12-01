@@ -26,6 +26,14 @@ namespace CLI.Console
             _addressesDao = addressesDao;
             _departmentsDao = departmentsDao;
             _studentSubjectDao = studentSubjectDao;
+            fillObjects(studentsDao, profesDao, subjectsDao, examGradesDao, addressesDao,departmentsDao,studentSubjectDao);
+        }
+
+        private void fillObjects(StudentDAO studentsDao, ProfessorDAO profesDao, SubjectDAO subjectsDao, ExamGradesDAO examGradesDao, AdressDAO addressesDao, DepartmentDAO departmentsDao, StudentSubjectDAO studentSubjectDao)
+        {
+            studentsDao.fillObjectsAndLists(studentSubjectDao, subjectsDao, addressesDao);
+            profesDao.fillObjectsAndLists(subjectsDao, addressesDao);
+            subjectsDao.fillObjectsAndLists(studentsDao, studentSubjectDao, profesDao);
         }
 
         public void RunMenu()

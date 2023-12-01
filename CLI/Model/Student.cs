@@ -22,8 +22,8 @@ namespace CLI.Model
         public EnumUt.StatusType StatusStudenta { get; set; }
         public float ProsecnaOcena { get; set; }
 
-        List<OcenaNaIspitu> SpisakPolozenihIspita { get; set; }
-        List<OcenaNaIspitu> SpisakNepolozenihIspita { get; set; }
+        public List<OcenaNaIspitu> SpisakPolozenihIspita { get; set; }
+        public List<Predmet> SpisakNepolozenihPredmeta { get; set; }
 
         public Student(string ime, string prezime, string datumRodjenja, int adresaId, string kontaktTelefon, string email, Indeks brojIndeksa, int trenutnaGodinaStudija, EnumUt.StatusType statusStudenta, float prosecnaOcena)
         {
@@ -38,13 +38,13 @@ namespace CLI.Model
             StatusStudenta = statusStudenta;
             ProsecnaOcena = prosecnaOcena;
             SpisakPolozenihIspita = new List<OcenaNaIspitu>();
-            SpisakNepolozenihIspita = new List<OcenaNaIspitu>();
+            SpisakNepolozenihPredmeta = new List<Predmet>();
         }
 
         public Student()
         {
             SpisakPolozenihIspita = new List<OcenaNaIspitu>();
-            SpisakNepolozenihIspita = new List<OcenaNaIspitu>();
+            SpisakNepolozenihPredmeta = new List<Predmet>();
         }
 
         public override string? ToString()

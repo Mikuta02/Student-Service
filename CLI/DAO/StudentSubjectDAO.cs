@@ -34,6 +34,8 @@ namespace CLI.DAO
             {
                 return false;
             }
+            predmet.StudentiNepolozili.Add(student);
+            student.SpisakNepolozenihPredmeta.Add(predmet);
             StudentPredmet studentPredmet = new StudentPredmet(studID, subjID);
             //studentPredmet.StudentSubjectId = GenerateId();
             _studsub.Add(studentPredmet);
@@ -65,6 +67,29 @@ namespace CLI.DAO
         public List<StudentPredmet> GetAllStudentSubject()
         {
             return _studsub;
+        }
+
+        public void RemoveByStudentID(int id)
+        {
+            foreach (StudentPredmet sp in _studsub)
+            {
+                if(sp.StudentId == id)
+                {
+                    _studsub.Remove(sp);
+                    _storage.Save(_studsub); 
+                }
+            }
+        }
+        public void RemoveBySubjectID(int id)
+        {
+            foreach (StudentPredmet sp in _studsub)
+            {
+                if (sp.SubjectId == id)
+                {
+                    _studsub.Remove(sp);
+                    _storage.Save(_studsub);
+                }
+            }
         }
     }
 }

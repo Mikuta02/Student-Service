@@ -107,6 +107,7 @@ namespace CLI.Console
         private void ShowAllSubjects()
         {
             PrintSubjects(_subjectsDAO.GetAllPredmets());
+           // _subjectsDAO.showall();
         }
 
         private void RemoveSubject()
@@ -118,6 +119,7 @@ namespace CLI.Console
                 System.Console.WriteLine("Predmet nije pronadjen");
                 return;
             }
+            _studsub.RemoveBySubjectID(id);
             System.Console.WriteLine("Predmet izbrisan");
 
         }
