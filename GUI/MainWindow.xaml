@@ -34,10 +34,15 @@
                     <Button>KURAC</Button>
                 </ToolBar>
             </ToolBarTray>
-            <StatusBar DockPanel.Dock="Bottom">
-                
+            <StatusBar VerticalAlignment="Bottom">
+                <!-- Add your status bar items here -->
+                <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
+                <TextBlock>Status 2</TextBlock>
+                <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
+                <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
             </StatusBar>
         </DockPanel>
-
+        
     </Grid>
+    
 </Window>
