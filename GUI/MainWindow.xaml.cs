@@ -21,6 +21,8 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static RoutedCommand MyCommand = new RoutedCommand();
+
         public MainWindow()
         {
             InitializeComponent();

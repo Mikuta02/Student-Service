@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="DTO\" />
+    <Folder Include="Images\" />
     <Folder Include="View\Student\" />
   </ItemGroup>
 
