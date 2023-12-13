@@ -22,7 +22,7 @@
                     </MenuItem>
                     <MenuItem Header="Open">
                         <MenuItem.Icon>
-                            <Image Source="open-in-app.svg" Width="16" Height="16"/>
+                            <Image Source="Images/open-in-app.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                         <MenuItem Header="Studenti"  InputGestureText="Ctrl+Alt+S"></MenuItem>
                         <MenuItem Header="Predmeti"  InputGestureText="Ctrl+Alt+P"></MenuItem>
@@ -39,12 +39,12 @@
                 <MenuItem Header="Edit">
                     <MenuItem Header="Edit" InputGestureText="Ctrl+E">
                         <MenuItem.Icon>
-                            <Image Source="GUI/Images/pencil.png" Width="16" Height="16"/>
+                            <Image Source="Images/pencil.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Delete" InputGestureText="Delete">
                         <MenuItem.Icon>
-                            <Image Source="GUI/Images/delete.png" Width="16" Height="16"/>
+                            <Image Source="Images/delete.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>

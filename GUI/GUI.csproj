@@ -8,13 +8,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\close-box.png" />
+    <None Remove="Images\closewindow.png" />
+    <None Remove="Images\content-save.png" />
+    <None Remove="Images\delete.png" />
+    <None Remove="Images\folder-plus.png" />
+    <None Remove="Images\information.png" />
+    <None Remove="Images\open-in-app.png" />
+    <None Remove="Images\pencil.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CLI\CLI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DTO\" />
-    <Folder Include="Images\" />
     <Folder Include="View\Student\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\close-box.png" />
+    <Resource Include="Images\closewindow.png" />
+    <Resource Include="Images\content-save.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\folder-plus.png" />
+    <Resource Include="Images\information.png" />
+    <Resource Include="Images\open-in-app.png" />
+    <Resource Include="Images\pencil.png" />
   </ItemGroup>
 
 </Project>
