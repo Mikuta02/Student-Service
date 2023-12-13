@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        KeyDown="MainWindow_KeyDown">
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -61,6 +62,21 @@
                     <Button>KURAC</Button>
                 </ToolBar>
             </ToolBarTray>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Add DataGrid for Students -->
+                <DataGrid x:Name="studentsDataGrid" Grid.Row="1" AutoGenerateColumns="True" />
+
+                <!-- Add DataGrid for Professors -->
+                <DataGrid x:Name="professorsDataGrid" Grid.Row="1" AutoGenerateColumns="True" Visibility="Collapsed" />
+
+                <!-- Add DataGrid for Subjects -->
+                <DataGrid x:Name="subjectsDataGrid" Grid.Row="1" AutoGenerateColumns="True" Visibility="Collapsed" />
+            </Grid>
             <StatusBar VerticalAlignment="Bottom">
                 <!-- Add your status bar items here -->
                 <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>

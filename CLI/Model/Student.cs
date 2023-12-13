@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CLI.Model
 {
 
-    class Student : Serialization.ISerializable
+    public class Student : Serialization.ISerializable
     {
         public int StudentId { get; set; }
         public string Ime { get; set; }
@@ -30,6 +30,22 @@ namespace CLI.Model
             Ime = ime;
             Prezime = prezime;
             DatumRodjenja = DateTime.Parse(datumRodjenja);
+            AdresaId = adresaId;
+            KontaktTelefon = kontaktTelefon;
+            Email = email;
+            BrojIndeksa = brojIndeksa;
+            TrenutnaGodinaStudija = trenutnaGodinaStudija;
+            StatusStudenta = statusStudenta;
+            ProsecnaOcena = prosecnaOcena;
+            SpisakPolozenihIspita = new List<OcenaNaIspitu>();
+            SpisakNepolozenihPredmeta = new List<Predmet>();
+        }
+
+        public Student(string ime, string prezime, DateTime datumRodjenja, int adresaId, string kontaktTelefon, string email, Indeks brojIndeksa, int trenutnaGodinaStudija, EnumUt.StatusType statusStudenta, float prosecnaOcena)
+        {
+            Ime = ime;
+            Prezime = prezime;
+            DatumRodjenja = datumRodjenja;
             AdresaId = adresaId;
             KontaktTelefon = kontaktTelefon;
             Email = email;

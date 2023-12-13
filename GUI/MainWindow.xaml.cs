@@ -30,6 +30,34 @@ namespace GUI
             InitializeStatusBar();
         }
 
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.H)
+            {
+                //OpenAboutWindow();
+            }
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.N)
+            {
+               // OpenAboutWindow();
+            }
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
+            {
+                //OpenAboutWindow();
+            }
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.O)
+            {
+                //OpenAboutWindow();
+            }
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.E)
+            {
+                //OpenAboutWindow();
+            }
+            if (e.Key == Key.Delete)
+            {
+               // OpenAboutWindow();
+            }
+        }
+
         private void AddNewEntity(object sender, RoutedEventArgs e)
         {
 
@@ -45,10 +73,15 @@ namespace GUI
             this.Close();
         }
 
+        private void OpenAboutWindow()
+        {
+            var aboutWindow = new About();
+            aboutWindow.ShowDialog();
+        }
+
         private void OpenAboutWindow(object sender, RoutedEventArgs e)
         {
-            About about = new About();
-            about.Show();
+            OpenAboutWindow();
         }
 
         private void InitializeStatusBar()

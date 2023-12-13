@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    class Indeks
+    public class Indeks
     {
         public int IndeksId { get; set; }
         public string OznakaSmera {  get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CLI.Model
 {
-    class Predmet : Serialization.ISerializable
+    public class Predmet : Serialization.ISerializable
     {
         public int PredmetId { get; set; } 
         public string SifraPredmeta { get; set; }

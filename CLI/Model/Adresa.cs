@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    class Adresa : Serialization.ISerializable
+    public class Adresa : Serialization.ISerializable
     {
         public int AdresaId { get; set; }   
         public string Ulica {  get; set; }
