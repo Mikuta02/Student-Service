@@ -51,6 +51,29 @@ namespace GUI
             about.Show();
         }
 
+        private void CreateEntityButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Create_Entity button clicked!");
+            // Add logic to open the dialog for creating an entity
+        }
+
+        private void DeleteEntityButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Delete_Entity button clicked!");
+            // Add logic to delete the selected entity
+        }
+
+        private void EditEntityButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit_Entity button clicked!");
+            // Add logic to open the dialog for editing an entity
+        }
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Search button clicked!");
+            // Add logic to perform the search based on the criteria
+        }
+
         private void InitializeStatusBar()
         {
             // Update date and time every second

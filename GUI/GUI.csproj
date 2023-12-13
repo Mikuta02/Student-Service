@@ -13,7 +13,11 @@
     <None Remove="Images\content-save.png" />
     <None Remove="Images\delete.png" />
     <None Remove="Images\folder-plus.png" />
+    <None Remove="Images\folder.png" />
     <None Remove="Images\information.png" />
+    <None Remove="Images\kantica.png" />
+    <None Remove="Images\lupa.png" />
+    <None Remove="Images\olovka.png" />
     <None Remove="Images\open-in-app.png" />
     <None Remove="Images\pencil.png" />
   </ItemGroup>
@@ -33,7 +37,11 @@
     <Resource Include="Images\content-save.png" />
     <Resource Include="Images\delete.png" />
     <Resource Include="Images\folder-plus.png" />
+    <Resource Include="Images\folder.png" />
     <Resource Include="Images\information.png" />
+    <Resource Include="Images\kantica.png" />
+    <Resource Include="Images\lupa.png" />
+    <Resource Include="Images\olovka.png" />
     <Resource Include="Images\open-in-app.png" />
     <Resource Include="Images\pencil.png" />
   </ItemGroup>
