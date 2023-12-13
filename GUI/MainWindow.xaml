@@ -59,7 +59,35 @@
             </Menu>
             <ToolBarTray DockPanel.Dock="Top">
                 <ToolBar>
-                    <Button>KURAC</Button>
+                    <Button Click="CreateEntityButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/folder.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+                    <!-- Edit Entity button with an icon -->
+                    <Button Click="EditEntityButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/olovka.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Delete Entity button with an icon -->
+                    <Button Click="DeleteEntityButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/kantica.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Text input field for search -->
+                    <TextBox Width="150" Margin="10,0,0,0" x:Name="searchTextBox" />
+
+                    <!-- Search button with an icon -->
+                    <Button Click="SearchButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/lupa.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+                    
                 </ToolBar>
             </ToolBarTray>
             <Grid>
