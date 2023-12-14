@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    class StudentDAO
+    public class StudentDAO
     {
         private readonly List<Student> _students;
         private readonly Storage<Student> _storage;

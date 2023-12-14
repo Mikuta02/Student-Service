@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    class SubjectDAO
+    public class SubjectDAO
     {
         private readonly List<Predmet> _subjects;
         private readonly Storage<Predmet> _storage;

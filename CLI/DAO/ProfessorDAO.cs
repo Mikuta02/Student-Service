@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CLI.DAO
 {
-    class ProfessorDAO
+    public class ProfessorDAO
     {
         private readonly List<Profesor> _profesors;
         private readonly Storage<Profesor> _storage;

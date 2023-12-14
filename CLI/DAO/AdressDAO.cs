@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    class AdressDAO
+    public class AdressDAO
     {
         private readonly List<Adresa> _adresses;
         private readonly Storage<Adresa> _storage;

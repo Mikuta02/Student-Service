@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    class IndexesDAO
+    public class IndexesDAO
     {
         /*        private readonly List<Indeks> _indexes;
                 private readonly Storage<Indeks> _storage;

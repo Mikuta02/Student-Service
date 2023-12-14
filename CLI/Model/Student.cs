@@ -57,6 +57,23 @@ namespace CLI.Model
             SpisakNepolozenihPredmeta = new List<Predmet>();
         }
 
+        public Student(string ime, string prezime, DateTime datumRodjenja, int adresaId, string kontaktTelefon, string email, string brojIndeksa, int trenutnaGodinaStudija, string statusStudenta, float prosecnaOcena)
+        {
+            Ime = ime;
+            Prezime = prezime;
+            DatumRodjenja = datumRodjenja;
+            AdresaId = adresaId;
+            KontaktTelefon = kontaktTelefon;
+            Email = email;
+            BrojIndeksa = makeIndex(brojIndeksa);
+            TrenutnaGodinaStudija = trenutnaGodinaStudija;
+            Enum.TryParse(statusStudenta, out EnumUt.StatusType statusStudentaEnum);
+            StatusStudenta = statusStudentaEnum;
+            ProsecnaOcena = prosecnaOcena;
+            SpisakPolozenihIspita = new List<OcenaNaIspitu>();
+            SpisakNepolozenihPredmeta = new List<Predmet>();
+        }
+
         public Student()
         {
             SpisakPolozenihIspita = new List<OcenaNaIspitu>();

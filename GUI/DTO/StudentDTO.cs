@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GUI.DTO
 {
-    class StudentDTO : INotifyPropertyChanged
+    public class StudentDTO : INotifyPropertyChanged
     {
         public int StudentId { get; set; }
         private string ime { get; set; }
@@ -23,7 +23,7 @@ namespace GUI.DTO
                 if (ime != value)
                 {
                     ime = value;
-                    OnPropertyChanged("Name");
+                    OnPropertyChanged("Ime");
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace GUI.DTO
                 if (prezime != value)
                 {
                     prezime = value;
-                    OnPropertyChanged("LastName");
+                    OnPropertyChanged("Prezime");
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace GUI.DTO
                 if (datumRodjenja != value)
                 {
                     datumRodjenja = value;
-                    OnPropertyChanged("Date");
+                    OnPropertyChanged("DatumRodjenja");
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace GUI.DTO
                 if (adresaId != value)
                 {
                     adresaId = value;
-                    OnPropertyChanged("Adress");
+                    OnPropertyChanged("AdresaId");
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace GUI.DTO
                 if (kontaktTelefon != value)
                 {
                     kontaktTelefon = value;
-                    OnPropertyChanged("Contact");
+                    OnPropertyChanged("KontaktTelefon");
                 }
             }
         }
@@ -108,8 +108,8 @@ namespace GUI.DTO
                 }
             }
         }
-        private Indeks brojIndeksa { get; set; }
-        public Indeks BrojIndeksa
+        private string brojIndeksa { get; set; }
+        public string BrojIndeksa
         {
             get
             {
@@ -120,7 +120,7 @@ namespace GUI.DTO
                 if (brojIndeksa != value)
                 {
                     brojIndeksa = value;
-                    OnPropertyChanged("Index");
+                    OnPropertyChanged("BrojIndeksa");
                 }
             }
         }
@@ -136,12 +136,12 @@ namespace GUI.DTO
                 if (trenutnaGodinaStudija != value)
                 {
                     trenutnaGodinaStudija = value;
-                    OnPropertyChanged("Year");
+                    OnPropertyChanged("TrenutnaGodinaStudija");
                 }
             }
         }
-        private EnumUt.StatusType statusStudenta { get; set; }
-        public EnumUt.StatusType StatusStudenta
+        private string statusStudenta { get; set; }
+        public string StatusStudenta
         {
             get
             {
@@ -152,7 +152,8 @@ namespace GUI.DTO
                 if (statusStudenta != value)
                 {
                     statusStudenta = value;
-                    OnPropertyChanged("Status");
+                    
+                    OnPropertyChanged("StatusStudenta");
                 }
             }
         }
@@ -168,7 +169,7 @@ namespace GUI.DTO
                 if (prosecnaOcena != value)
                 {
                     prosecnaOcena = value;
-                    OnPropertyChanged("Average");
+                    OnPropertyChanged("ProsecnaOcena");
                 }
             }
         }

@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="DTO\" />
-    <Folder Include="View\Student\" />
   </ItemGroup>
 
   <ItemGroup>

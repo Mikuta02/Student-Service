@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace CLI.Model
 {
-    class Profesor : Serialization.ISerializable
+    public class Profesor : Serialization.ISerializable
     {
         public int ProfesorId {  get; set; }
         public string Ime { get; set; }

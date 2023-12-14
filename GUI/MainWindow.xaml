@@ -25,8 +25,8 @@
                         <MenuItem.Icon>
                             <Image Source="Images/open-in-app.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
-                        <MenuItem Header="Studenti"  InputGestureText="Ctrl+Alt+S"></MenuItem>
-                        <MenuItem Header="Predmeti"  InputGestureText="Ctrl+Alt+P"></MenuItem>
+                        <MenuItem Header="Studenti" InputGestureText="Ctrl+Alt+S"></MenuItem>
+                        <MenuItem Header="Predmeti" InputGestureText="Ctrl+Alt+P"></MenuItem>
                         <MenuItem Header="Profesori" InputGestureText="Ctrl+Alt+R"></MenuItem>
                         <MenuItem Header="Katedre" InputGestureText="Ctrl+Alt+K"></MenuItem>
                     </MenuItem>
@@ -64,30 +64,22 @@
                             <Image Source="Images/folder.png" Width="16" Height="16" Margin="0,0,5,0"/>
                         </StackPanel>
                     </Button>
-                    <!-- Edit Entity button with an icon -->
                     <Button Click="EditEntityButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Images/olovka.png" Width="16" Height="16" Margin="0,0,5,0"/>
                         </StackPanel>
                     </Button>
-
-                    <!-- Delete Entity button with an icon -->
                     <Button Click="DeleteEntityButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Images/kantica.png" Width="16" Height="16" Margin="0,0,5,0"/>
                         </StackPanel>
                     </Button>
-
-                    <!-- Text input field for search -->
                     <TextBox Width="150" Margin="10,0,0,0" x:Name="searchTextBox" />
-
-                    <!-- Search button with an icon -->
                     <Button Click="SearchButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Images/lupa.png" Width="16" Height="16" Margin="0,0,5,0"/>
                         </StackPanel>
                     </Button>
-                    
                 </ToolBar>
             </ToolBarTray>
             <Grid>
@@ -95,25 +87,16 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-                <!-- Add DataGrid for Students -->
                 <DataGrid x:Name="studentsDataGrid" Grid.Row="1" AutoGenerateColumns="True" />
-
-                <!-- Add DataGrid for Professors -->
                 <DataGrid x:Name="professorsDataGrid" Grid.Row="1" AutoGenerateColumns="True" Visibility="Collapsed" />
-
-                <!-- Add DataGrid for Subjects -->
                 <DataGrid x:Name="subjectsDataGrid" Grid.Row="1" AutoGenerateColumns="True" Visibility="Collapsed" />
             </Grid>
             <StatusBar VerticalAlignment="Bottom">
-                <!-- Add your status bar items here -->
                 <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
                 <TextBlock>Status 2</TextBlock>
                 <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
                 <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
             </StatusBar>
         </DockPanel>
-        
     </Grid>
-    
 </Window>

@@ -1,0 +1,82 @@
+﻿<Window x:Class="GUI.View.Student.AddStudent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View.Student"
+        mc:Ignorable="d"
+        Title="AddStudent" Height="400" Width="343">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Labels and Input Fields in a Grid -->
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Ime:" Grid.Row="0"/>
+            <TextBox Name="txtIme" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Prezime:" Grid.Row="1"/>
+            <TextBox Name="txtPrezime" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Datum Rodjenja:" Grid.Row="2"/>
+            <DatePicker Name="dpDatumRodjenja" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" Width="165"/>
+
+            <Label Content="Adresa:" Grid.Row="3"/>
+            <TextBox Name="txtAdresa" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" Width="124"/>
+
+            <Label Content="Kontakt:" Grid.Row="4"/>
+            <TextBox Name="txtKontakt" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Email:" Grid.Row="5"/>
+            <TextBox Name="txtEmail" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Broj Indeksa:" Grid.Row="6"/>
+            <TextBox Name="txtIndeks" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Trenutna Godina Studija:" Grid.Row="7"/>
+            <ComboBox Name="cmbGodinaStudija" Grid.Row="7" Grid.Column="1" Width="100" Margin="0,0,0,5">
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+            </ComboBox>
+
+            <Label Content="Status Studenta:" Grid.Row="8"/>
+            <ComboBox Name="cmbStatusStudenta" Grid.Row="8" Grid.Column="1" Width="100" Margin="0,0,0,5">
+                <ComboBoxItem>Budzet</ComboBoxItem>
+                <ComboBoxItem>Samofinansiranje</ComboBoxItem>
+            </ComboBox>
+
+            <Label Content="Prosecna Ocena:" Grid.Row="9"/>
+            <TextBox Name="txtProsecnaOcena" Grid.Row="9" Grid.Column="1" Margin="0,0,0,5"/>
+        </Grid>
+
+        <!-- Buttons: Confirm and Cancel in the center -->
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
+            <Button Name="btnConfirm" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnConfirm_Click" />
+            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
+
+

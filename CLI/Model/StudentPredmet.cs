@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLI.Model
 {
-    class StudentPredmet : ISerializable
+    public class StudentPredmet : ISerializable
     {
         public int StudentSubjectId { get; set; }
         public int StudentId { get; set; }

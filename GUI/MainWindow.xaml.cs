@@ -1,4 +1,5 @@
 ﻿using GUI.View.MenuBar;
+using GUI.View.Student;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace GUI
         {
             if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.H)
             {
-                //OpenAboutWindow();
+                OpenAboutWindow();
             }
             if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.N)
             {
@@ -86,8 +87,15 @@ namespace GUI
 
         private void CreateEntityButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Create_Entity button clicked!");
-            // Add logic to open the dialog for creating an entity
+            CreateEntityButton_Click();
+        }
+
+        private void CreateEntityButton_Click()
+        {
+            var addStudentWindow = new AddStudent();
+            addStudentWindow.Owner = this;
+            addStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            addStudentWindow.ShowDialog();
         }
 
         private void DeleteEntityButton_Click(object sender, RoutedEventArgs e)
