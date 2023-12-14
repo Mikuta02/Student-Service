@@ -179,7 +179,26 @@ namespace GUI.DTO
             return new Student(ime, prezime, datumRodjenja, adresaId, kontaktTelefon, email, brojIndeksa, trenutnaGodinaStudija, statusStudenta, prosecnaOcena);
         }
 
+        public StudentDTO()
+        {
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public StudentDTO(Student student)
+        {
+            StudentId = student.StudentId;
+            ime = student.Ime;
+            prezime = student.Prezime;
+            datumRodjenja = student.DatumRodjenja;
+            adresaId = student.AdresaId;
+            kontaktTelefon = student.KontaktTelefon;
+            email = student.Email;
+            brojIndeksa = student.BrojIndeksa.ToString();
+            trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
+            statusStudenta = student.StatusStudenta.ToString();
+            prosecnaOcena = student.ProsecnaOcena;
+        }
 
         protected virtual void OnPropertyChanged(string name)
         {
@@ -187,6 +206,23 @@ namespace GUI.DTO
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        public StudentDTO Clone()
+        {
+            return new StudentDTO
+            {
+                Ime = this.Ime,
+                Prezime = this.Prezime,
+                DatumRodjenja = this.DatumRodjenja,
+                AdresaId = this.AdresaId,
+                KontaktTelefon = this.KontaktTelefon,
+                Email = this.Email,
+                BrojIndeksa = this.BrojIndeksa,
+                TrenutnaGodinaStudija = this.TrenutnaGodinaStudija,
+                StatusStudenta = this.StatusStudenta,
+                ProsecnaOcena = this.ProsecnaOcena,
+            };
         }
     }
 }

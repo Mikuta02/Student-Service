@@ -1,0 +1,24 @@
+﻿<Window x:Class="GUI.View.DialogWindows.ConfirmationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View.DialogWindows"
+        mc:Ignorable="d"
+        Title="Confirmation" Height="150" Width="300" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="White">
+    <Border BorderBrush="#FF707070" BorderThickness="1" CornerRadius="5">
+        <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="ConfirmationMessage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <Button Content="Yes" IsDefault="True" Width="40" Height="20" Margin="0,0,20,5" Click="YesButton_Click"/>
+                <Button Content="No" IsCancel="True" Width="40" Height="20" Margin="0,0,0,5" Click="NoButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

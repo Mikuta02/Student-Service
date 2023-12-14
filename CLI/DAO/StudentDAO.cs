@@ -1,4 +1,5 @@
 ﻿using CLI.Model;
+using CLI.Observer;
 using CLI.Storage;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace CLI.DAO
     {
         private readonly List<Student> _students;
         private readonly Storage<Student> _storage;
+        public Subject StudentSubject;
 
 
         public StudentDAO()
         {
             _storage = new Storage<Student>("students.txt");
             _students = _storage.Load();
+            StudentSubject = new Subject();
         }
 
         private int GenerateId()
@@ -39,6 +42,7 @@ namespace CLI.DAO
             student.Adresa = adresa;
             _students.Add(student);
             _storage.Save(_students);
+            StudentSubject.NotifyObservers();
             return student;
         }
 
@@ -83,6 +87,7 @@ namespace CLI.DAO
             oldStudent.ProsecnaOcena = student.ProsecnaOcena;
 
             _storage.Save(_students);
+            StudentSubject.NotifyObservers();
             return oldStudent;
         }
 
@@ -93,6 +98,7 @@ namespace CLI.DAO
 
             _students.Remove(student);
             _storage.Save(_students);
+            StudentSubject.NotifyObservers();
             return student;
         }
 

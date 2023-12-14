@@ -1,4 +1,5 @@
 ﻿using CLI.DAO;
+using CLI.Model;
 using GUI.DTO;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,9 @@ using System.Windows.Shapes;
 namespace GUI.View.Student
 {
     /// <summary>
-    /// Interaction logic for AddStudent.xaml
+    /// Interaction logic for EditStudent.xaml
     /// </summary>
-    public partial class AddStudent : Window, INotifyPropertyChanged
+    public partial class EditStudent : Window, INotifyPropertyChanged
     {
         public StudentDTO Student { get; set; }
 
@@ -29,12 +30,12 @@ namespace GUI.View.Student
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public AddStudent(StudentDAO studentsDAO)
+        public EditStudent(StudentDAO studentsDAO, StudentDTO selectedStudent)
         {
             InitializeComponent();
             DataContext = this;
-            Student = new StudentDTO();
             this.studentsDAO = studentsDAO;
+            Student = selectedStudent;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -47,8 +48,9 @@ namespace GUI.View.Student
         {
             if (ValidateFields())
             {
-                studentsDAO.AddStudent(Student.toStudent());
-                MessageBox.Show("Student added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Console.WriteLine(Student.StudentId);
+                studentsDAO.UpdateStudent(Student.toStudent());
+                MessageBox.Show("Student updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
@@ -64,6 +66,7 @@ namespace GUI.View.Student
 
         private bool ValidateFields()
         {
+            // Add validation logic for each field
             return !string.IsNullOrWhiteSpace(txtIme.Text) &&
                    !string.IsNullOrWhiteSpace(txtPrezime.Text) &&
                    dpDatumRodjenja.SelectedDate.HasValue &&

@@ -8,10 +8,17 @@
         Title="MainWindow" Height="450" Width="800"
         KeyDown="MainWindow_KeyDown">
     <Grid>
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Menu Grid.Row="0">
                 <MenuItem Header="File">
-                    <MenuItem Header="New" InputGestureText="Ctrl+N">
+                    <MenuItem Header="New" InputGestureText="Ctrl+N" Click="CreateEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/folder-plus.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
@@ -25,9 +32,9 @@
                         <MenuItem.Icon>
                             <Image Source="Images/open-in-app.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
-                        <MenuItem Header="Studenti" InputGestureText="Ctrl+Alt+S"></MenuItem>
-                        <MenuItem Header="Predmeti" InputGestureText="Ctrl+Alt+P"></MenuItem>
-                        <MenuItem Header="Profesori" InputGestureText="Ctrl+Alt+R"></MenuItem>
+                        <MenuItem Header="Studenti" InputGestureText="Ctrl+Alt+S" Click="MenuItem_Studenti_Click"></MenuItem>
+                        <MenuItem Header="Predmeti" InputGestureText="Ctrl+Alt+P" Click="MenuItem_Predmeti_Click"></MenuItem>
+                        <MenuItem Header="Profesori" InputGestureText="Ctrl+Alt+R" Click="MenuItem_Profesori_Click"></MenuItem>
                         <MenuItem Header="Katedre" InputGestureText="Ctrl+Alt+K"></MenuItem>
                     </MenuItem>
                     <Separator/>
@@ -43,7 +50,7 @@
                             <Image Source="Images/pencil.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Delete" InputGestureText="Delete">
+                    <MenuItem Header="Delete" InputGestureText="Delete" Click="DeleteEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/delete.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
@@ -57,7 +64,8 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
-            <ToolBarTray DockPanel.Dock="Top">
+
+            <ToolBarTray Grid.Row="1">
                 <ToolBar>
                     <Button Click="CreateEntityButton_Click">
                         <StackPanel Orientation="Horizontal">
@@ -82,21 +90,39 @@
                     </Button>
                 </ToolBar>
             </ToolBarTray>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <DataGrid x:Name="studentsDataGrid" Grid.Row="1" AutoGenerateColumns="True" />
-                <DataGrid x:Name="professorsDataGrid" Grid.Row="1" AutoGenerateColumns="True" Visibility="Collapsed" />
-                <DataGrid x:Name="subjectsDataGrid" Grid.Row="1" AutoGenerateColumns="True" Visibility="Collapsed" />
-            </Grid>
-            <StatusBar VerticalAlignment="Bottom">
+
+            <TabControl Grid.Row="2" x:Name="MainTabControl">
+                <TabItem x:Name="StudentsTab" Header="Studenti">
+                    <DataGrid Height="350"
+                              AutoGenerateColumns="False"
+                              x:Name="StudentsDataGrid"
+                              ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
+                              SelectionMode="Single" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Indeks" Binding="{Binding BrojIndeksa}"/>
+                            <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
+                            <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
+                            <DataGridTextColumn Header="Godina Studija" Binding="{Binding TrenutnaGodinaStudija}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding StatusStudenta}"/>
+                            <DataGridTextColumn Header="Prosek" Binding="{Binding ProsecnaOcena}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem x:Name="ProffesorsTab" Header="Profesori">
+                    
+                </TabItem>
+                <TabItem x:Name="SubjectsTab" Header="Predmeti">
+
+                </TabItem>
+            </TabControl>
+
+            <StatusBar Grid.Row="3" VerticalAlignment="Bottom">
                 <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
                 <TextBlock>Status 2</TextBlock>
                 <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
                 <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
             </StatusBar>
-        </DockPanel>
+        </Grid>
     </Grid>
 </Window>
