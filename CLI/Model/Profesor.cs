@@ -69,6 +69,19 @@ namespace CLI.Model
             Predmeti = new List<Predmet>();
         }
 
+        public Profesor(string ime, string prezime, DateTime datumRodjenja, int adresaId, string kontaktTelefon, string email, int brojLicneKarte, string zvanje, int godineStaza)
+        {
+            Ime = ime;
+            Prezime = prezime;
+            DatumRodjenja = datumRodjenja;
+            AdresaId = adresaId;
+            KontaktTelefon = kontaktTelefon;
+            Email = email;
+            BrojLicneKarte = brojLicneKarte;
+            Zvanje = zvanje;
+            GodineStaza = godineStaza;
+        }
+
         public void FromCSV(string[] values)
         {
             ProfesorId = int.Parse(values[0]);

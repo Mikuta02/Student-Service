@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\close-box.png" />
     <Resource Include="Images\closewindow.png" />
     <Resource Include="Images\content-save.png" />
