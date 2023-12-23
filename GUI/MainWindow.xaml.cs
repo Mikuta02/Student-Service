@@ -3,6 +3,7 @@ using CLI.DAO;
 using CLI.Model;
 using GUI.View.MenuBar;
 using GUI.View.Student;
+using GUI.View.Profesor;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using CLI.Observer;
 using GUI.View.DialogWindows;
+using GUI.View.Predmet;
 
 namespace GUI
 {
@@ -23,6 +25,13 @@ namespace GUI
         public ObservableCollection<StudentDTO> Students { get; set; }
         public StudentDTO SelectedStudent { get; set; }
         private StudentDAO studentsDAO { get; set; }
+
+        public ProfesorDTO SelectedProfesor { get; set; }
+        private ProfessorDAO profesorsDAO { get; set; }
+
+        public PredmetDTO SelectedPredmet {  get; set; }
+        private SubjectDAO predmetsDAO { get; set; }
+
 
         public MainWindow()
         {
@@ -147,13 +156,17 @@ namespace GUI
             }
             else if (MainTabControl.SelectedItem == ProffesorsTab)
             {
-                // Create professor logic
-                // Add your logic to create professors here
+                var addProfesorWindow = new AddProfesor(profesorsDAO);
+                addProfesorWindow.Owner = this;
+                addProfesorWindow.WindowStartupLocation= WindowStartupLocation.CenterOwner;
+                addProfesorWindow.ShowDialog();
             }
             else if (MainTabControl.SelectedItem == SubjectsTab)
             {
-                // Create subject logic
-                // Add your logic to create subjects here
+                var addPredmetWindow = new AddPredmet(predmetsDAO);
+                addPredmetWindow.Owner = this;
+                addPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                addPredmetWindow.ShowDialog();
             }
         }
 
@@ -181,29 +194,87 @@ namespace GUI
             }
             else if (MainTabControl.SelectedItem == ProffesorsTab)
             {
-                // Delete professor logic
-                // Add your logic to delete professors here
+                if(SelectedProfesor == null)
+                {
+                    MessageBox.Show(this, "Please choose a profesor to delete!");
+                }
+                else
+                {
+                    var confirmationDialog = new ConfirmationWindow("Profesor");
+                    confirmationDialog.Owner = this;
+                    confirmationDialog.WindowStartupLocation= WindowStartupLocation.CenterOwner;
+                    confirmationDialog.ShowDialog();
+
+                    if (confirmationDialog.UserConfirmed)
+                    {
+                        profesorsDAO.RemoveProfessor(SelectedProfesor.ProfesorId);
+                    }
+                }
             }
             else if (MainTabControl.SelectedItem == SubjectsTab)
             {
-                // Delete subject logic
-                // Add your logic to delete subjects here
+                if (SelectedPredmet == null)
+                {
+                    MessageBox.Show(this, "Please choose a subject to delete!");
+                }
+                else
+                {
+                    var confirmationDialog = new ConfirmationWindow("Subject");
+                    confirmationDialog.Owner = this;
+                    confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    confirmationDialog.ShowDialog();
+
+                    if(confirmationDialog.UserConfirmed)
+                    {
+                        predmetsDAO.RemovePredmet(SelectedPredmet.PredmetId);
+                    }
+                }
             }
         }
 
         private void EditEntityButton_Click(object sender, RoutedEventArgs e)
         {
-            if(SelectedStudent == null)
+            if (MainTabControl.SelectedItem == StudentsTab)
+            { 
+                if (SelectedStudent == null)
+                {
+                    MessageBox.Show(this, "Please choose a student to edit!");
+                }
+                else
+                {
+                    // System.Console.WriteLine(SelectedStudent.StudentId);
+                    var editStudentWindow = new EditStudent(studentsDAO, SelectedStudent);
+                    editStudentWindow.Owner = this;
+                    editStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    editStudentWindow.ShowDialog();
+                }
+            }else if(MainTabControl.SelectedItem == ProffesorsTab) 
             {
-                MessageBox.Show(this,"Please choose a student to edit!");
+                if(SelectedProfesor == null)
+                {
+                    MessageBox.Show(this, "Please choose a professor to edit!");
+                }
+                else
+                {
+                    var editsProfesorWindow = new EditProfesor(profesorsDAO, SelectedProfesor);
+                    editsProfesorWindow.Owner = this;
+                    editsProfesorWindow.WindowStartupLocation= WindowStartupLocation.CenterOwner;
+                    editsProfesorWindow.ShowDialog();
+                }
             }
-            else
+            else if (MainTabControl.SelectedItem == SubjectsTab)
             {
-               // System.Console.WriteLine(SelectedStudent.StudentId);
-                var editStudentWindow = new EditStudent(studentsDAO, SelectedStudent);
-                editStudentWindow.Owner = this;
-                editStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                editStudentWindow.ShowDialog();
+                if(SelectedPredmet == null)
+                {
+                    MessageBox.Show(this, "Please choose a subject to edit!");
+                }
+                else
+                {
+                    var editSubjectWindow = new EditPredmet(predmetsDAO, SelectedPredmet);
+                    editSubjectWindow.Owner = this;
+                    editSubjectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    editSubjectWindow.ShowDialog();
+                }
             }
         }
         private void SearchButton_Click(object sender, RoutedEventArgs e)
