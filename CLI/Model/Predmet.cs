@@ -49,6 +49,33 @@ namespace CLI.Model
             StudentiNepolozili = new List<Student>();
         }
 
+        public Predmet(string sifraPredmeta, string naziv, string semestar, int godinaStudija, int profesorID, int espb)
+        {
+            SifraPredmeta = sifraPredmeta;
+            Naziv = naziv;
+            GodinaStudija = godinaStudija;
+            ProfesorID = profesorID;
+            ESPB = espb;
+        }
+
+        public Predmet(string sifraPredmeta, string naziv, string semestar, int godinaStudija, Profesor profesorPredmeta, int profesorID, int espb)
+        {
+            SifraPredmeta = sifraPredmeta;
+            Naziv = naziv;
+            GodinaStudija = godinaStudija;
+            ProfesorID = profesorID;
+            ESPB = espb;
+        }
+
+        public Predmet(string sifraPredmeta, string naziv, string semestar, int godinaStudija, string profesorPredmeta, int profesorID, int espb)
+        {
+            SifraPredmeta = sifraPredmeta;
+            Naziv = naziv;
+            GodinaStudija = godinaStudija;
+            ProfesorID = profesorID;
+            ESPB = espb;
+        }
+
         public override string? ToString()
         {
             return $"ID {PredmetId,2} | Sifra {SifraPredmeta,5} | Naziv {Naziv,30} | Godina {GodinaStudija,2} | ProfID {ProfesorID,2} | ESPB {ESPB,2} |";

@@ -1,0 +1,76 @@
+﻿<Window x:Class="GUI.View.Predmet.AddPredmet"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View.Predmet"
+        mc:Ignorable="d"
+        Title="AddPredmet" Height="420" Width="380">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Labels and Input Fields in a Grid -->
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Sifra Predmeta:" Grid.Row="0"/>
+            <TextBox Name="txtSifraPredmeta" Text="{Binding Path=Predmet.SifraPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Naziv:" Grid.Row="1"/>
+            <TextBox Name="txtNaziv" Text="{Binding Path=Predmet.Naziv, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Semestar:" Grid.Row="2"/>
+            <TextBox Name="txtSemestar" Text="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Godina Studija:" Grid.Row="3"/>
+            <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Width="178" Margin="0,0,0,5">
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+            </ComboBox>
+
+
+
+
+            <Label Content="Profesor Predmeta:" Grid.Row="4"/>
+            <TextBox Name="txtProfesorPredmeta" Text="{Binding Path=Predmet.ProfesorPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="ProfesorID:" Grid.Row="5"/>
+            <TextBox Name="txtProfesorID" Text="{Binding Path=Predmet.ProfesorID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="ESPB:" Grid.Row="6"/>
+            <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
+
+          
+
+        </Grid>
+
+        <!-- Buttons: Confirm and Cancel in the center -->
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
+            <Button Name="btnConfirm" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnConfirm_Click" />
+            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
+
+

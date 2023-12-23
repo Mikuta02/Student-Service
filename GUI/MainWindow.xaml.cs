@@ -239,5 +239,19 @@ namespace GUI
             Students.Clear();
             foreach (Student student in studentsDAO.GetAllStudents()) Students.Add(new StudentDTO(student));
         }
+
+        private void StudentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ProfesorsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void SubjectsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

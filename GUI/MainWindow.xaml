@@ -98,7 +98,7 @@
                               x:Name="StudentsDataGrid"
                               ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"
                               SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
-                              SelectionMode="Single" IsReadOnly="True">
+                              SelectionMode="Single" IsReadOnly="True" SelectionChanged="StudentsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Indeks" Binding="{Binding BrojIndeksa}"/>
                             <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
@@ -110,10 +110,42 @@
                     </DataGrid>
                 </TabItem>
                 <TabItem x:Name="ProffesorsTab" Header="Profesori">
-                    
+                        <DataGrid Height="350"
+                            AutoGenerateColumns="False"
+                            x:Name="ProfesorsDataGrid"
+                            ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
+                            SelectionMode="Single" IsReadOnly="True" SelectionChanged="ProfesorsDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
+                            <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
+                            <DataGridTextColumn Header="Datum Rodjenja" Binding="{Binding DatumRodjenja}"/>
+                            <DataGridTextColumn Header="Adresa" Binding="{Binding Adresa}"/>
+                            <DataGridTextColumn Header="Kontakt" Binding="{Binding Kontakt}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Broj Licne Karte" Binding="{Binding BrojLicneKarte}"/>
+                            <DataGridTextColumn Header="Zvanje" Binding="{Binding Zvanje}"/>
+                            <DataGridTextColumn Header="Godine Staza" Binding="{Binding GodineStaza}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
                 <TabItem x:Name="SubjectsTab" Header="Predmeti">
-
+                    <DataGrid Height="350"
+                            AutoGenerateColumns="False"
+                            x:Name="SubjectsDataGrid"
+                            ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
+                            SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Sifra Predmeta" Binding="{Binding SifraPredmeta}"/>
+                            <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}"/>
+                            <DataGridTextColumn Header="Semestar" Binding="{Binding Semestar}"/>
+                            <DataGridTextColumn Header="GodinaStudija" Binding="{Binding GodinaStudija}"/>
+                            <DataGridTextColumn Header="Profesor Predmeta" Binding="{Binding ProfesorPredmeta}"/>
+                            <DataGridTextColumn Header="Profesor ID" Binding="{Binding ProfesorID}"/>
+                            <DataGridTextColumn Header="ESPB" Binding="{Binding ESPB}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
             </TabControl>
 
