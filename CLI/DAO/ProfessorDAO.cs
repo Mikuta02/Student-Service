@@ -1,4 +1,5 @@
 ﻿using CLI.Model;
+using CLI.Observer;
 using CLI.Storage;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace CLI.DAO
     {
         private readonly List<Profesor> _profesors;
         private readonly Storage<Profesor> _storage;
+        public Subject ProfesorSubject;
 
         public ProfessorDAO()
         {
@@ -38,6 +40,7 @@ namespace CLI.DAO
 
             _profesors.Add(profesor);
             _storage.Save(_profesors);
+            ProfesorSubject.NotifyObservers();
             return profesor;
         }
 
@@ -82,6 +85,7 @@ namespace CLI.DAO
             oldProfesor.GodineStaza = profesor.GodineStaza;
 
             _storage.Save(_profesors);
+            ProfesorSubject.NotifyObservers();
             return oldProfesor;
         }
         public Profesor? RemoveProfessor(int id)
@@ -91,6 +95,7 @@ namespace CLI.DAO
 
             _profesors.Remove(profesor);
             _storage.Save(_profesors);
+            ProfesorSubject.NotifyObservers();
             return profesor;
         }
         private Profesor? GetProfessorById(int id)

@@ -26,9 +26,13 @@ namespace GUI
         public StudentDTO SelectedStudent { get; set; }
         private StudentDAO studentsDAO { get; set; }
 
+
+
+        public ObservableCollection<ProfesorDTO> Profesors { get; set; }
         public ProfesorDTO SelectedProfesor { get; set; }
         private ProfessorDAO profesorsDAO { get; set; }
 
+        public ObservableCollection<PredmetDTO> Predmets {  get; set; }
         public PredmetDTO SelectedPredmet {  get; set; }
         private SubjectDAO predmetsDAO { get; set; }
 
@@ -41,6 +45,13 @@ namespace GUI
             Students = new ObservableCollection<StudentDTO>();
             studentsDAO = new StudentDAO();
             studentsDAO.StudentSubject.Subscribe(this);
+            Profesors = new ObservableCollection<ProfesorDTO>();
+            profesorsDAO = new ProfessorDAO();
+            profesorsDAO.ProfesorSubject.Subscribe(this);
+
+            Predmets = new ObservableCollection<PredmetDTO>();
+            predmetsDAO = new SubjectDAO();
+            predmetsDAO.PredmetSubject.Subscribe(this);
             Update();
         }
 
@@ -309,6 +320,13 @@ namespace GUI
         {
             Students.Clear();
             foreach (Student student in studentsDAO.GetAllStudents()) Students.Add(new StudentDTO(student));
+
+            Predmets.Clear();
+            foreach(Predmet predmet in predmetsDAO.GetAllPredmets()) Predmets.Add(new PredmetDTO(predmet));
+
+            Profesors.Clear();
+            foreach(Profesor profesor in profesorsDAO.GetAllProfessors()) Profesors.Add(new ProfesorDTO(profesor));
+
         }
 
         private void StudentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

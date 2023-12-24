@@ -119,13 +119,9 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
                             <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
-                            <DataGridTextColumn Header="Datum Rodjenja" Binding="{Binding DatumRodjenja}"/>
-                            <DataGridTextColumn Header="Adresa" Binding="{Binding Adresa}"/>
-                            <DataGridTextColumn Header="Kontakt" Binding="{Binding Kontakt}"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                            <DataGridTextColumn Header="Broj Licne Karte" Binding="{Binding BrojLicneKarte}"/>
                             <DataGridTextColumn Header="Zvanje" Binding="{Binding Zvanje}"/>
-                            <DataGridTextColumn Header="Godine Staza" Binding="{Binding GodineStaza}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
@@ -141,8 +137,6 @@
                             <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}"/>
                             <DataGridTextColumn Header="Semestar" Binding="{Binding Semestar}"/>
                             <DataGridTextColumn Header="GodinaStudija" Binding="{Binding GodinaStudija}"/>
-                            <DataGridTextColumn Header="Profesor Predmeta" Binding="{Binding ProfesorPredmeta}"/>
-                            <DataGridTextColumn Header="Profesor ID" Binding="{Binding ProfesorID}"/>
                             <DataGridTextColumn Header="ESPB" Binding="{Binding ESPB}"/>
                         </DataGrid.Columns>
                     </DataGrid>

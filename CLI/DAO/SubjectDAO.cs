@@ -1,4 +1,5 @@
 ﻿using CLI.Model;
+using CLI.Observer;
 using CLI.Storage;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace CLI.DAO
     {
         private readonly List<Predmet> _subjects;
         private readonly Storage<Predmet> _storage;
-
+        public Subject PredmetSubject;
 
         public SubjectDAO()
         {
@@ -34,7 +35,7 @@ namespace CLI.DAO
             if(!AddProfessorToSubject(predmet)) return null;
             _subjects.Add(predmet);
             _storage.Save(_subjects);
-
+            PredmetSubject.NotifyObservers();
             return predmet;
         }
 
@@ -63,7 +64,7 @@ namespace CLI.DAO
             oldPredmet.ESPB = predmet.ESPB;
             AddProfessorToSubject(predmet);
             _storage.Save(_subjects);
-            
+            PredmetSubject.NotifyObservers();
             return oldPredmet;
         }
 
@@ -74,6 +75,7 @@ namespace CLI.DAO
 
             _subjects.Remove(predmet);
             _storage.Save(_subjects);
+            PredmetSubject.NotifyObservers();
             return predmet;
         }
 
