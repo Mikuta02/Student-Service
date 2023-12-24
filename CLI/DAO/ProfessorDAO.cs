@@ -19,6 +19,7 @@ namespace CLI.DAO
         {
             _storage = new Storage<Profesor>("profesors.txt");
             _profesors = _storage.Load();
+            ProfesorSubject = new Subject();
         }
 
         private int GenerateId()

@@ -25,13 +25,9 @@ namespace GUI
         public ObservableCollection<StudentDTO> Students { get; set; }
         public StudentDTO SelectedStudent { get; set; }
         private StudentDAO studentsDAO { get; set; }
-
-
-
         public ObservableCollection<ProfesorDTO> Profesors { get; set; }
         public ProfesorDTO SelectedProfesor { get; set; }
         private ProfessorDAO profesorsDAO { get; set; }
-
         public ObservableCollection<PredmetDTO> Predmets {  get; set; }
         public PredmetDTO SelectedPredmet {  get; set; }
         private SubjectDAO predmetsDAO { get; set; }
@@ -42,9 +38,11 @@ namespace GUI
             InitializeComponent();
             InitializeStatusBar();
             DataContext = this;
+
             Students = new ObservableCollection<StudentDTO>();
             studentsDAO = new StudentDAO();
             studentsDAO.StudentSubject.Subscribe(this);
+
             Profesors = new ObservableCollection<ProfesorDTO>();
             profesorsDAO = new ProfessorDAO();
             profesorsDAO.ProfesorSubject.Subscribe(this);
@@ -52,6 +50,7 @@ namespace GUI
             Predmets = new ObservableCollection<PredmetDTO>();
             predmetsDAO = new SubjectDAO();
             predmetsDAO.PredmetSubject.Subscribe(this);
+
             Update();
         }
 

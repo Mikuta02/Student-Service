@@ -10,7 +10,7 @@ namespace GUI.DTO
 {
     public class PredmetDTO : INotifyPropertyChanged
     {
-        public int PredmetId { get; set; }
+        public int PredmetId { get; set; } //dodati get set zbog edita
         private string sifraPredmeta { get; set; }
         public string  SifraPredmeta
         {
@@ -75,22 +75,6 @@ namespace GUI.DTO
                 }
             }
         }
-        private string profesorPredmeta { get; set; }
-        public string ProfesorPredmeta
-        {
-            get
-            {
-                return profesorPredmeta;
-            }
-            set
-            {
-                if(profesorPredmeta != value)
-                {
-                    profesorPredmeta = value;
-                    OnPropertyChanged("ProfesorPredmeta");
-                }
-            }
-        }
         private int profesorID {  get; set; }
         public int ProfesorID
         {
@@ -126,7 +110,7 @@ namespace GUI.DTO
 
         public Predmet toPredmet()
         {
-            return new Predmet(sifraPredmeta, naziv, semestar, godinaStudija,profesorPredmeta, profesorID, espb);
+            return new Predmet(sifraPredmeta, naziv, semestar, godinaStudija, profesorID, espb);
         }
 
         public PredmetDTO()
@@ -144,7 +128,6 @@ namespace GUI.DTO
             naziv = this.Naziv;
             semestar = this.Semestar;
             godinaStudija = this.GodinaStudija;
-            profesorPredmeta = this.ProfesorPredmeta;
             profesorID=this.ProfesorID;
             espb = this.ESPB;
 
@@ -167,7 +150,6 @@ namespace GUI.DTO
                 Naziv = this.Naziv,
                 Semestar = this.Semestar,
                 GodinaStudija = this.GodinaStudija,
-                ProfesorPredmeta = this.ProfesorPredmeta,
                 ProfesorID = this.ProfesorID,
                 ESPB = this.ESPB,
             };

@@ -20,6 +20,7 @@ namespace CLI.DAO
         {
             _storage = new Storage<Predmet>("predmet.txt");
             _subjects = _storage.Load();
+            PredmetSubject = new Subject();
         }
 
         private int GenerateId()

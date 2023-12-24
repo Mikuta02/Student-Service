@@ -129,8 +129,8 @@
                     <DataGrid Height="350"
                             AutoGenerateColumns="False"
                             x:Name="SubjectsDataGrid"
-                            ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
-                            SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding Predmets, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
                             SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Sifra Predmeta" Binding="{Binding SifraPredmeta}"/>
