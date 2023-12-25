@@ -43,37 +43,23 @@ namespace CLI.Model
             StudentiNepolozili = new List<Student>();
         }
 
-        public Predmet()
+        public Predmet(string sifraPredmeta, string naziv, string semestar, int godinaStudija, int profesorID, int eSPB)
         {
+            SifraPredmeta = sifraPredmeta;
+            Naziv = naziv;
+            GodinaStudija = godinaStudija;
+            ProfesorID = profesorID;
+            ESPB = eSPB;
+            Enum.TryParse(semestar, out EnumUt.SemestarType semestarEnum);
+            Semestar = semestarEnum;
             StudentiPolozili = new List<Student>();
             StudentiNepolozili = new List<Student>();
         }
 
-        public Predmet(string sifraPredmeta, string naziv, string semestar, int godinaStudija, int profesorID, int espb)
+        public Predmet()
         {
-            SifraPredmeta = sifraPredmeta;
-            Naziv = naziv;
-            GodinaStudija = godinaStudija;
-            ProfesorID = profesorID;
-            ESPB = espb;
-        }
-
-        public Predmet(string sifraPredmeta, string naziv, string semestar, int godinaStudija, Profesor profesorPredmeta, int profesorID, int espb)
-        {
-            SifraPredmeta = sifraPredmeta;
-            Naziv = naziv;
-            GodinaStudija = godinaStudija;
-            ProfesorID = profesorID;
-            ESPB = espb;
-        }
-
-        public Predmet(string sifraPredmeta, string naziv, string semestar, int godinaStudija, string profesorPredmeta, int profesorID, int espb)
-        {
-            SifraPredmeta = sifraPredmeta;
-            Naziv = naziv;
-            GodinaStudija = godinaStudija;
-            ProfesorID = profesorID;
-            ESPB = espb;
+            StudentiPolozili = new List<Student>();
+            StudentiNepolozili = new List<Student>();
         }
 
         public override string? ToString()

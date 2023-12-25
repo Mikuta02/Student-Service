@@ -68,8 +68,12 @@
 
             <Label Content="Status Studenta:" Grid.Row="8"/>
             <ComboBox Name="cmbStatusStudenta"  SelectedItem="{Binding Path=Student.StatusStudenta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1" Width="178" Margin="0,0,0,5">
-                <ComboBoxItem>Budzet</ComboBoxItem>
-                <ComboBoxItem>Samofinansiranje</ComboBoxItem>
+                <ComboBox.ItemsSource>
+                    <x:Array Type="{x:Type sys:String}">
+                        <sys:String>B</sys:String>
+                        <sys:String>S</sys:String>
+                    </x:Array>
+                </ComboBox.ItemsSource>
             </ComboBox>
 
             <Label Content="Prosecna Ocena:" Grid.Row="9"/>

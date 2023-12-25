@@ -123,13 +123,13 @@ namespace GUI.DTO
 
         public PredmetDTO(Predmet predmet)
         {
-            PredmetId = this.PredmetId;
-            sifraPredmeta = this.SifraPredmeta;
-            naziv = this.Naziv;
-            semestar = this.Semestar;
-            godinaStudija = this.GodinaStudija;
-            profesorID=this.ProfesorID;
-            espb = this.ESPB;
+            PredmetId = predmet.PredmetId;
+            sifraPredmeta = predmet.SifraPredmeta;
+            naziv = predmet.Naziv;
+            semestar = predmet.Semestar.ToString();
+            godinaStudija = predmet.GodinaStudija;
+            profesorID= predmet.ProfesorID;
+            espb = predmet.ESPB;
 
 
         }

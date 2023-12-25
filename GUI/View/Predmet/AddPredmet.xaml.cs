@@ -67,7 +67,7 @@ namespace GUI.View.Predmet
         {
             return !string.IsNullOrWhiteSpace(txtSifraPredmeta.Text) &&
                    !string.IsNullOrWhiteSpace(txtNaziv.Text) &&
-                   !string.IsNullOrWhiteSpace(txtSemestar.Text) &&
+                   cmbSemestar.SelectedItem != null &&
                    cmbGodinaStudija.SelectedItem != null &&
                    !string.IsNullOrWhiteSpace(txtProfesorID.Text) &&
                    !string.IsNullOrWhiteSpace(txtESPB.Text);           
