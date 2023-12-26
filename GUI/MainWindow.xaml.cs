@@ -22,6 +22,27 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window, IObserver
     {
+        public static readonly DependencyProperty CurrentTabProperty =
+            DependencyProperty.Register(
+                nameof(CurrentTab),
+                typeof(string),
+                typeof(MainWindow),
+                new PropertyMetadata("Studenti", OnCurrentTabChanged));
+
+
+        public string CurrentTab
+        {
+            get { return (string)GetValue(CurrentTabProperty); }
+            set { SetValue(CurrentTabProperty, value); }
+        }
+
+        private static void OnCurrentTabChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MainWindow mainWindow)
+            {
+                mainWindow.UpdateTabStatus();
+            }
+        }
         public ObservableCollection<StudentDTO> Students { get; set; }
         public StudentDTO SelectedStudent { get; set; }
         private StudentDAO studentsDAO { get; set; }
@@ -32,10 +53,27 @@ namespace GUI
         public PredmetDTO SelectedPredmet {  get; set; }
         private SubjectDAO predmetsDAO { get; set; }
 
-
+        private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainTabControl.SelectedItem != null)
+            {
+                CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
+            }
+        }
+        private void UpdateTabStatus()
+        {
+            statusTab.Text = $"Tab: {CurrentTab}";
+        }
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            // Postavite početni tab
+           // CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
+        }
         public MainWindow()
         {
             InitializeComponent();
+            MainTabControl.SelectionChanged += MainTabControl_SelectionChanged;
+
             InitializeStatusBar();
             DataContext = this;
 
@@ -51,6 +89,8 @@ namespace GUI
             predmetsDAO = new SubjectDAO();
             predmetsDAO.PredmetSubject.Subscribe(this);
 
+            CurrentTab = "Studenti";
+            UpdateTabStatus();
             Update();
         }
 

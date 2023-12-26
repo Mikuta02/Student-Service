@@ -145,7 +145,7 @@
 
             <StatusBar Grid.Row="3" VerticalAlignment="Bottom">
                 <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
-                <TextBlock>Status 2</TextBlock>
+                <TextBlock x:Name="statusTab"  HorizontalAlignment="Right" Margin="0,0,10,0">Tab:</TextBlock>
                 <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
                 <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
             </StatusBar>
