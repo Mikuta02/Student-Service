@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:cliModel="clr-namespace:CLI.Model;assembly=CLI"
         xmlns:local="clr-namespace:GUI.View.Predmet"
         mc:Ignorable="d"
         Title="EditPredmet" Height="420" Width="380">
@@ -39,14 +41,25 @@
             <TextBox Name="txtNaziv" Text="{Binding Path=Predmet.Naziv, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
             <Label Content="Semestar:" Grid.Row="2"/>
-            <TextBox Name="txtSemestar" Text="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+            <ComboBox Name="cmbSemestar" SelectedItem="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Width="178" Margin="0,0,0,5">
+                <ComboBox.ItemsSource>
+                    <x:Array Type="{x:Type sys:String}">
+                        <sys:String>Letnji</sys:String>
+                        <sys:String>Zimski</sys:String>
+                    </x:Array>
+                </ComboBox.ItemsSource>
+            </ComboBox>
 
             <Label Content="Godina Studija:" Grid.Row="3"/>
             <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Width="178" Margin="0,0,0,5">
-                <ComboBoxItem>1</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem>3</ComboBoxItem>
-                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBox.ItemsSource>
+                    <x:Array Type="{x:Type sys:Int32}">
+                        <sys:Int32>1</sys:Int32>
+                        <sys:Int32>2</sys:Int32>
+                        <sys:Int32>3</sys:Int32>
+                        <sys:Int32>4</sys:Int32>
+                    </x:Array>
+                </ComboBox.ItemsSource>
             </ComboBox>
 
 

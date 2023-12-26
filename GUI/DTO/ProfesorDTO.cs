@@ -201,18 +201,21 @@ namespace GUI.DTO
 
         public ProfesorDTO Clone()
         {
-            return new ProfesorDTO
-            {
-                Ime = this.Ime,
-                Prezime = this.Prezime,
-                DatumRodjenja = this.DatumRodjenja,
-                AdresaId = this.AdresaId,
-                KontaktTelefon = this.KontaktTelefon,
-                Email = this.Email,
-                BrojLicneKarte = this.BrojLicneKarte,
-                Zvanje = this.Zvanje,
-                GodineStaza = this.GodineStaza,
-            };
+            ProfesorDTO profesor = new ProfesorDTO();
+
+            profesor.ProfesorId = this.ProfesorId;
+            profesor.ime = this.Ime;
+            profesor.prezime = this.Prezime;
+            profesor.datumRodjenja = this.DatumRodjenja;
+            profesor.adresaId = this.AdresaId;
+            profesor.kontaktTelefon = this.KontaktTelefon;
+            profesor.email = this.Email;
+            profesor.brojLicneKarte = this.BrojLicneKarte;
+            profesor.zvanje = this.Zvanje;
+            profesor.godineStaza = this.GodineStaza;
+
+
+            return profesor;
         }
 
 

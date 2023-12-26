@@ -1,2 +1,2 @@
 0|Nebojsa|Ralevic|31.12.1966|0|1232132|ggg|1111|3|3
-1|Sasa|Popovic|02.02.1922|0|3232134|rrr|2222|2|2
+1|Sasa|Popovic|02.02.1922|0|3232134|replika|22232|idk|3

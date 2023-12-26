@@ -24,11 +24,9 @@ namespace GUI.View.Student
     /// </summary>
     public partial class EditStudent : Window, INotifyPropertyChanged
     {
-        public StudentDTO Student { get; set; }
-
-        private StudentDAO studentsDAO;
-
         public event PropertyChangedEventHandler? PropertyChanged;
+        public StudentDTO Student { get; set; }
+        private StudentDAO studentsDAO { get; set; }
 
         public EditStudent(StudentDAO studentsDAO, StudentDTO selectedStudent)
         {
@@ -48,8 +46,9 @@ namespace GUI.View.Student
         {
             if (ValidateFields())
             {
-                System.Console.WriteLine(Student.StudentId);
-                studentsDAO.UpdateStudent(Student.toStudent());
+                CLI.Model.Student studentForEdit = Student.toStudent();
+                studentForEdit.StudentId = Student.StudentId;
+                studentsDAO.UpdateStudent(studentForEdit);
                 MessageBox.Show("Student updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -73,10 +72,37 @@ namespace GUI.View.Student
                    !string.IsNullOrWhiteSpace(txtAdresa.Text) &&
                    !string.IsNullOrWhiteSpace(txtKontakt.Text) &&
                    !string.IsNullOrWhiteSpace(txtEmail.Text) &&
-                   !string.IsNullOrWhiteSpace(txtIndeks.Text) &&
+                   !string.IsNullOrWhiteSpace(txtIndeks.Text) && IsValidIndex(txtIndeks.Text) &&
                    cmbGodinaStudija.SelectedItem != null &&
                    cmbStatusStudenta.SelectedItem != null &&
                    !string.IsNullOrWhiteSpace(txtProsecnaOcena.Text);
+        }
+
+        private bool IsValidIndex(string input)
+        {
+            try
+            {
+                makeIndex(input);
+                return true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid index format. Please enter a valid index.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        private Indeks makeIndex(string input)
+        {
+            string[] parts = input.Split('/');
+
+            string oznaka = input.Substring(0, 2);
+            int upis = int.Parse(parts[0].Substring(3));
+            int godina = int.Parse(parts[1]);
+
+            Indeks indeks = new Indeks(oznaka, upis, godina);
+
+            return indeks;
         }
     }
 }

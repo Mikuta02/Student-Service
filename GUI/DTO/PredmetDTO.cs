@@ -142,17 +142,19 @@ namespace GUI.DTO
             }
         }
 
-        public PredmetDTO clone()
+        public PredmetDTO Clone()
         {
-            return new PredmetDTO
-            {
-                SifraPredmeta = this.sifraPredmeta,
-                Naziv = this.Naziv,
-                Semestar = this.Semestar,
-                GodinaStudija = this.GodinaStudija,
-                ProfesorID = this.ProfesorID,
-                ESPB = this.ESPB,
-            };
+            PredmetDTO predmet = new PredmetDTO();
+
+            predmet.PredmetId = this.PredmetId;
+            predmet.sifraPredmeta = this.SifraPredmeta;
+            predmet.naziv = this.Naziv;
+            predmet.semestar = this.Semestar;
+            predmet.godinaStudija = this.GodinaStudija;
+            predmet.profesorID = this.ProfesorID;
+            predmet.espb = this.ESPB;
+
+            return predmet;
         }
     }
 }

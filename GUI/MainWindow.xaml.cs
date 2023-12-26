@@ -252,8 +252,7 @@ namespace GUI
                 }
                 else
                 {
-                    // System.Console.WriteLine(SelectedStudent.StudentId);
-                    var editStudentWindow = new EditStudent(studentsDAO, SelectedStudent);
+                    var editStudentWindow = new EditStudent(studentsDAO, SelectedStudent.Clone());
                     editStudentWindow.Owner = this;
                     editStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editStudentWindow.ShowDialog();
@@ -266,7 +265,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editsProfesorWindow = new EditProfesor(profesorsDAO, SelectedProfesor);
+                    var editsProfesorWindow = new EditProfesor(profesorsDAO, SelectedProfesor.Clone());
                     editsProfesorWindow.Owner = this;
                     editsProfesorWindow.WindowStartupLocation= WindowStartupLocation.CenterOwner;
                     editsProfesorWindow.ShowDialog();
@@ -280,12 +279,13 @@ namespace GUI
                 }
                 else
                 {
-                    var editSubjectWindow = new EditPredmet(predmetsDAO, SelectedPredmet);
+                    var editSubjectWindow = new EditPredmet(predmetsDAO, SelectedPredmet.Clone());
                     editSubjectWindow.Owner = this;
                     editSubjectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editSubjectWindow.ShowDialog();
                 }
             }
+            Update();
         }
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {

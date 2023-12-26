@@ -210,19 +210,21 @@ namespace GUI.DTO
 
         public StudentDTO Clone()
         {
-            return new StudentDTO
-            {
-                Ime = this.Ime,
-                Prezime = this.Prezime,
-                DatumRodjenja = this.DatumRodjenja,
-                AdresaId = this.AdresaId,
-                KontaktTelefon = this.KontaktTelefon,
-                Email = this.Email,
-                BrojIndeksa = this.BrojIndeksa,
-                TrenutnaGodinaStudija = this.TrenutnaGodinaStudija,
-                StatusStudenta = this.StatusStudenta,
-                ProsecnaOcena = this.ProsecnaOcena,
-            };
+            StudentDTO student = new StudentDTO();
+
+            student.StudentId = this.StudentId;
+            student.ime = this.Ime;
+            student.prezime = this.Prezime;
+            student.datumRodjenja = this.DatumRodjenja;
+            student.adresaId = this.AdresaId;
+            student.kontaktTelefon = this.KontaktTelefon;
+            student.email = this.Email;
+            student.brojIndeksa = this.BrojIndeksa;
+            student.trenutnaGodinaStudija = this.TrenutnaGodinaStudija;
+            student.statusStudenta = this.StatusStudenta;
+            student.prosecnaOcena = this.ProsecnaOcena;
+
+            return student;
         }
     }
 }

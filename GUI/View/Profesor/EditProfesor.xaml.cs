@@ -30,10 +30,9 @@ namespace GUI.View.Profesor
     /// </summary>
     public partial class EditProfesor : Window, INotifyPropertyChanged
     {
-        
-        public ProfesorDTO Profesor { get; set; }
-        private ProfessorDAO profesorsDAO;
         public event PropertyChangedEventHandler? PropertyChanged;
+        public ProfesorDTO Profesor { get; set; }
+        private ProfessorDAO profesorsDAO { get; set; }
 
         public EditProfesor (ProfessorDAO profesorsDAO,ProfesorDTO selectedProfesor) 
         {
@@ -52,8 +51,9 @@ namespace GUI.View.Profesor
         {
             if (ValidateFields())
             {
-                System.Console.WriteLine(Profesor.ProfesorId);
-                profesorsDAO.UpdateProfessor(Profesor.toProfesor());
+                CLI.Model.Profesor profForEdit = Profesor.toProfesor();
+                profForEdit.ProfesorId = Profesor.ProfesorId;
+                profesorsDAO.UpdateProfessor(profForEdit);
                 MessageBox.Show("Profesor updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }

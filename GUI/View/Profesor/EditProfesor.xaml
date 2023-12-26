@@ -56,10 +56,10 @@
                     <TextBox Name="txtBrojLicneKarte" Text="{Binding Path=Profesor.BrojLicneKarte, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
 
                     <Label Content="Zvanje:" Grid.Row="7"/>
-                    <TextBox Name="txtZvanje" Text="{Binding Path=Profesor.Zvanje, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="8" Grid.Column="1" Margin="0,0,0,5"/>
-]
+                    <TextBox Name="txtZvanje" Text="{Binding Path=Profesor.Zvanje, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="7" Grid.Column="1" Margin="0,0,0,5"/>
+
                     <Label Content="Godine Staza:" Grid.Row="8"/>
-                    <TextBox Name="txtGodineStaza" Text="{Binding Path=Profesor.GodineStaza, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="1" Margin="0,0,0,5"/>
+                    <TextBox Name="txtGodineStaza" Text="{Binding Path=Profesor.GodineStaza, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1" Margin="0,0,0,5"/>
                 </Grid>
 
                 <!-- Buttons: Confirm and Cancel in the center -->

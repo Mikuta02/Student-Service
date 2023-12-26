@@ -1,4 +1,5 @@
 ﻿using CLI.DAO;
+using CLI.Model;
 using GUI.DTO;
 using System;
 using System.Collections.Generic;
@@ -70,10 +71,38 @@ namespace GUI.View.Student
                    !string.IsNullOrWhiteSpace(txtAdresa.Text) &&
                    !string.IsNullOrWhiteSpace(txtKontakt.Text) &&
                    !string.IsNullOrWhiteSpace(txtEmail.Text) &&
-                   !string.IsNullOrWhiteSpace(txtIndeks.Text) &&
+                   !string.IsNullOrWhiteSpace(txtIndeks.Text) && IsValidIndex(txtIndeks.Text) &&
                    cmbGodinaStudija.SelectedItem != null &&
                    cmbStatusStudenta.SelectedItem != null &&
                    !string.IsNullOrWhiteSpace(txtProsecnaOcena.Text);
         }
+
+        private bool IsValidIndex(string input)
+        {
+            try
+            {
+                makeIndex(input);
+                return true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid index format. Please enter a valid index.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        private Indeks makeIndex(string input)
+        {
+            string[] parts = input.Split('/');
+
+            string oznaka = input.Substring(0, 2);
+            int upis = int.Parse(parts[0].Substring(3));
+            int godina = int.Parse(parts[1]);
+
+            Indeks indeks = new Indeks(oznaka, upis, godina);
+
+            return indeks;
+        }
+
     }
 }

@@ -24,10 +24,10 @@ namespace GUI.View.Predmet
     /// </summary>
     public partial class EditPredmet : Window, INotifyPropertyChanged
     {
-        public PredmetDTO Predmet {  get; set; }
-        private SubjectDAO predmetsDAO;
-
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public PredmetDTO Predmet {  get; set; }
+        private SubjectDAO predmetsDAO { get; set; }
 
         public EditPredmet(SubjectDAO predmetsDAO,PredmetDTO selectPredmet)
         {
@@ -47,8 +47,10 @@ namespace GUI.View.Predmet
         {
             if (ValidateFields())
             {
-                System.Console.WriteLine(Predmet.PredmetId);
-                predmetsDAO.UpdatePredmet(Predmet.toPredmet());
+                // System.Console.WriteLine(Predmet.PredmetId);
+                CLI.Model.Predmet predmetForEdit = Predmet.toPredmet();
+                predmetForEdit.PredmetId = Predmet.PredmetId;
+                predmetsDAO.UpdatePredmet(predmetForEdit);
                 MessageBox.Show("Subject updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -65,7 +67,7 @@ namespace GUI.View.Predmet
         {
             return !string.IsNullOrWhiteSpace(txtSifraPredmeta.Text) &&
                    !string.IsNullOrWhiteSpace(txtNaziv.Text) &&
-                   !string.IsNullOrWhiteSpace(txtSemestar.Text) &&
+                   cmbSemestar.SelectedItem != null &&
                    cmbGodinaStudija.SelectedItem != null &&
                    !string.IsNullOrWhiteSpace(txtProfesorID.Text) &&
                    !string.IsNullOrWhiteSpace(txtESPB.Text);
