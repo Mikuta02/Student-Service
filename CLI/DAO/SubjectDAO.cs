@@ -90,7 +90,7 @@ namespace CLI.DAO
             return _subjects;
         }
 
-        internal void fillObjectsAndLists(StudentDAO studentsDao, StudentSubjectDAO studentSubjectDao, ProfessorDAO profesDao)
+        public void fillObjectsAndLists(StudentDAO studentsDao, StudentSubjectDAO studentSubjectDao, ProfessorDAO profesDao)
         {
             List<Student> students = studentsDao.GetAllStudents();
             List<StudentPredmet> studentSubjects = studentSubjectDao.GetAllStudentSubject();
@@ -115,15 +115,15 @@ namespace CLI.DAO
             }
         }
 
-/*        internal void showall()
-        {
-            foreach(Predmet sub in _subjects)
-            {
-                foreach(Student stud in sub.StudentiNepolozili)
+        /*        internal void showall()
                 {
-                    System.Console.WriteLine($"ID OVOG PREDMETA{sub.PredmetId}\t{stud}\n");
-                }
-            }
-        }*/
+                    foreach(Predmet sub in _subjects)
+                    {
+                        foreach(Student stud in sub.StudentiNepolozili)
+                        {
+                            System.Console.WriteLine($"ID OVOG PREDMETA{sub.PredmetId}\t{stud}\n");
+                        }
+                    }
+                }*/
     }
 }

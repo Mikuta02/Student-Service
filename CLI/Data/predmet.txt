@@ -1,3 +1,3 @@
 0|A1|Analiza 1|Letnji|1|9|0
 1|PJISP|prog jez i struk pod|Letnji|1|9|1
-2|A3|Analiza 3|Letnji|3|1562|0
+2|A3|Analiza 3|Zimski|3|1562|0

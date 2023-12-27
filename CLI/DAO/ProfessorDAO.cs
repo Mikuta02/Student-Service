@@ -126,7 +126,7 @@ namespace CLI.DAO
             return _profesors;
         }
 
-        internal void fillObjectsAndLists(SubjectDAO subjectsDao, AdressDAO addressesDao)
+        public void fillObjectsAndLists(SubjectDAO subjectsDao, AdressDAO addressesDao)
         {
             List<Predmet> subjects = subjectsDao.GetAllPredmets();
             List<Adresa> adresses = addressesDao.GetAllAdress();

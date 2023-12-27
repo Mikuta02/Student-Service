@@ -52,23 +52,11 @@ namespace GUI
         public ObservableCollection<PredmetDTO> Predmets {  get; set; }
         public PredmetDTO SelectedPredmet {  get; set; }
         private SubjectDAO predmetsDAO { get; set; }
+        private ExamGradesDAO examGradesDAO { get; set; }
+        private AdressDAO adressesDAO { get; set; }
+        private DepartmentDAO departmentsDAO { get; set; }
+        private StudentSubjectDAO studentSubjectDAO { get; set; }
 
-        private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (MainTabControl.SelectedItem != null)
-            {
-                CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
-            }
-        }
-        private void UpdateTabStatus()
-        {
-            statusTab.Text = $"Tab: {CurrentTab}";
-        }
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            // Postavite početni tab
-           // CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
-        }
         public MainWindow()
         {
             InitializeComponent();
@@ -89,9 +77,22 @@ namespace GUI
             predmetsDAO = new SubjectDAO();
             predmetsDAO.PredmetSubject.Subscribe(this);
 
+            examGradesDAO = new ExamGradesDAO();
+            adressesDAO = new AdressDAO();
+            departmentsDAO = new DepartmentDAO();
+            studentSubjectDAO = new StudentSubjectDAO();
+
             CurrentTab = "Studenti";
+            fillObjects(studentsDAO, profesorsDAO, predmetsDAO, examGradesDAO, adressesDAO, departmentsDAO, studentSubjectDAO);
             UpdateTabStatus();
             Update();
+        }
+
+        private void fillObjects(StudentDAO studentsDAO, ProfessorDAO profesorsDAO, SubjectDAO predmetsDAO, ExamGradesDAO examGradesDAO, AdressDAO adressesDAO, DepartmentDAO departmentsDAO, StudentSubjectDAO studentSubjectDAO)
+        {
+            studentsDAO.fillObjectsAndLists(studentSubjectDAO, predmetsDAO, adressesDAO);
+            profesorsDAO.fillObjectsAndLists(predmetsDAO, adressesDAO);
+            predmetsDAO.fillObjectsAndLists(studentsDAO, studentSubjectDAO, profesorsDAO);
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
@@ -102,7 +103,7 @@ namespace GUI
             }
             if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.N)
             {
-               // OpenAboutWindow();
+                CreateEntityButton_Click();
             }
             if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
             {
@@ -114,7 +115,7 @@ namespace GUI
             }
             if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.E)
             {
-                //OpenAboutWindow();
+                EditEntityButton_Click();
             }
             if (Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Alt) && e.Key == Key.P)
             {
@@ -130,13 +131,8 @@ namespace GUI
             }
             if (e.Key == Key.Delete)
             {
-               // OpenAboutWindow();
+                DeleteEntityButton_Click();
             }
-        }
-
-        private void AddNewEntity(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void SaveApp(object sender, RoutedEventArgs e)
@@ -222,6 +218,11 @@ namespace GUI
 
         private void DeleteEntityButton_Click(object sender, RoutedEventArgs e)
         {
+            DeleteEntityButton_Click();
+        }
+
+        private void DeleteEntityButton_Click()
+        {
             if (MainTabControl.SelectedItem == StudentsTab)
             {
                 // Delete student logic
@@ -283,6 +284,11 @@ namespace GUI
         }
 
         private void EditEntityButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditEntityButton_Click();
+        }
+
+        private void EditEntityButton_Click()
         {
             if (MainTabControl.SelectedItem == StudentsTab)
             { 
@@ -380,6 +386,23 @@ namespace GUI
         private void SubjectsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainTabControl.SelectedItem != null)
+            {
+                CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
+            }
+        }
+        private void UpdateTabStatus()
+        {
+            statusTab.Text = $"Tab: {CurrentTab}";
+        }
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            // Postavite početni tab
+            // CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
         }
     }
 }

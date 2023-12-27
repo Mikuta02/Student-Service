@@ -103,6 +103,5 @@ namespace GUI.View.Student
 
             return indeks;
         }
-
     }
 }
