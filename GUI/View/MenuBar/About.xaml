@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="About" Height="300" Width="400">
     <Grid>
-        <TextBox>Ubij me boze</TextBox>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontSize="18" Text="Program Version: 0.2v"/>
+            <TextBlock FontSize="16" Text="Authors: Boris Gozdenovic and Milan Jakovljevic"/>
+        </StackPanel>
     </Grid>
 </Window>
+
+
+
