@@ -35,7 +35,8 @@ namespace CLI.DAO
                 return false;
             }
             predmet.StudentiNepolozili.Add(student);
-            student.SpisakNepolozenihPredmeta.Add(predmet);
+            studentDAO.AddSubjectToNonPassed(predmet, student.StudentId);
+            //student.SpisakNepolozenihPredmeta.Add(predmet);
             StudentPredmet studentPredmet = new StudentPredmet(studID, subjID);
             //studentPredmet.StudentSubjectId = GenerateId();
             _studsub.Add(studentPredmet);
@@ -90,6 +91,22 @@ namespace CLI.DAO
                     _storage.Save(_studsub);
                 }
             }
+        }
+
+        public List<Predmet>? GetAvailableSubjects(List<Predmet>? spisakNepolozenihPredmeta, int studentId, int trenutnaGodinaStudija)
+        {
+            // mozada bude bug sa id studenta jer prije kloniranja se salje
+            SubjectDAO subjectDAO = new SubjectDAO();
+            List<Predmet> _subjects = subjectDAO.GetAllPredmets();
+            List<Predmet> availableSubjects = new List<Predmet>();
+            foreach (Predmet sp in _subjects)
+            {
+                if(!DoesStudSubExist(studentId, sp.PredmetId) && trenutnaGodinaStudija>=sp.GodinaStudija)
+                {
+                    availableSubjects.Add(sp);
+                }
+            }
+            return availableSubjects;
         }
     }
 }

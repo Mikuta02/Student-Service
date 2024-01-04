@@ -183,7 +183,7 @@ namespace GUI.DTO
                 if (spisakNepolozenihPredmeta != value)
                 {
                     spisakNepolozenihPredmeta = value;
-                    OnPropertyChanged(nameof(SpisakNepolozenihPredmeta));
+                    OnPropertyChanged("SpisakNepolozenihPredmeta");
                 }
             }
         }

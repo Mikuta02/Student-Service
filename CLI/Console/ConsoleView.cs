@@ -1,4 +1,5 @@
 ﻿using CLI.DAO;
+using CLI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +28,29 @@ namespace CLI.Console
             _departmentsDao = departmentsDao;
             _studentSubjectDao = studentSubjectDao;
             fillObjects(studentsDao, profesDao, subjectsDao, examGradesDao, addressesDao,departmentsDao,studentSubjectDao);
+            List<OcenaNaIspitu> ocene = examGradesDao.GetAllGrades();
+            List<Student> students = studentsDao.GetAllStudents();
+            foreach (OcenaNaIspitu o in ocene)
+            {
+                System.Console.WriteLine(o.PredmetStudenta);
+                System.Console.WriteLine("\nKURAC");
+                System.Console.WriteLine(o.StudentPolozio);
+            }
+            foreach (Student o in students)
+            {
+                foreach(Predmet p in o.SpisakNepolozenihPredmeta)
+                {
+                    System.Console.WriteLine(p);
+                }
+            }
         }
 
         private void fillObjects(StudentDAO studentsDao, ProfessorDAO profesDao, SubjectDAO subjectsDao, ExamGradesDAO examGradesDao, AdressDAO addressesDao, DepartmentDAO departmentsDao, StudentSubjectDAO studentSubjectDao)
         {
-            studentsDao.fillObjectsAndLists(studentSubjectDao, subjectsDao, addressesDao);
+            studentsDao.fillObjectsAndLists(studentSubjectDao, subjectsDao, addressesDao, examGradesDao);
             profesDao.fillObjectsAndLists(subjectsDao, addressesDao);
-            subjectsDao.fillObjectsAndLists(studentsDao, studentSubjectDao, profesDao);
+            subjectsDao.fillObjectsAndLists(studentsDao, studentSubjectDao, profesDao, examGradesDao);
+            examGradesDao.fillObjectsAndLists(studentsDao, subjectsDao);
         }
 
         public void RunMenu()

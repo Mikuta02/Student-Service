@@ -40,6 +40,14 @@ namespace CLI.Model
             DatumPolaganja = DateTime.Parse(datumPolaganja);
         }
 
+        public OcenaNaIspitu(int studentId, int predmetId, int ocena, DateTime datumPolaganja)
+        {
+            StudentId = studentId;
+            PredmetId = predmetId;
+            Ocena = ocena;
+            DatumPolaganja = datumPolaganja;
+        }
+
         public override string ToString()
         {
             return $"ID {OcenaNaIspituId,2} | Student id {StudentId,2} | Predmet id {PredmetId,2} | Ocena {Ocena,2} | Datum polaganja {DatumPolaganja.ToString("dd/MM/yyyy"),10}"; ;

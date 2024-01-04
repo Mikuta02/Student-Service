@@ -112,7 +112,7 @@ namespace CLI.DAO
             return _students;
         }
 
-        public void fillObjectsAndLists(StudentSubjectDAO studentSubjectDao, SubjectDAO subjectsDao, AdressDAO addressesDao)
+        public void fillObjectsAndLists(StudentSubjectDAO studentSubjectDao, SubjectDAO subjectsDao, AdressDAO addressesDao, ExamGradesDAO examGradesDAO)
         {
             List<Predmet> subjects = subjectsDao.GetAllPredmets();
             List<StudentPredmet> studentSubjects = studentSubjectDao.GetAllStudentSubject();
@@ -122,18 +122,19 @@ namespace CLI.DAO
             {
                 Student? student = GetStudentById(sp.StudentId);
                 Predmet? predmet = subjects.Find(s => s.PredmetId == sp.SubjectId);
-                if (student != null && predmet!=null)
+                if (student != null && predmet!=null && !examGradesDAO.didStudentPass(student.StudentId, predmet.PredmetId))
                 {
                     student.SpisakNepolozenihPredmeta.Add(predmet);
                 }
             }
+            
             //adresa
             foreach(Student s in _students)
             {
                 Adresa? adresa = adresses.Find(p => p.AdresaId == s.AdresaId);
                 s.Adresa = adresa;
             }
-            
+            StudentSubject.NotifyObservers();
         }
 
         internal void PassOrFailExam(int studentId, int predmetId, OcenaNaIspitu ocena, bool v)
@@ -157,6 +158,17 @@ namespace CLI.DAO
         {
             Student? student = _students.Find(s => s.StudentId == studentId);
             return student.SpisakNepolozenihPredmeta;
+        }
+
+        internal void AddSubjectToNonPassed(Predmet predmet, int studentId)
+        {
+            Student? student = GetStudentById(studentId);
+            if(student != null)
+            {
+                student.SpisakNepolozenihPredmeta.Add(predmet);
+            }
+            StudentSubject.NotifyObservers();
+            //student.SpisakNepolozenihPredmeta.Add(predmet);
         }
     }
 }

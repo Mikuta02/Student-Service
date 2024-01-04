@@ -90,7 +90,7 @@ namespace CLI.DAO
             return _subjects;
         }
 
-        public void fillObjectsAndLists(StudentDAO studentsDao, StudentSubjectDAO studentSubjectDao, ProfessorDAO profesDao)
+        public void fillObjectsAndLists(StudentDAO studentsDao, StudentSubjectDAO studentSubjectDao, ProfessorDAO profesDao, ExamGradesDAO examGradesDao)
         {
             List<Student> students = studentsDao.GetAllStudents();
             List<StudentPredmet> studentSubjects = studentSubjectDao.GetAllStudentSubject();
@@ -101,7 +101,7 @@ namespace CLI.DAO
             {
                 Predmet? predmet = GetPredmetById(sp.SubjectId);
                 Student? student = students.Find(s => s.StudentId == sp.StudentId);
-                if (student != null && predmet != null)
+                if (student != null && predmet != null && !examGradesDao.didStudentPass(student.StudentId, predmet.PredmetId))
                 {
                     predmet.StudentiNepolozili.Add(student);
                 }

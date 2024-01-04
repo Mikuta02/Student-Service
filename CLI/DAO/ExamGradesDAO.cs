@@ -1,4 +1,5 @@
 ﻿using CLI.Model;
+using CLI.Observer;
 using CLI.Storage;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,14 @@ namespace CLI.DAO
     {
         private readonly List<OcenaNaIspitu> _ocene;
         private readonly Storage<OcenaNaIspitu> _storage;
+        public Subject ExamGradeSubject;
 
 
         public ExamGradesDAO()
         {
             _storage = new Storage<OcenaNaIspitu>("grades.txt");
             _ocene = _storage.Load();
+            ExamGradeSubject = new Subject();
         }
 
         private int GenerateId()
@@ -42,11 +45,10 @@ namespace CLI.DAO
             ocena.PredmetStudenta = subject;
             studentDAO.PassOrFailExam(student.StudentId, subject.PredmetId, ocena, true);
             subjectDAO.PassOrFailExam(student.StudentId, subject.PredmetId, ocena, true);
-            // TO DO:
-            // VRATITI PREDMET ODNOSNO STUDENT NA NEPOLOZENE LISTE KAD SE IZBRISE EXAMGRADE OBJEKAT. TAKODJE FILLOBJECTS URADITI
-            // SAD ME MRZI A I NE TREBA ZA OVU KT2...
+
             _ocene.Add(ocena);
             _storage.Save(_ocene);
+            ExamGradeSubject.NotifyObservers();
             return ocena;
         }
 
@@ -98,6 +100,7 @@ namespace CLI.DAO
             oldOcenaNaIspitu.DatumPolaganja = ocena.DatumPolaganja;
 
             _storage.Save(_ocene);
+            ExamGradeSubject.NotifyObservers();
             return oldOcenaNaIspitu;
         }
         public OcenaNaIspitu? RemoveExamGrade(int id)
@@ -113,6 +116,7 @@ namespace CLI.DAO
 
             _ocene.Remove(ocena);
             _storage.Save(_ocene);
+            ExamGradeSubject.NotifyObservers();
             return ocena;
         }
         private OcenaNaIspitu? GetGradeById(int id)
@@ -130,14 +134,16 @@ namespace CLI.DAO
             List<Student> students = studentsDao.GetAllStudents();
             List<Predmet> subjects = subjectDAO.GetAllPredmets();
 
-            foreach(Student student in students)
+            foreach(OcenaNaIspitu ocena in GetAllGrades())
             {
-                foreach(OcenaNaIspitu examGrade in student.SpisakPolozenihIspita)
-                {
-                    examGrade.StudentPolozio = student;
-                    examGrade.PredmetStudenta = subjects.Find(s => s.PredmetId == examGrade.PredmetId);
-                }
+                ocena.StudentPolozio = students.Find(s => s.StudentId == ocena.StudentId); ;
+                ocena.PredmetStudenta = subjects.Find(s => s.PredmetId == ocena.PredmetId);
             }
+        }
+
+        public bool didStudentPass(int studentId, int predmetId)
+        {
+            return _ocene.Any(o => o.StudentId == studentId && o.PredmetId == predmetId);
         }
     }
 }

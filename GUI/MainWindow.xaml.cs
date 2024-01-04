@@ -84,9 +84,10 @@ namespace GUI
 
         private void fillObjects(StudentDAO studentsDAO, ProfessorDAO profesorsDAO, SubjectDAO predmetsDAO, ExamGradesDAO examGradesDAO, AdressDAO adressesDAO, DepartmentDAO departmentsDAO, StudentSubjectDAO studentSubjectDAO)
         {
-            studentsDAO.fillObjectsAndLists(studentSubjectDAO, predmetsDAO, adressesDAO);
+            studentsDAO.fillObjectsAndLists(studentSubjectDAO, predmetsDAO, adressesDAO, examGradesDAO);
             profesorsDAO.fillObjectsAndLists(predmetsDAO, adressesDAO);
-            predmetsDAO.fillObjectsAndLists(studentsDAO, studentSubjectDAO, profesorsDAO);
+            predmetsDAO.fillObjectsAndLists(studentsDAO, studentSubjectDAO, profesorsDAO, examGradesDAO);
+            examGradesDAO.fillObjectsAndLists(studentsDAO, predmetsDAO);
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
@@ -292,7 +293,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editStudentWindow = new EditStudent(studentsDAO, SelectedStudent.Clone());
+                    var editStudentWindow = new EditStudent(studentsDAO, SelectedStudent.Clone(), studentSubjectDAO);
                     editStudentWindow.Owner = this;
                     editStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editStudentWindow.ShowDialog();

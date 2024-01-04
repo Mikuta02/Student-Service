@@ -75,12 +75,81 @@ namespace GUI.DTO
                 }
             }
         }
+        private Student studentPolozio { get; set; }
+        public Student StudentPolozio
+        {
+            get
+            {
+                return studentPolozio;
+            }
+            set
+            {
+                if (studentPolozio != value)
+                {
+                    studentPolozio = value;
+                    OnPropertyChanged("StudentPolozio");
+                }
+            }
+        }
+        public Predmet predmetStudenta { get; set; }
+        public Predmet PredmetStudenta
+        {
+            get
+            {
+                return predmetStudenta;
+            }
+            set
+            {
+                if (predmetStudenta != value)
+                {
+                    predmetStudenta = value;
+                    OnPropertyChanged("PredmetStudenta");
+                }
+            }
+        }
+/*        public string sifraPredmeta { get; set; }
+        public string SifraPredmeta
+        {
+            get
+            {
+                return sifraPredmeta;
+            }
+            set
+            {
+                if (sifraPredmeta != value)
+                {
+                    sifraPredmeta = value;
+                    OnPropertyChanged("SifraPredmeta");
+                }
+            }
+        }
+        public string naziv { get; set; }
+        public string Naziv
+        {
+            get
+            {
+                return naziv;
+            }
+            set
+            {
+                if (naziv != value)
+                {
+                    naziv = value;
+                    OnPropertyChanged("Naziv");
+                }
+            }
+        }*/
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public OcenaNaIspitu toExamGrade()
+        {
+            return new OcenaNaIspitu(studentID, predmetId, ocena, datumPolaganja);
+        }
+
         public ExamGradeDTO()
         {
-
+            
         }
 
         public ExamGradeDTO(OcenaNaIspitu examGrade)
@@ -90,6 +159,10 @@ namespace GUI.DTO
             predmetId = examGrade.PredmetId;
             ocena = examGrade.Ocena;
             datumPolaganja = examGrade.DatumPolaganja;
+            studentPolozio = examGrade.StudentPolozio;
+            predmetStudenta = examGrade.PredmetStudenta;
+           /* sifraPredmeta = examGrade.PredmetStudenta.SifraPredmeta;
+            naziv = examGrade.PredmetStudenta.Naziv;*/
         }
 
         protected virtual void OnPropertyChanged(string name)
