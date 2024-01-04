@@ -115,6 +115,23 @@ namespace CLI.DAO
             }
         }
 
+        internal void PassOrFailExam(int studentId, int predmetId, OcenaNaIspitu ocena, bool v)
+        {
+            Predmet? predmet = GetPredmetById(predmetId);
+            Student? student = predmet.StudentiNepolozili.Find(s => s.StudentId == studentId);
+            if (v == true)
+            {
+                predmet.StudentiNepolozili.Remove(student);
+                predmet.StudentiPolozili.Add(student);
+            }
+            else
+            {
+                predmet.StudentiPolozili.Remove(student);
+                predmet.StudentiPolozili.Add(student);
+            }
+
+        }
+
         /*        internal void showall()
                 {
                     foreach(Predmet sub in _subjects)

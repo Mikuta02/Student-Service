@@ -174,6 +174,20 @@ namespace GUI.DTO
             }
         }
 
+        private List<Predmet> spisakNepolozenihPredmeta;
+        public List<Predmet> SpisakNepolozenihPredmeta
+        {
+            get { return spisakNepolozenihPredmeta; }
+            set
+            {
+                if (spisakNepolozenihPredmeta != value)
+                {
+                    spisakNepolozenihPredmeta = value;
+                    OnPropertyChanged(nameof(SpisakNepolozenihPredmeta));
+                }
+            }
+        }
+
         public Student toStudent()
         {
             return new Student(ime, prezime, datumRodjenja, adresaId, kontaktTelefon, email, brojIndeksa, trenutnaGodinaStudija, statusStudenta, prosecnaOcena);
@@ -198,6 +212,7 @@ namespace GUI.DTO
             trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             statusStudenta = student.StatusStudenta.ToString();
             prosecnaOcena = student.ProsecnaOcena;
+            spisakNepolozenihPredmeta = student.SpisakNepolozenihPredmeta;
         }
 
         protected virtual void OnPropertyChanged(string name)
@@ -223,6 +238,7 @@ namespace GUI.DTO
             student.trenutnaGodinaStudija = this.TrenutnaGodinaStudija;
             student.statusStudenta = this.StatusStudenta;
             student.prosecnaOcena = this.ProsecnaOcena;
+            student.spisakNepolozenihPredmeta = this.SpisakNepolozenihPredmeta;
 
             return student;
         }

@@ -161,6 +161,20 @@ namespace GUI.DTO
             }
         }
 
+        private List<Predmet> spisakNepolozenihPredmeta;
+        public List<Predmet> SpisakNepolozenihPredmeta
+        {
+            get { return spisakNepolozenihPredmeta; }
+            set
+            {
+                if (spisakNepolozenihPredmeta != value)
+                {
+                    spisakNepolozenihPredmeta = value;
+                    OnPropertyChanged(nameof(SpisakNepolozenihPredmeta));
+                }
+            }
+        }
+
         public Profesor toProfesor()
         {
             return new Profesor(ime, prezime, datumRodjenja, adresaId, kontaktTelefon, email, brojLicneKarte, zvanje, godineStaza);

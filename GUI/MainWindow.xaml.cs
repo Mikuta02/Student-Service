@@ -36,13 +36,7 @@ namespace GUI
             set { SetValue(CurrentTabProperty, value); }
         }
 
-        private static void OnCurrentTabChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is MainWindow mainWindow)
-            {
-                mainWindow.UpdateTabStatus();
-            }
-        }
+
         public ObservableCollection<StudentDTO> Students { get; set; }
         public StudentDTO SelectedStudent { get; set; }
         private StudentDAO studentsDAO { get; set; }
@@ -403,6 +397,14 @@ namespace GUI
         {
             // Postavite početni tab
             // CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
+        }
+
+        private static void OnCurrentTabChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MainWindow mainWindow)
+            {
+                mainWindow.UpdateTabStatus();
+            }
         }
     }
 }

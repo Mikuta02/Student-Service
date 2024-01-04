@@ -27,6 +27,7 @@ namespace GUI.View.Student
         public event PropertyChangedEventHandler? PropertyChanged;
         public StudentDTO Student { get; set; }
         private StudentDAO studentsDAO { get; set; }
+        private List<CLI.Model.Predmet> SpisakNepolozenihPredmeta { get; set; }
 
         public EditStudent(StudentDAO studentsDAO, StudentDTO selectedStudent)
         {
@@ -34,6 +35,9 @@ namespace GUI.View.Student
             DataContext = this;
             this.studentsDAO = studentsDAO;
             Student = selectedStudent;
+
+            SpisakNepolozenihPredmeta = studentsDAO.LoadSpisakNepolozenihPredmeta(selectedStudent.StudentId);
+            dgNepolozeni.ItemsSource = SpisakNepolozenihPredmeta;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -105,5 +109,21 @@ namespace GUI.View.Student
             return indeks;
         }
 
+
+        private void btnUkloni_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDodaj_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void btnPolaganje_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

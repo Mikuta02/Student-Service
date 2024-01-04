@@ -135,5 +135,28 @@ namespace CLI.DAO
             }
             
         }
+
+        internal void PassOrFailExam(int studentId, int predmetId, OcenaNaIspitu ocena, bool v)
+        {
+            Student? student = GetStudentById(studentId);
+            Predmet? predmet = student.SpisakNepolozenihPredmeta.Find(s => s.PredmetId == predmetId);
+            if (v == true)
+            {
+                student.SpisakNepolozenihPredmeta.Remove(predmet);
+                student.SpisakPolozenihIspita.Add(ocena);
+            }
+            else
+            {
+                student.SpisakPolozenihIspita.Remove(ocena);
+                student.SpisakNepolozenihPredmeta.Add(predmet);
+            }
+
+        }
+
+        public List<Predmet>? LoadSpisakNepolozenihPredmeta(int studentId)
+        {
+            Student? student = _students.Find(s => s.StudentId == studentId);
+            return student.SpisakNepolozenihPredmeta;
+        }
     }
 }

@@ -40,8 +40,9 @@ namespace CLI.DAO
             }
             ocena.StudentPolozio = student;
             ocena.PredmetStudenta = subject;
+            studentDAO.PassOrFailExam(student.StudentId, subject.PredmetId, ocena, true);
+            subjectDAO.PassOrFailExam(student.StudentId, subject.PredmetId, ocena, true);
             // TO DO:
-            // POZVATI METODE IZ STUDENT DAO I PREDMET DAO GDJE SU SALJU ID-EVI PA UKLJANJAJU STUDENTI I PREDMETI SA NEPOLOZENIH LISTI A DODAJU NA POLOZENE LISTE
             // VRATITI PREDMET ODNOSNO STUDENT NA NEPOLOZENE LISTE KAD SE IZBRISE EXAMGRADE OBJEKAT. TAKODJE FILLOBJECTS URADITI
             // SAD ME MRZI A I NE TREBA ZA OVU KT2...
             _ocene.Add(ocena);
@@ -101,8 +102,14 @@ namespace CLI.DAO
         }
         public OcenaNaIspitu? RemoveExamGrade(int id)
         {
+            StudentDAO studentDAO = new StudentDAO();
+            SubjectDAO subjectDAO = new SubjectDAO();
+
             OcenaNaIspitu? ocena = GetGradeById(id);
             if (ocena == null) return null;
+
+            studentDAO.PassOrFailExam(ocena.StudentId, ocena.PredmetId, ocena, false);
+            subjectDAO.PassOrFailExam(ocena.StudentId, ocena.PredmetId, ocena, false);
 
             _ocene.Remove(ocena);
             _storage.Save(_ocene);
@@ -116,6 +123,21 @@ namespace CLI.DAO
         public List<OcenaNaIspitu> GetAllGrades()
         {
             return _ocene;
+        }
+        
+        public void fillObjectsAndLists(StudentDAO studentsDao, SubjectDAO subjectDAO)
+        {
+            List<Student> students = studentsDao.GetAllStudents();
+            List<Predmet> subjects = subjectDAO.GetAllPredmets();
+
+            foreach(Student student in students)
+            {
+                foreach(OcenaNaIspitu examGrade in student.SpisakPolozenihIspita)
+                {
+                    examGrade.StudentPolozio = student;
+                    examGrade.PredmetStudenta = subjects.Find(s => s.PredmetId == examGrade.PredmetId);
+                }
+            }
         }
     }
 }
