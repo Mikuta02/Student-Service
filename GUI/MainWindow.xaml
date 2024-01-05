@@ -215,11 +215,77 @@
                             SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
                             SelectionMode="Single" IsReadOnly="True" SelectionChanged="ProfesorsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
-                            <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
-                            <DataGridTextColumn Header="Zvanje" Binding="{Binding Zvanje}"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Ime" SortMemberPath="Ime" Binding="{Binding Ime}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Ime" />
+                                                        <Image x:Name="SortArrowIme" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
 
+                            <DataGridTextColumn Header="Prezime" SortMemberPath="Prezime" Binding="{Binding Prezime}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Prezime" />
+                                                        <Image x:Name="SortArrowPrezime" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Header="Zvanje" SortMemberPath="Zvanje" Binding="{Binding Zvanje}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Zvanje" />
+                                                        <Image x:Name="SortArrowZvanje" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Header="Email" SortMemberPath="Email" Binding="{Binding Email}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Email" />
+                                                        <Image x:Name="SortArrowEmail" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
