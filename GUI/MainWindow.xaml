@@ -100,12 +100,110 @@
                               SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
                               SelectionMode="Single" IsReadOnly="True" SelectionChanged="StudentsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Indeks" Binding="{Binding BrojIndeksa}"/>
-                            <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
-                            <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
-                            <DataGridTextColumn Header="Godina Studija" Binding="{Binding TrenutnaGodinaStudija}"/>
-                            <DataGridTextColumn Header="Status" Binding="{Binding StatusStudenta}"/>
-                            <DataGridTextColumn Header="Prosek" Binding="{Binding ProsecnaOcena}"/>
+                            <DataGridTextColumn Header="Indeks" SortMemberPath="BrojIndeksa" Binding="{Binding BrojIndeksa}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Indeks" />
+                                                        <Image x:Name="SortArrowIndeks" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Ime" SortMemberPath="Ime" Binding="{Binding Ime}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Ime" />
+                                                        <Image x:Name="SortArrowIme" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Prezime" SortMemberPath="Prezime" Binding="{Binding Prezime}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Prezime" />
+                                                        <Image x:Name="SortArrowPrezime" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Godina Studija" SortMemberPath="TrenutnaGodinaStudija" Binding="{Binding TrenutnaGodinaStudija}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Godina Studija" />
+                                                        <Image x:Name="SortArrowGodinaStudija" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Status" SortMemberPath="StatusStudenta" Binding="{Binding StatusStudenta}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Status" />
+                                                        <Image x:Name="SortArrowStatus" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Header="Prosek" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Prosek" />
+                                                        <Image x:Name="SortArrowProsek" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>

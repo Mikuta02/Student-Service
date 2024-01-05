@@ -14,6 +14,9 @@ using System.Windows.Threading;
 using CLI.Observer;
 using GUI.View.DialogWindows;
 using GUI.View.Predmet;
+using System.ComponentModel;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 
 namespace GUI
 {
@@ -405,6 +408,42 @@ namespace GUI
             {
                 mainWindow.UpdateTabStatus();
             }
+        }
+        private void DataGridColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridColumnHeader columnHeader = e.OriginalSource as DataGridColumnHeader;
+            if (columnHeader != null)
+            {
+                // Postavite logiku za sortiranje ovde
+
+                // Ako sortirate po ovoj koloni, promenite vidljivost strelice
+                Image sortArrow = FindChild<Image>(columnHeader, "SortArrowIme");
+                if (sortArrow != null)
+                {
+                    sortArrow.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                string controlName = child.GetValue(Control.NameProperty) as string;
+
+                if (controlName == childName)
+                {
+                    return child as T;
+                }
+                else
+                {
+                    T result = FindChild<T>(child, childName);
+                    if (result != null)
+                        return result;
+                }
+            }
+            return null;
         }
     }
 }
