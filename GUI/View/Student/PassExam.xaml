@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GUI.View.Student"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="PassExam" Height="179" Width="273">
+        Title="PassExam" Height="197" Width="273">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -28,13 +28,13 @@
             </Grid.RowDefinitions>
 
             <Label Content="Sifra:" Grid.Row="0"/>
-            <TextBox Name="txtSifra" Text="{Binding Path=Predmet.SifraPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+            <TextBox Name="txtSifra"  IsReadOnly="True" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
 
             <Label Content="Naziv:" Grid.Row="1"/>
-            <TextBox Name="txtNaziv" Text="{Binding Path=Predmet.Naziv, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+            <TextBox Name="txtNaziv"  IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
             <Label Content="Ocena:" Grid.Row="2"/>
-            <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Exam.Ocena, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1" Width="178" Margin="0,0,0,5">
+            <ComboBox Name="cmbOcena" Grid.Row="2" Grid.Column="1" Width="178" Margin="0,0,0,5">
                 <ComboBox.ItemsSource>
                     <x:Array Type="{x:Type sys:Int32}">
                         <sys:Int32>6</sys:Int32>
@@ -47,7 +47,7 @@
             </ComboBox>
 
             <Label Content="Datum:" Grid.Row="3"/>
-            <DatePicker Name="dpDatumRodjenja" SelectedDate="{Binding Path=Exam.DatumPolaganja, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Margin="48,0,0,5" Grid.ColumnSpan="2"/>
+            <DatePicker Name="dpDatumRodjenja"  Grid.Row="3" Margin="48,0,0,5" Grid.ColumnSpan="2"/>
 
         </Grid>
 

@@ -132,6 +132,16 @@ namespace CLI.DAO
 
         }
 
+        public Predmet? FindSubjectBySifraAndNaziv(string sifra, string naziv)
+        {
+            Predmet? foundSubject = _subjects.FirstOrDefault(sub =>
+                sub.SifraPredmeta.Equals(sifra, StringComparison.OrdinalIgnoreCase) &&
+                sub.Naziv.Equals(naziv, StringComparison.OrdinalIgnoreCase));
+
+            return foundSubject;
+        }
+
+
         /*        internal void showall()
                 {
                     foreach(Predmet sub in _subjects)

@@ -161,7 +161,7 @@ namespace GUI.DTO
             datumPolaganja = examGrade.DatumPolaganja;
             studentPolozio = examGrade.StudentPolozio;
             predmetStudenta = examGrade.PredmetStudenta;
-           /* sifraPredmeta = examGrade.PredmetStudenta.SifraPredmeta;
+/*            sifraPredmeta = examGrade.PredmetStudenta.SifraPredmeta;
             naziv = examGrade.PredmetStudenta.Naziv;*/
         }
 

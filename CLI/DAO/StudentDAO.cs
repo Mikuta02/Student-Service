@@ -122,9 +122,17 @@ namespace CLI.DAO
             {
                 Student? student = GetStudentById(sp.StudentId);
                 Predmet? predmet = subjects.Find(s => s.PredmetId == sp.SubjectId);
-                if (student != null && predmet!=null && !examGradesDAO.didStudentPass(student.StudentId, predmet.PredmetId))
+                if (student != null && predmet!=null)
                 {
-                    student.SpisakNepolozenihPredmeta.Add(predmet);
+                    if (!examGradesDAO.didStudentPass(student.StudentId, predmet.PredmetId))
+                    {
+                        student.SpisakNepolozenihPredmeta.Add(predmet);
+                    }
+                    else
+                    {
+                        OcenaNaIspitu ocena = examGradesDAO.GetGradeByStudentAndSubjectIds(student.StudentId, predmet.PredmetId);
+                        student.SpisakPolozenihIspita.Add(ocena);
+                    }   
                 }
             }
             
@@ -169,6 +177,12 @@ namespace CLI.DAO
             }
             StudentSubject.NotifyObservers();
             //student.SpisakNepolozenihPredmeta.Add(predmet);
+        }
+
+        public List<OcenaNaIspitu>? LoadSpisakPolozenihPredmeta(int studentId)
+        {
+            Student? student = _students.Find(s => s.StudentId == studentId);
+            return student.SpisakPolozenihIspita;
         }
     }
 }

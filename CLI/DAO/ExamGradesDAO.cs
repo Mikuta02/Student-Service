@@ -145,5 +145,11 @@ namespace CLI.DAO
         {
             return _ocene.Any(o => o.StudentId == studentId && o.PredmetId == predmetId);
         }
+
+        public OcenaNaIspitu GetGradeByStudentAndSubjectIds(int studentId, int predmetId)
+        {
+            return _ocene.FirstOrDefault(o => o.StudentId == studentId && o.PredmetId == predmetId);
+        }
+
     }
 }

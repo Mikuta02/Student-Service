@@ -102,38 +102,20 @@
                                   SelectedItem="{Binding SelectedExam, UpdateSourceTrigger=PropertyChanged}"
                                   SelectionMode="Single" IsReadOnly="True" SelectionChanged="PolozeniDataGrid_SelectionChanged">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Sifra predmeta">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding PredmetStudenta.SifraPredmeta}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Naziv predmeta">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding PredmetStudenta.Naziv}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="ESPB">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding PredmetStudenta.ESPB}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Sifra predmeta" Binding="{Binding PredmetStudenta.SifraPredmeta}" />
+                        <DataGridTextColumn Header="Naziv predmeta" Binding="{Binding PredmetStudenta.Naziv}" />
+                        <DataGridTextColumn Header="ESPB" Binding="{Binding PredmetStudenta.ESPB}" />
                         <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" />
                         <DataGridTextColumn Header="Datum Polaganja" Binding="{Binding DatumPolaganja}" />
                     </DataGrid.Columns>
+
                 </DataGrid>
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,301,56,0">
-                    <TextBlock Text="Prosek ocena:" />
-                    <TextBlock Name="txtProsekOcena" />
-                    <TextBlock Text="Suma ESPB:" />
-                    <TextBlock Name="txtSumaESPB" />
-                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,301,56,0"/>
+                <TextBlock Text="Prosek ocena:" Margin="255,286,79,74" />
+                <TextBlock x:Name="txtProsekOcena" Text="{Binding AverageGrade, StringFormat=N2}" Margin="349,286,12,72" />
+                <TextBlock Text="Suma ESPB:" Margin="255,307,93,53" />
+                <TextBlock x:Name="txtSumaESPB" Text="{Binding ESPBSum}" Margin="349,307,38,53" />
             </Grid>
         </TabItem>
 
@@ -150,7 +132,11 @@
                 </StackPanel>
 
                 <!-- DataGrid for listing subjects from List<Predmet> SpisakNepolozenihPredmeta -->
-                <DataGrid x:Name="NepolozeniDataGrid" AutoGenerateColumns="False" Margin="10,50,10,26">
+                <DataGrid x:Name="NepolozeniDataGrid" AutoGenerateColumns="False" Margin="10,50,10,26"
+                                  ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectionMode="Single" IsReadOnly="True" SelectionChanged="NepolozeniDataGrid_SelectionChanged">
+ 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Sifra predmeta" Binding="{Binding SifraPredmeta}" />
                         <DataGridTextColumn Header="Naziv predmeta" Binding="{Binding Naziv}" />

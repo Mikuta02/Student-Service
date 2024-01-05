@@ -40,7 +40,11 @@ namespace CLI.Console
             {
                 foreach(Predmet p in o.SpisakNepolozenihPredmeta)
                 {
-                    System.Console.WriteLine(p);
+                    //System.Console.WriteLine(p);
+                }
+                foreach(OcenaNaIspitu oi in o.SpisakPolozenihIspita)
+                {
+                    System.Console.WriteLine(oi);
                 }
             }
         }

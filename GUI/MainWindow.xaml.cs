@@ -75,9 +75,8 @@ namespace GUI
             adressesDAO = new AdressDAO();
             departmentsDAO = new DepartmentDAO();
             studentSubjectDAO = new StudentSubjectDAO();
-
-            CurrentTab = "Studenti";
             fillObjects(studentsDAO, profesorsDAO, predmetsDAO, examGradesDAO, adressesDAO, departmentsDAO, studentSubjectDAO);
+            CurrentTab = "Studenti";
             UpdateTabStatus();
             Update();
         }
