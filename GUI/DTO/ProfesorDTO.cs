@@ -180,10 +180,7 @@ namespace GUI.DTO
             return new Profesor(ime, prezime, datumRodjenja, adresaId, kontaktTelefon, email, brojLicneKarte, zvanje, godineStaza);
         }
 
-        public ProfesorDTO()
-        {
-
-        }
+       
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -203,6 +200,13 @@ namespace GUI.DTO
             godineStaza = profesor.GodineStaza;
 
 
+        }
+
+        public List<int> PredmetiListaId { get; set; }
+
+        public ProfesorDTO()
+        {
+            PredmetiListaId = new List<int>();
         }
 
         protected virtual void OnPropertyChanged(string name)

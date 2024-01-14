@@ -37,6 +37,7 @@ namespace GUI.View.Student
         private List<CLI.Model.Predmet> SpisakNepolozenihPredmeta { get; set; }
         private List<OcenaNaIspitu> SpisakPolozenihPredmeta { get; set; }
 
+        public ProfesorPredmetDTO SelectedProfesorPredmet { get; set; }
         private double _averageGrade { get; set; }
 
         public double AverageGrade
@@ -203,6 +204,11 @@ namespace GUI.View.Student
                 //SpisakNepolozenihPredmeta = studentsDAO.LoadSpisakNepolozenihPredmeta(Student.StudentId);
                 NepolozeniDataGrid.Items.Refresh(); // Refresh the DataGrid
             }
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         private List<CLI.Model.Predmet> GetAvailableSubjects()

@@ -149,6 +149,32 @@
         </TabItem>
 
 
+        <TabItem Header="Profesori">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Profesori:" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="0" Grid.Column="0"/>
+
+
+
+                <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" x:Name="StudentiDataGrid"
+                    ItemsSource="{Binding Profesori}" SelectedItem="{Binding SelectedProfesorPredmet}" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ime" Width="88" Binding="{Binding Ime}"/>
+                        <DataGridTextColumn Header="Prezime" Width="87" Binding="{Binding Prezime}"/>
+                        <DataGridTextColumn Header="Predmet" Width="*" Binding="{Binding NazivPredmeta}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+        </TabItem>
 
 
     </TabControl>
