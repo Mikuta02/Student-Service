@@ -14,28 +14,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUI.View.Predmet
+namespace GUI.View.Katedra
 {
     /// <summary>
-    /// Interaction logic for AddPredmet.xaml
+    /// Interaction logic for AddKatedra.xaml
     /// </summary>
-    public partial class AddPredmet : Window, INotifyPropertyChanged
+    public partial class AddKatedra : Window, INotifyPropertyChanged
     {
-        public PredmetDTO Predmet {  get; set; }
-        private SubjectDAO predmetsDAO;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public AddPredmet(SubjectDAO predmetsDAO)
+        private DepartmentDAO departmentsDAO { get; set; }
+        public KatedraDTO Katedra { get; set; }
+        public AddKatedra(DepartmentDAO departmentsDAO)
         {
             InitializeComponent();
             DataContext = this;
-            Predmet = new PredmetDTO();
-            this.predmetsDAO = predmetsDAO;
+
+            Katedra = new KatedraDTO();
+            this.departmentsDAO = departmentsDAO;
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -47,8 +46,8 @@ namespace GUI.View.Predmet
         {
             if (ValidateFields())
             {
-                predmetsDAO.AddPredmet(Predmet.toPredmet());
-                MessageBox.Show("Subject added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                departmentsDAO.AddDepartment(Katedra.toKatedra());
+                MessageBox.Show("Department added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
@@ -64,15 +63,8 @@ namespace GUI.View.Predmet
 
         private bool ValidateFields()
         {
-            return !string.IsNullOrWhiteSpace(txtSifraPredmeta.Text) &&
-                   !string.IsNullOrWhiteSpace(txtNaziv.Text) &&
-                   cmbSemestar.SelectedItem != null &&
-                   cmbGodinaStudija.SelectedItem != null &&
-                   !string.IsNullOrWhiteSpace(txtProfesorID.Text) &&
-                   !string.IsNullOrWhiteSpace(txtESPB.Text);           
+            return !string.IsNullOrWhiteSpace(txtSifraKatedre.Text) &&
+                   !string.IsNullOrWhiteSpace(txtNazivKatedre.Text);
         }
-
-
-
     }
 }

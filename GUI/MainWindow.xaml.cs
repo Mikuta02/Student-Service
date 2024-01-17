@@ -17,6 +17,7 @@ using GUI.View.Predmet;
 using System.ComponentModel;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using GUI.View.Katedra;
 
 namespace GUI
 {
@@ -49,10 +50,13 @@ namespace GUI
         public ObservableCollection<PredmetDTO> Predmets {  get; set; }
         public PredmetDTO SelectedPredmet {  get; set; }
         private SubjectDAO predmetsDAO { get; set; }
+        public ObservableCollection<KatedraDTO> Katedre { get; set; }
+        public KatedraDTO SelectedKatedra { get; set; }
+        private DepartmentDAO departmentsDAO { get; set; }
         private ExamGradesDAO examGradesDAO { get; set; }
         private AdressDAO adressesDAO { get; set; }
-        private DepartmentDAO departmentsDAO { get; set; }
         private StudentSubjectDAO studentSubjectDAO { get; set; }
+        private ProfessorDepartmentDAO professorDepartmentDAO { get; set; }
 
         public MainWindow()
         {
@@ -74,10 +78,14 @@ namespace GUI
             predmetsDAO = new SubjectDAO();
             predmetsDAO.PredmetSubject.Subscribe(this);
 
+            Katedre = new ObservableCollection<KatedraDTO>();
+            departmentsDAO = new DepartmentDAO();
+            departmentsDAO.DepartmentSubject.Subscribe(this);
+
             examGradesDAO = new ExamGradesDAO();
             adressesDAO = new AdressDAO();
-            departmentsDAO = new DepartmentDAO();
             studentSubjectDAO = new StudentSubjectDAO();
+            professorDepartmentDAO = new ProfessorDepartmentDAO();
             fillObjects(studentsDAO, profesorsDAO, predmetsDAO, examGradesDAO, adressesDAO, departmentsDAO, studentSubjectDAO);
             CurrentTab = "Studenti";
             UpdateTabStatus();
@@ -89,6 +97,7 @@ namespace GUI
             studentsDAO.fillObjectsAndLists(studentSubjectDAO, predmetsDAO, adressesDAO, examGradesDAO);
             profesorsDAO.fillObjectsAndLists();
             predmetsDAO.fillObjectsAndLists();
+            departmentsDAO.fillObjectsAndLists();
             examGradesDAO.fillObjectsAndLists(studentsDAO, predmetsDAO);
         }
 
@@ -211,6 +220,13 @@ namespace GUI
                 addPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addPredmetWindow.ShowDialog();
             }
+            else if (MainTabControl.SelectedItem == DepartmentsTab)
+            {
+                var addKatedraWindow = new AddKatedra(departmentsDAO);
+                addKatedraWindow.Owner = this;
+                addKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                addKatedraWindow.ShowDialog();
+            }
         }
 
         private void DeleteEntityButton_Click(object sender, RoutedEventArgs e)
@@ -278,6 +294,25 @@ namespace GUI
                     }
                 }
             }
+            else if (MainTabControl.SelectedItem == DepartmentsTab)
+            {
+                if (SelectedKatedra == null)
+                {
+                    MessageBox.Show(this, "Please choose a department to delete!");
+                }
+                else
+                {
+                    var confirmationDialog = new ConfirmationWindow("Department");
+                    confirmationDialog.Owner = this;
+                    confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    confirmationDialog.ShowDialog();
+
+                    if (confirmationDialog.UserConfirmed)
+                    {
+                        departmentsDAO.RemoveDepartment(SelectedKatedra.katedraId);
+                    }
+                }
+            }
         }
 
         private void EditEntityButton_Click(object sender, RoutedEventArgs e)
@@ -328,6 +363,20 @@ namespace GUI
                     editSubjectWindow.ShowDialog();
                 }
             }
+            else if (MainTabControl.SelectedItem == DepartmentsTab)
+            {
+                if (SelectedKatedra == null)
+                {
+                    MessageBox.Show(this, "Please choose a department to edit!");
+                }
+                else
+                {
+                    var editDepartmentWindpw = new EditKatedra(departmentsDAO, SelectedKatedra.clone(), profesorsDAO);
+                    editDepartmentWindpw.Owner = this;
+                    editDepartmentWindpw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    editDepartmentWindpw.ShowDialog();
+                }
+            }
             Update();
         }
        
@@ -364,6 +413,9 @@ namespace GUI
 
             Profesors.Clear();
             foreach(Profesor profesor in profesorsDAO.GetAllProfessors()) Profesors.Add(new ProfesorDTO(profesor));
+
+            Katedre.Clear();
+            foreach (Katedra katedra in departmentsDAO.GetAllDepartments()) Katedre.Add(new KatedraDTO(katedra));
 
         }
 

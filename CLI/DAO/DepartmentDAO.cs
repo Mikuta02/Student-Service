@@ -1,4 +1,5 @@
 ﻿using CLI.Model;
+using CLI.Observer;
 using CLI.Storage;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,14 @@ namespace CLI.DAO
     {
         private readonly List<Katedra> _departments;
         private readonly Storage<Katedra> _storage;
+        public Subject DepartmentSubject;
 
 
         public DepartmentDAO()
         {
             _storage = new Storage<Katedra>("departments.txt");
             _departments = _storage.Load();
+            DepartmentSubject = new Subject();  
         }
 
         private int GenerateId()
@@ -34,6 +37,7 @@ namespace CLI.DAO
             if (!AddHeadOfDepartment(katedra)) return null;
             _departments.Add(katedra);
             _storage.Save(_departments);
+            DepartmentSubject.NotifyObservers();
             return katedra;
         }
 
@@ -101,8 +105,10 @@ namespace CLI.DAO
             oldKatedra.NazivKatedre = katedra.NazivKatedre;
             oldKatedra.SefId = katedra.SefId;
             oldKatedra.Sef = katedra.Sef;
-            
+
+            fillObjectsAndLists();
             _storage.Save(_departments);
+            DepartmentSubject.NotifyObservers();
             return oldKatedra;
         }
 
@@ -113,6 +119,7 @@ namespace CLI.DAO
 
             _departments.Remove(katedra);
             _storage.Save(_departments);
+            DepartmentSubject.NotifyObservers();
             return katedra;
         }
 
@@ -142,15 +149,31 @@ namespace CLI.DAO
             return false;
         }
 
-        internal void fillObjectsAndLists(ProfessorDAO profesDao)
+        public void fillObjectsAndLists()
         {
-            List<Profesor> professors = profesDao.GetAllProfessors();
 
-            foreach(Katedra dep in _departments)
+            Storage<Profesor> _professorStorage = new Storage<Profesor>("profesors.txt");
+            List<Profesor> professors = _professorStorage.Load();
+
+
+            Storage<ProfesorKatedra> _professorDepartmentsStorage = new Storage<ProfesorKatedra>("professor_department.txt");
+            List<ProfesorKatedra> profDeps = _professorDepartmentsStorage.Load();
+
+            foreach (Katedra dep in _departments)
             {
                 Profesor? sef = professors.Find(p => p.ProfesorId == dep.SefId);
                 if (sef == null) continue;
                 dep.Sef = sef;
+            }
+
+            foreach (ProfesorKatedra pk in profDeps)
+            {
+                Katedra? katedra = GetDepartmentById(pk.KatedraId);
+                Profesor? profesor = professors.Find(p => p.ProfesorId == pk.ProfesorId);
+                if (katedra != null && profesor != null)
+                {
+                    katedra.Profesori.Add(profesor);
+                }
             }
         }
     }

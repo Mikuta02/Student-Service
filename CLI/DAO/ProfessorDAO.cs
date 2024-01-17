@@ -101,7 +101,7 @@ namespace CLI.DAO
             ProfesorSubject.NotifyObservers();
             return profesor;
         }
-        private Profesor? GetProfessorById(int id)
+        public Profesor? GetProfessorById(int id)
         {
             return _profesors.Find(s => s.ProfesorId == id);
         }
@@ -166,6 +166,21 @@ namespace CLI.DAO
         {
             Profesor? profesor = _profesors.Find(s => s.ProfesorId == profesorId);
             return profesor.Predmeti;
+        }
+
+        public bool isProfessorEligible(int profesorId)
+        {
+            Profesor? profesor = GetProfessorById(profesorId);
+            if (profesor == null) return false;
+
+            if(profesor.Zvanje=="redovni profesor" && profesor.GodineStaza >= 5)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }   
 }

@@ -4,3 +4,4 @@
 3|OOP|Objektno|Letnji|2|8|1
 4|OLL|Osnove Lige Legendi|Letnji|3|8|-1
 5|ULP|Uvod u lizanje pizde|Zimski|4|0|1
+6|A1|Analiza 12|Letnji|1|9|0

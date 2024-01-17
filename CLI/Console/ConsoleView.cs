@@ -31,6 +31,7 @@ namespace CLI.Console
             List<OcenaNaIspitu> ocene = examGradesDao.GetAllGrades();
             List<Student> students = studentsDao.GetAllStudents();
             List<Profesor> profesors = profesDao.GetAllProfessors();
+            List<Katedra> deps = departmentsDao.GetAllDepartments();
             foreach (OcenaNaIspitu o in ocene)
             {
                 System.Console.WriteLine(o.PredmetStudenta);
@@ -52,8 +53,16 @@ namespace CLI.Console
             {
                 foreach(Predmet pred in p.Predmeti)
                 {
-                    System.Console.WriteLine(pred);
+                    //System.Console.WriteLine(pred);
                 }
+            }
+            foreach (Katedra k in deps)
+            {
+                System.Console.WriteLine(k.Sef);
+                /*                foreach(Profesor p in k.Profesori)
+                                {
+                                    System.Console.WriteLine(p);
+                                }*/
             }
         }
 
@@ -62,6 +71,7 @@ namespace CLI.Console
             studentsDao.fillObjectsAndLists(studentSubjectDao, subjectsDao, addressesDao, examGradesDao);
             profesDao.fillObjectsAndLists();
             subjectsDao.fillObjectsAndLists();
+            departmentsDao.fillObjectsAndLists();
             examGradesDao.fillObjectsAndLists(studentsDao, subjectsDao);
         }
 

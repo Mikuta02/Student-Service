@@ -141,8 +141,6 @@ namespace GUI.DTO
                 }
             }
 
-
-
         }
         private int godineStaza {  get; set; }
         public int GodineStaza
@@ -167,9 +165,6 @@ namespace GUI.DTO
         {
             return new Profesor(ime, prezime, datumRodjenja, adresaId, kontaktTelefon, email, brojLicneKarte, zvanje, godineStaza);
         }
-
-       
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

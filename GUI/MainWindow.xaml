@@ -390,6 +390,69 @@
 
                     </DataGrid>
                 </TabItem>
+                <TabItem x:Name="DepartmentsTab" Header="Departmani">
+                    <DataGrid Height="350"
+                            AutoGenerateColumns="False"
+                            x:Name="DepartmentsDataGrid"
+                            ItemsSource="{Binding Katedre, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedKatedra, UpdateSourceTrigger=PropertyChanged}"
+                            SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Sifra Katedre" SortMemberPath="SifraKatedre" Binding="{Binding SifraKatedre}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Sifra Katedre" />
+                                                        <Image x:Name="SortArrowSifraPredmeta" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Header="Naziv Katedre" SortMemberPath="NazivKatedre" Binding="{Binding NazivKatedre}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Naziv" />
+                                                        <Image x:Name="SortArrowNaziv" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Sef" SortMemberPath="Sef" Binding="{Binding Sef}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Sef" />
+                                                        <Image x:Name="SortArrowSifraPredmeta" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
             </TabControl>
 
             <StatusBar Grid.Row="3" VerticalAlignment="Bottom">
