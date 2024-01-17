@@ -161,19 +161,7 @@ namespace GUI.DTO
             }
         }
 
-        private List<Predmet> spisakNepolozenihPredmeta;
-        public List<Predmet> SpisakNepolozenihPredmeta
-        {
-            get { return spisakNepolozenihPredmeta; }
-            set
-            {
-                if (spisakNepolozenihPredmeta != value)
-                {
-                    spisakNepolozenihPredmeta = value;
-                    OnPropertyChanged(nameof(SpisakNepolozenihPredmeta));
-                }
-            }
-        }
+        public List<int> spisakIDPredmeta { get; set; }
 
         public Profesor toProfesor()
         {
@@ -199,14 +187,23 @@ namespace GUI.DTO
             zvanje = profesor.Zvanje;
             godineStaza = profesor.GodineStaza;
 
+            spisakIDPredmeta = new List<int>();
 
+            if (profesor.Predmeti.Any())
+            {
+                foreach (Predmet p in profesor.Predmeti)
+                {
+                    if (!spisakIDPredmeta.Contains(p.PredmetId))
+                    {
+                        spisakIDPredmeta.Add(p.PredmetId);
+                    }
+                }
+            }
         }
-
-        public List<int> PredmetiListaId { get; set; }
 
         public ProfesorDTO()
         {
-            PredmetiListaId = new List<int>();
+            spisakIDPredmeta = new List<int>(); 
         }
 
         protected virtual void OnPropertyChanged(string name)
@@ -231,7 +228,7 @@ namespace GUI.DTO
             profesor.brojLicneKarte = this.BrojLicneKarte;
             profesor.zvanje = this.Zvanje;
             profesor.godineStaza = this.GodineStaza;
-
+            profesor.spisakIDPredmeta = this.spisakIDPredmeta;
 
             return profesor;
         }

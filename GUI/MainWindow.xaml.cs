@@ -87,8 +87,8 @@ namespace GUI
         private void fillObjects(StudentDAO studentsDAO, ProfessorDAO profesorsDAO, SubjectDAO predmetsDAO, ExamGradesDAO examGradesDAO, AdressDAO adressesDAO, DepartmentDAO departmentsDAO, StudentSubjectDAO studentSubjectDAO)
         {
             studentsDAO.fillObjectsAndLists(studentSubjectDAO, predmetsDAO, adressesDAO, examGradesDAO);
-            profesorsDAO.fillObjectsAndLists(predmetsDAO, adressesDAO);
-            predmetsDAO.fillObjectsAndLists(studentsDAO, studentSubjectDAO, profesorsDAO, examGradesDAO);
+            profesorsDAO.fillObjectsAndLists();
+            predmetsDAO.fillObjectsAndLists();
             examGradesDAO.fillObjectsAndLists(studentsDAO, predmetsDAO);
         }
 
@@ -308,7 +308,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editsProfesorWindow = new EditProfesor(profesorsDAO, SelectedProfesor.Clone());
+                    var editsProfesorWindow = new EditProfesor(profesorsDAO, predmetsDAO, SelectedProfesor.Clone());
                     editsProfesorWindow.Owner = this;
                     editsProfesorWindow.WindowStartupLocation= WindowStartupLocation.CenterOwner;
                     editsProfesorWindow.ShowDialog();

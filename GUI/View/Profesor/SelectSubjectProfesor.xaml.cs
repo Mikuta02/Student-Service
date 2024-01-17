@@ -56,7 +56,7 @@ namespace GUI.View.Profesor
 
             foreach (CLI.Model.Predmet pr in predmetDAO.GetAllPredmets())
             {
-                if (!Profesor.PredmetiListaId.Contains(pr.PredmetId))
+                if (!Profesor.spisakIDPredmeta.Contains(pr.PredmetId))
                 {
                     Subjects.Add(new PredmetDTO(pr));
                 }
@@ -74,13 +74,14 @@ namespace GUI.View.Profesor
             CLI.Model.Profesor prof = Profesor.toProfesor();
             prof.ProfesorId = Profesor.ProfesorId;
             prof.AdresaId = Profesor.AdresaId;
-            prof.Adresa.AdresaId = Profesor.AdresaId;
 
+            int originalProfessor = SelectedPredmet.ProfesorID;
             CLI.Model.Predmet pred = SelectedPredmet.toPredmet();
             pred.PredmetId = SelectedPredmet.PredmetId;
             pred.ProfesorID = Profesor.ProfesorId;
+            //predmetDAO.RemoveSubjectFromProfessor(pred, originalProfessor);
 
-            Profesor.PredmetiListaId.Add(SelectedPredmet.PredmetId);
+            Profesor.spisakIDPredmeta.Add(SelectedPredmet.PredmetId);
 
             predmetDAO.UpdatePredmet(pred);
             profesorDAO.UpdateProfessor(prof);

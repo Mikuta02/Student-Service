@@ -30,6 +30,7 @@ namespace CLI.Console
             fillObjects(studentsDao, profesDao, subjectsDao, examGradesDao, addressesDao,departmentsDao,studentSubjectDao);
             List<OcenaNaIspitu> ocene = examGradesDao.GetAllGrades();
             List<Student> students = studentsDao.GetAllStudents();
+            List<Profesor> profesors = profesDao.GetAllProfessors();
             foreach (OcenaNaIspitu o in ocene)
             {
                 System.Console.WriteLine(o.PredmetStudenta);
@@ -44,7 +45,14 @@ namespace CLI.Console
                 }
                 foreach(OcenaNaIspitu oi in o.SpisakPolozenihIspita)
                 {
-                    System.Console.WriteLine(oi);
+                    //System.Console.WriteLine(oi);
+                }
+            }
+            foreach (Profesor p in profesors)
+            {
+                foreach(Predmet pred in p.Predmeti)
+                {
+                    System.Console.WriteLine(pred);
                 }
             }
         }
@@ -52,8 +60,8 @@ namespace CLI.Console
         private void fillObjects(StudentDAO studentsDao, ProfessorDAO profesDao, SubjectDAO subjectsDao, ExamGradesDAO examGradesDao, AdressDAO addressesDao, DepartmentDAO departmentsDao, StudentSubjectDAO studentSubjectDao)
         {
             studentsDao.fillObjectsAndLists(studentSubjectDao, subjectsDao, addressesDao, examGradesDao);
-            profesDao.fillObjectsAndLists(subjectsDao, addressesDao);
-            subjectsDao.fillObjectsAndLists(studentsDao, studentSubjectDao, profesDao, examGradesDao);
+            profesDao.fillObjectsAndLists();
+            subjectsDao.fillObjectsAndLists();
             examGradesDao.fillObjectsAndLists(studentsDao, subjectsDao);
         }
 

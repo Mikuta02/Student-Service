@@ -63,7 +63,8 @@ namespace CLI.DAO
             oldPredmet.GodinaStudija = predmet.GodinaStudija;
             oldPredmet.ProfesorID = predmet.ProfesorID;
             oldPredmet.ESPB = predmet.ESPB;
-            AddProfessorToSubject(predmet);
+            fillObjectsAndLists();
+            //AddProfessorToSubject(predmet);
             _storage.Save(_subjects);
             PredmetSubject.NotifyObservers();
             return oldPredmet;
@@ -80,7 +81,7 @@ namespace CLI.DAO
             return predmet;
         }
 
-        private Predmet? GetPredmetById(int id)
+        public Predmet? GetPredmetById(int id)
         {
             return _subjects.Find(s => s.PredmetId == id);
         }
@@ -90,11 +91,22 @@ namespace CLI.DAO
             return _subjects;
         }
 
-        public void fillObjectsAndLists(StudentDAO studentsDao, StudentSubjectDAO studentSubjectDao, ProfessorDAO profesDao, ExamGradesDAO examGradesDao)
+        public void fillObjectsAndLists()
         {
-            List<Student> students = studentsDao.GetAllStudents();
-            List<StudentPredmet> studentSubjects = studentSubjectDao.GetAllStudentSubject();
-            List<Profesor> professors = profesDao.GetAllProfessors();
+            /*            List<Student> students = studentsDao.GetAllStudents();
+                        List<StudentPredmet> studentSubjects = studentSubjectDao.GetAllStudentSubject();
+                        List<Profesor> professors = profesDao.GetAllProfessors();*/
+
+            ExamGradesDAO examGradesDao = new ExamGradesDAO();
+
+            Storage<Student> _studentStorage = new Storage<Student>("students.txt");
+            List<Student> students = _studentStorage.Load();
+
+            Storage<StudentPredmet> _studentPredmetStorage = new Storage<StudentPredmet>("student_subject.txt");
+            List<StudentPredmet> studentSubjects = _studentPredmetStorage.Load();
+
+            Storage<Profesor> _profesorStorage = new Storage<Profesor>("profesors.txt");
+            List<Profesor> professors = _profesorStorage.Load();
 
             //spisak koji nisu polozili
             foreach (StudentPredmet sp in studentSubjects)
@@ -139,6 +151,31 @@ namespace CLI.DAO
                 sub.Naziv.Equals(naziv, StringComparison.OrdinalIgnoreCase));
 
             return foundSubject;
+        }
+
+        public List<Predmet> GetAvailableSubjects(int profesorId)
+        {
+            List<Predmet> availableSubject = GetAllPredmets();
+
+            List<Predmet> availableSubjects = availableSubject
+            .Where(predmet => predmet.ProfesorID != profesorId)
+            .ToList();
+
+            return availableSubjects;
+        }
+
+        public int RemoveSubjectFromProfessor(Predmet selectedSubject, int originalProfessor)
+        {
+            ProfessorDAO professorsDAO = new();
+            List<Profesor> _professors = professorsDAO.GetAllProfessors();
+
+            Profesor? profesor = _professors.Find(p => p.ProfesorId == originalProfessor);//professorsDAO.GetProfessorById(s.ProfesorID);
+            Predmet? predmet = GetPredmetById(selectedSubject.PredmetId);
+            if (profesor == null || predmet == null) return -1;
+            profesor.Predmeti.Remove(selectedSubject);
+            predmet.ProfesorID = selectedSubject.ProfesorID;
+            fillObjectsAndLists();
+            return 1;
         }
 
 
