@@ -40,11 +40,10 @@ namespace GUI.View.Profesor
         public PredmetDTO SelectedPredmet { get; set; }
         public ObservableCollection<PredmetDTO> Predmeti { get; set; }
 
-        private List<CLI.Model.Predmet> SpisakPredmeta { get; set; }
 
-        public EditProfesor (ProfessorDAO profesorsDAO, SubjectDAO predmetsDAO, ProfesorDTO selectedProfesor) 
+        public EditProfesor(ProfessorDAO profesorsDAO, SubjectDAO predmetsDAO, ProfesorDTO selectedProfesor)
         {
-            InitializeComponent ();
+            InitializeComponent();
             DataContext = this;
             this.profesorsDAO = profesorsDAO;
             this.subjectsDAO = predmetsDAO;
@@ -54,8 +53,6 @@ namespace GUI.View.Profesor
 
             studentsDAO = new StudentDAO();
             SelectedPredmet = new PredmetDTO();
-            //SpisakPredmeta = profesorsDAO.LoadSpisakPredmeta(selectedProfesor.ProfesorId);
-            //PredmetiDataGrid.ItemsSource = SpisakPredmeta;
             Update();
         }
 
@@ -122,7 +119,7 @@ namespace GUI.View.Profesor
             selectSubjectProfesorWindow.Owner = this;
             selectSubjectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             selectSubjectProfesorWindow.ShowDialog();
-           
+
             Update();
         }
 

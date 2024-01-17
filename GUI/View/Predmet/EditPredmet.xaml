@@ -62,17 +62,15 @@
                 </ComboBox.ItemsSource>
             </ComboBox>
 
+            <Label Content="ESPB:" Grid.Row="4"/>
+            <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
 
+            <Label Content="Profesor:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="5"  Text="{Binding Path=Predmet.ImeProfesoraKojiPredaje, UpdateSourceTrigger=PropertyChanged}"
+                     Height="20" Margin="6,0,100,0" Name="txtBoxProfesor" VerticalAlignment="Center" Grid.Column="1"/>
 
-
-           
-            <Label Content="ProfesorID:" Grid.Row="4"/>
-            <TextBox Name="txtProfesorID" Text="{Binding Path=Predmet.ProfesorID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
-
-            <Label Content="ESPB:" Grid.Row="5"/>
-            <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
-
-
+            <Button Name="AddProfessorButton" Width="30" Height="20" Click="AddProfessor_Click" Content="+" Grid.Row="5" Grid.Column="1" Margin="198,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Button Name="RemoveProfessorButton" Width="30" Height="20" Click="RemoveProfessor_Click" Content="-" Grid.Row="5" Grid.Column="2" Margin="35,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
 
         </Grid>
 

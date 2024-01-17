@@ -33,17 +33,17 @@ namespace CLI.DAO
         {
             predmet.PredmetId = GenerateId();
 
-            if(!AddProfessorToSubject(predmet)) return null;
+            if (!AddProfessorToSubject(predmet)) return null;
             _subjects.Add(predmet);
             _storage.Save(_subjects);
             PredmetSubject.NotifyObservers();
             return predmet;
         }
 
-       public bool AddProfessorToSubject(Predmet predmet)
+        public bool AddProfessorToSubject(Predmet predmet)
         {
             ProfessorDAO professorsDAO = new();
-            List<Profesor> _professors = professorsDAO.GetAllProfessors(); 
+            List<Profesor> _professors = professorsDAO.GetAllProfessors();
 
             Profesor? profesor = _professors.Find(p => p.ProfesorId == predmet.ProfesorID);//professorsDAO.GetProfessorById(s.ProfesorID);
             if (profesor == null) return false;
@@ -62,6 +62,10 @@ namespace CLI.DAO
             oldPredmet.Semestar = predmet.Semestar;
             oldPredmet.GodinaStudija = predmet.GodinaStudija;
             oldPredmet.ProfesorID = predmet.ProfesorID;
+            if (predmet.ProfesorID == -1)
+            {
+                oldPredmet.ProfesorPredmeta = null;
+            }
             oldPredmet.ESPB = predmet.ESPB;
             fillObjectsAndLists();
             //AddProfessorToSubject(predmet);
@@ -119,7 +123,7 @@ namespace CLI.DAO
                 }
             }
             //profesor
-            foreach(Predmet pred in _subjects)
+            foreach (Predmet pred in _subjects)
             {
                 Profesor? profesor = professors.Find(p => p.ProfesorId == pred.ProfesorID);
                 if (profesor == null) continue;
