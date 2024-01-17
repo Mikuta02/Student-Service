@@ -68,7 +68,7 @@ namespace CLI.Console
 
         private void fillObjects(StudentDAO studentsDao, ProfessorDAO profesDao, SubjectDAO subjectsDao, ExamGradesDAO examGradesDao, AdressDAO addressesDao, DepartmentDAO departmentsDao, StudentSubjectDAO studentSubjectDao)
         {
-            studentsDao.fillObjectsAndLists(studentSubjectDao, subjectsDao, addressesDao, examGradesDao);
+            studentsDao.fillObjectsAndLists();
             profesDao.fillObjectsAndLists();
             subjectsDao.fillObjectsAndLists();
             departmentsDao.fillObjectsAndLists();

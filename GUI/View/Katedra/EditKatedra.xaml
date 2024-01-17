@@ -65,5 +65,25 @@
                 </DataGrid>
             </Grid>
         </TabItem>
+        <TabItem Header="Predmeti">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="31*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="PredmetiDataGrid" AutoGenerateColumns="False" Margin="10,10,10,26"
+                                  ItemsSource="{Binding Predmeti, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectionMode="Single" IsReadOnly="True" Grid.ColumnSpan="2">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Sifra Predmeta" Binding="{Binding SifraPredmeta}" />
+                        <DataGridTextColumn Header="Naziv Predmeta" Binding="{Binding NazivPredmeta}" />
+                        <DataGridTextColumn Header="Ime Profesora" Binding="{Binding Profesor}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
     </TabControl>
 </Window>

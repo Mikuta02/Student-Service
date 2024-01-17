@@ -94,7 +94,7 @@ namespace GUI
 
         private void fillObjects(StudentDAO studentsDAO, ProfessorDAO profesorsDAO, SubjectDAO predmetsDAO, ExamGradesDAO examGradesDAO, AdressDAO adressesDAO, DepartmentDAO departmentsDAO, StudentSubjectDAO studentSubjectDAO)
         {
-            studentsDAO.fillObjectsAndLists(studentSubjectDAO, predmetsDAO, adressesDAO, examGradesDAO);
+            studentsDAO.fillObjectsAndLists();
             profesorsDAO.fillObjectsAndLists();
             predmetsDAO.fillObjectsAndLists();
             departmentsDAO.fillObjectsAndLists();

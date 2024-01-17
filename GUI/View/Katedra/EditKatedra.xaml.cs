@@ -29,7 +29,9 @@ namespace GUI.View.Katedra
         public KatedraDTO Katedra { get; set; }
         private DepartmentDAO departmentsDAO { get; set; }
         private ProfessorDAO professorDAO { get; set; }
+        private SubjectDAO subjectDAO { get; set; }
         public ObservableCollection<ProfesorDTO> Profesori { get; set; }
+        public ObservableCollection<ProfesorPredmetKatedraDTO> Predmeti { get; set; }
         public ProfesorDTO SelectedProfesor { get; set; }
         public ProfesorDTO SefKatedre { get; set; } 
 
@@ -42,6 +44,8 @@ namespace GUI.View.Katedra
             this.professorDAO = professorDAO;
 
             Profesori = new ObservableCollection<ProfesorDTO>();
+            Predmeti = new ObservableCollection<ProfesorPredmetKatedraDTO>();
+            subjectDAO = new SubjectDAO();
             SelectedProfesor = new ProfesorDTO();
             SefKatedre = new ProfesorDTO();
             Update();
@@ -59,6 +63,7 @@ namespace GUI.View.Katedra
         {
             professorDAO.fillObjectsAndLists();
             departmentsDAO.fillObjectsAndLists();
+            subjectDAO.fillObjectsAndLists();
 
             if (Katedra.spisakIDProfesora != null)
             {
@@ -66,6 +71,17 @@ namespace GUI.View.Katedra
                 foreach (int i in Katedra.spisakIDProfesora)
                 {
                     Profesori.Add(new ProfesorDTO(professorDAO.GetProfessorById(i)));
+                }
+            }
+
+            foreach(CLI.Model.Profesor profesor in professorDAO.GetAllProfessors())
+            {
+                foreach(CLI.Model.Predmet predmet in profesor.Predmeti)
+                {
+                    if(Katedra.spisakIDProfesora.Contains(profesor.ProfesorId))
+                    {
+                        Predmeti.Add(new ProfesorPredmetKatedraDTO(profesor, predmet));
+                    }
                 }
             }
 

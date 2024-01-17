@@ -86,6 +86,7 @@ namespace CLI.DAO
             oldStudent.TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             oldStudent.ProsecnaOcena = student.ProsecnaOcena;
 
+            fillObjectsAndLists();
             _storage.Save(_students);
             StudentSubject.NotifyObservers();
             return oldStudent;
@@ -112,13 +113,21 @@ namespace CLI.DAO
             return _students;
         }
 
-        public void fillObjectsAndLists(StudentSubjectDAO studentSubjectDao, SubjectDAO subjectsDao, AdressDAO addressesDao, ExamGradesDAO examGradesDAO)
+        public void fillObjectsAndLists()
         {
-            List<Predmet> subjects = subjectsDao.GetAllPredmets();
-            List<StudentPredmet> studentSubjects = studentSubjectDao.GetAllStudentSubject();
-            List<Adresa> adresses = addressesDao.GetAllAdress();
+            Storage<Predmet> _predmetiStorage = new Storage<Predmet>("predmet.txt");
+            List<Predmet> subjects = _predmetiStorage.Load();
+
+            Storage<StudentPredmet> _studentSubStorage = new Storage<StudentPredmet>("student_subject.txt");
+            List<StudentPredmet> studentSubjects = _studentSubStorage.Load();
+
+            Storage<Adresa> _adresaStorage = new Storage<Adresa>("adresses.txt");
+            List<Adresa> adresses = _adresaStorage.Load();
+
+            ExamGradesDAO examGradesDAO = new ExamGradesDAO();
+
             //spisak nepolozenih
-            foreach(StudentPredmet sp in studentSubjects)
+            foreach (StudentPredmet sp in studentSubjects)
             {
                 Student? student = GetStudentById(sp.StudentId);
                 Predmet? predmet = subjects.Find(s => s.PredmetId == sp.SubjectId);
