@@ -162,9 +162,9 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Postavi sefa.
         /// </summary>
-        internal static string Chose_Manager {
+        internal static string Chose_manager {
             get {
-                return ResourceManager.GetString("Chose Manager", resourceCulture);
+                return ResourceManager.GetString("Chose manager", resourceCulture);
             }
         }
         

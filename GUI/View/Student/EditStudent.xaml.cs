@@ -32,10 +32,12 @@ namespace GUI.View.Student
         public ObservableCollection<StudentDTO> Students { get; set; }
         public StudentDTO Student { get; set; }
         private StudentDAO studentsDAO { get; set; }
-        private StudentSubjectDAO studentSubjectDAO {  get; set; }
+        private StudentSubjectDAO studentSubjectDAO { get; set; }
         private SubjectDAO subjectDAO { get; set; }
+        private ProfessorDAO professorDAO { get; set; }
         public ObservableCollection<PredmetDTO> NepolozeniPredmeti { get; set; }
         public ObservableCollection<ExamGradeDTO> Ocene { get; set; }
+        public ObservableCollection<ProfesorPredmetDTO> Profesori { get; set; }
         public ExamGradeDTO SelectedOcena { get; set; }
         public PredmetDTO SelectedPredmet { get; set; }
         public ProfesorPredmetDTO SelectedProfesorPredmet { get; set; }
@@ -85,6 +87,8 @@ namespace GUI.View.Student
             SelectedPredmet = new PredmetDTO();
             Ocene = new ObservableCollection<ExamGradeDTO>();
             SelectedOcena = new ExamGradeDTO();
+            Profesori = new ObservableCollection<ProfesorPredmetDTO>();
+            professorDAO = new ProfessorDAO();
 
             //CalculateAverageGradeAndESPBSum();
             Update();
@@ -170,11 +174,11 @@ namespace GUI.View.Student
 
                 if (confirmationDialog.UserConfirmed)
                 {
-                   // NepolozeniPredmeti.Remove(SelectedPredmet);
+                    // NepolozeniPredmeti.Remove(SelectedPredmet);
                     studentSubjectDAO.RemoveSubjectFromStudent(SelectedPredmet.PredmetId, Student.StudentId);
                     Student.spisakIDNepolozenihPredmeta.Remove(SelectedPredmet.PredmetId);
                     // NepolozeniPredmeti.Remove(SelectedPredmet);  
-                }   
+                }
             }
             else
             {
@@ -203,12 +207,12 @@ namespace GUI.View.Student
         {
             studentsDAO.fillObjectsAndLists();
             examGradesDAO.fillObjectsAndLists();
-            
+
 
             if (Student.spisakIDNepolozenihPredmeta != null)
             {
                 NepolozeniPredmeti.Clear();
-                foreach(int i in Student.spisakIDNepolozenihPredmeta)
+                foreach (int i in Student.spisakIDNepolozenihPredmeta)
                 {
                     NepolozeniPredmeti.Add(new PredmetDTO(subjectDAO.GetPredmetById(i)));
                 }
@@ -220,7 +224,7 @@ namespace GUI.View.Student
                 foreach (int i in Student.spisakIDOcena)
                 {
 
-                    if (examGradesDAO.GetGradeById(i) != null && examGradesDAO.GetGradeById(i).PredmetStudenta!=null)
+                    if (examGradesDAO.GetGradeById(i) != null && examGradesDAO.GetGradeById(i).PredmetStudenta != null)
                     {
                         //MessageBox.Show("nasao je ocenuuu");
                         Ocene.Add(new ExamGradeDTO(examGradesDAO.GetGradeById(i)));
@@ -228,6 +232,21 @@ namespace GUI.View.Student
                     else
                     {
                         //MessageBox.Show("ocena nema predmet");
+                    }
+                }
+            }
+
+            Profesori.Clear();
+            foreach (int predmetID in Student.spisakIDNepolozenihPredmeta)
+            {
+                CLI.Model.Predmet? predmet = subjectDAO.GetPredmetById(predmetID);
+                if (predmet != null)
+                {
+                    CLI.Model.Profesor? profesor = professorDAO.GetProfessorById(predmet.ProfesorID);
+                    if (profesor != null)
+                    {
+                        // MessageBox.Show($"{predmet.Naziv}");
+                        Profesori.Add(new ProfesorPredmetDTO(profesor, predmet));
                     }
                 }
             }
@@ -264,7 +283,7 @@ namespace GUI.View.Student
                     examGradesDAO.AddExamGrade(newExam);
                     //examGradesDAO.fillObjectsAndLists();
 
-                   // Ocene.Add(new ExamGradeDTO(newExam));
+                    // Ocene.Add(new ExamGradeDTO(newExam));
                     Student.spisakIDPolozenihPredmeta.Add(SelectedPredmet.PredmetId);
                     Student.spisakIDOcena.Add(newExam.OcenaNaIspituId);
 
@@ -321,7 +340,7 @@ namespace GUI.View.Student
                         ++count;
                     }
                 }
-                AverageGrade = sumaOcena/ count;
+                AverageGrade = sumaOcena / count;
                 ESPBSum = sumaESPB;
             }
             else
