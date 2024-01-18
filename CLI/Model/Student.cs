@@ -20,12 +20,12 @@ namespace CLI.Model
         public Indeks BrojIndeksa { get; set; }
         public int TrenutnaGodinaStudija { get; set; }
         public EnumUt.StatusType StatusStudenta { get; set; }
-        public float ProsecnaOcena { get; set; }
+        public double ProsecnaOcena { get; set; }
 
         public List<OcenaNaIspitu> SpisakPolozenihIspita { get; set; }
         public List<Predmet> SpisakNepolozenihPredmeta { get; set; }
 
-        public Student(string ime, string prezime, string datumRodjenja, int adresaId, string kontaktTelefon, string email, Indeks brojIndeksa, int trenutnaGodinaStudija, EnumUt.StatusType statusStudenta, float prosecnaOcena)
+        public Student(string ime, string prezime, string datumRodjenja, int adresaId, string kontaktTelefon, string email, Indeks brojIndeksa, int trenutnaGodinaStudija, EnumUt.StatusType statusStudenta)
         {
             Ime = ime;
             Prezime = prezime;
@@ -36,12 +36,12 @@ namespace CLI.Model
             BrojIndeksa = brojIndeksa;
             TrenutnaGodinaStudija = trenutnaGodinaStudija;
             StatusStudenta = statusStudenta;
-            ProsecnaOcena = prosecnaOcena;
+            //ProsecnaOcena = prosecnaOcena;
             SpisakPolozenihIspita = new List<OcenaNaIspitu>();
             SpisakNepolozenihPredmeta = new List<Predmet>();
         }
 
-        public Student(string ime, string prezime, DateTime datumRodjenja, int adresaId, string kontaktTelefon, string email, Indeks brojIndeksa, int trenutnaGodinaStudija, EnumUt.StatusType statusStudenta, float prosecnaOcena)
+        public Student(string ime, string prezime, DateTime datumRodjenja, int adresaId, string kontaktTelefon, string email, Indeks brojIndeksa, int trenutnaGodinaStudija, EnumUt.StatusType statusStudenta)
         {
             Ime = ime;
             Prezime = prezime;
@@ -52,12 +52,12 @@ namespace CLI.Model
             BrojIndeksa = brojIndeksa;
             TrenutnaGodinaStudija = trenutnaGodinaStudija;
             StatusStudenta = statusStudenta;
-            ProsecnaOcena = prosecnaOcena;
+           // ProsecnaOcena = prosecnaOcena;
             SpisakPolozenihIspita = new List<OcenaNaIspitu>();
             SpisakNepolozenihPredmeta = new List<Predmet>();
         }
 
-        public Student(string ime, string prezime, DateTime datumRodjenja, int adresaId, string kontaktTelefon, string email, string brojIndeksa, int trenutnaGodinaStudija, string statusStudenta, float prosecnaOcena)
+        public Student(string ime, string prezime, DateTime datumRodjenja, int adresaId, string kontaktTelefon, string email, string brojIndeksa, int trenutnaGodinaStudija, string statusStudenta)
         {
             Ime = ime;
             Prezime = prezime;
@@ -69,7 +69,7 @@ namespace CLI.Model
             TrenutnaGodinaStudija = trenutnaGodinaStudija;
             Enum.TryParse(statusStudenta, out EnumUt.StatusType statusStudentaEnum);
             StatusStudenta = statusStudentaEnum;
-            ProsecnaOcena = prosecnaOcena;
+            //ProsecnaOcena = prosecnaOcena;
             SpisakPolozenihIspita = new List<OcenaNaIspitu>();
             SpisakNepolozenihPredmeta = new List<Predmet>();
         }
@@ -99,7 +99,7 @@ namespace CLI.Model
             BrojIndeksa.ToString(),
             TrenutnaGodinaStudija.ToString(),
             StatusStudenta.ToString(),
-            ProsecnaOcena.ToString()
+            //ProsecnaOcena.ToString()
         };
             return csvValues;
         }
@@ -132,7 +132,7 @@ namespace CLI.Model
                 StatusStudenta = EnumUt.StatusType.S;
             else
                 StatusStudenta = EnumUt.StatusType.B;
-            ProsecnaOcena = float.Parse(values[10]);
+            //ProsecnaOcena = float.Parse(values[10]);
         }
     }
 }

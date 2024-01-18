@@ -190,7 +190,7 @@ namespace GUI.DTO
 
         public Student toStudent()
         {
-            return new Student(ime, prezime, datumRodjenja, adresaId, kontaktTelefon, email, brojIndeksa, trenutnaGodinaStudija, statusStudenta, prosecnaOcena);
+            return new Student(ime, prezime, datumRodjenja, adresaId, kontaktTelefon, email, brojIndeksa, trenutnaGodinaStudija, statusStudenta);
         }
 
         public StudentDTO()

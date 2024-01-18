@@ -126,7 +126,7 @@ namespace CLI.DAO
 
             ExamGradesDAO examGradesDAO = new ExamGradesDAO();
 
-            //spisak nepolozenih
+            //spisak nepolozenih, polozenih
             foreach (StudentPredmet sp in studentSubjects)
             {
                 Student? student = GetStudentById(sp.StudentId);
@@ -143,6 +143,21 @@ namespace CLI.DAO
                         student.SpisakPolozenihIspita.Add(ocena);
                     }   
                 }
+            }
+
+            //prosjecna
+            int sum = 0;
+            int count = 0;
+            foreach(Student student in _students)
+            {
+               
+                foreach(OcenaNaIspitu oi in student.SpisakPolozenihIspita)
+                {
+                    sum += oi.Ocena;
+                    count++;
+                }
+                double average = (double)sum / count;
+                student.ProsecnaOcena = average;
             }
             
             //adresa
