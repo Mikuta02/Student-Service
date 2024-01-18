@@ -191,11 +191,8 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-<<<<<<< HEAD
+
                             <DataGridTextColumn Header="{ns:Loc Average}" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena}">
-=======
-                            <DataGridTextColumn Header="Prosek" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena, StringFormat=N2}">
->>>>>>> 3093b365d1504961dc6a0964719ae47134b03b27
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">

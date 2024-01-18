@@ -106,19 +106,13 @@
                                   SelectedItem="{Binding SelectedOcena, UpdateSourceTrigger=PropertyChanged}"
                                   SelectionMode="Single" IsReadOnly="True" SelectionChanged="PolozeniDataGrid_SelectionChanged">
                     <DataGrid.Columns>
-<<<<<<< HEAD
+
                         <DataGridTextColumn Header="{ns:Loc Grade code}" Binding="{Binding PredmetStudenta.SifraPredmeta}" />
                         <DataGridTextColumn Header="{ns:Loc Grade title}" Binding="{Binding PredmetStudenta.Naziv}" />
                         <DataGridTextColumn Header="{ns:Loc ECTS}" Binding="{Binding PredmetStudenta.ESPB}" />
                         <DataGridTextColumn Header="{ns:Loc Grade}" Binding="{Binding Ocena}" />
                         <DataGridTextColumn Header="{ns:Loc Date of taking exam}" Binding="{Binding DatumPolaganja}" />
-=======
-                        <DataGridTextColumn Header="Sifra predmeta" Binding="{Binding SifraPredmeta}" />
-                        <DataGridTextColumn Header="Naziv predmeta" Binding="{Binding Naziv}" />
-                        <DataGridTextColumn Header="ESPB" Binding="{Binding ESPB}" />
-                        <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" />
-                        <DataGridTextColumn Header="Datum Polaganja" Binding="{Binding DatumPolaganja}" />
->>>>>>> 3093b365d1504961dc6a0964719ae47134b03b27
+
                     </DataGrid.Columns>
 
                 </DataGrid>

@@ -28,13 +28,13 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="{ns:Loc Code:}" Grid.Row="0"/>
+            <Label Content="{ns:Loc Code}" Grid.Row="0"/>
             <TextBox Name="txtSifra"  IsReadOnly="True" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="{ns:Loc Title:}" Grid.Row="1"/>
+            <Label Content="{ns:Loc Title}" Grid.Row="1"/>
             <TextBox Name="txtNaziv"  IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="{ns:Loc Grade:}" Grid.Row="2"/>
+            <Label Content="{ns:Loc Grade}" Grid.Row="2"/>
             <ComboBox Name="cmbOcena" Grid.Row="2" Grid.Column="1" Width="178" Margin="0,0,0,5">
                 <ComboBox.ItemsSource>
                     <x:Array Type="{x:Type sys:Int32}">
@@ -47,7 +47,7 @@
                 </ComboBox.ItemsSource>
             </ComboBox>
 
-            <Label Content="{ns:Loc Date:}" Grid.Row="3"/>
+            <Label Content="{ns:Loc Date}" Grid.Row="3"/>
             <DatePicker Name="dpDatumRodjenja"  Grid.Row="3" Margin="48,0,0,5" Grid.ColumnSpan="2"/>
 
         </Grid>

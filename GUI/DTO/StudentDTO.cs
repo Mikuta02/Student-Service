@@ -204,10 +204,7 @@ namespace GUI.DTO
             brojIndeksa = student.BrojIndeksa.ToString();
             trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             statusStudenta = student.StatusStudenta.ToString();
-<<<<<<< HEAD
-            prosecnaOcena = (float)student.ProsecnaOcena;
-            spisakNepolozenihPredmeta = student.SpisakNepolozenihPredmeta;
-=======
+
             prosecnaOcena = student.ProsecnaOcena;
 
             spisakIDNepolozenihPredmeta = new List<int>();
@@ -239,7 +236,7 @@ namespace GUI.DTO
                     }
                 }
             }
->>>>>>> 3093b365d1504961dc6a0964719ae47134b03b27
+
         }
 
         protected virtual void OnPropertyChanged(string name)
