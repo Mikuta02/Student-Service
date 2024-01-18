@@ -173,7 +173,7 @@ namespace CLI.DAO
             Profesor? profesor = GetProfessorById(profesorId);
             if (profesor == null) return false;
 
-            if(profesor.Zvanje=="redovni profesor" && profesor.GodineStaza >= 5)
+            if((profesor.Zvanje=="redovni profesor" || profesor.Zvanje=="vanredni profesor") && profesor.GodineStaza >= 5)
             {
                 return true;
             }

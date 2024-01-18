@@ -247,7 +247,6 @@ namespace GUI
         {
             if (MainTabControl.SelectedItem == StudentsTab)
             {
-                // Delete student logic
                 if (SelectedStudent == null)
                 {
                     MessageBox.Show(this, "Please choose a student to delete!");

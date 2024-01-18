@@ -74,6 +74,7 @@ namespace GUI.View.Katedra
                 }
             }
 
+            Predmeti.Clear();
             foreach(CLI.Model.Profesor profesor in professorDAO.GetAllProfessors())
             {
                 foreach(CLI.Model.Predmet predmet in profesor.Predmeti)

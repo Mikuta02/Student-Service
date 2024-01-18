@@ -427,14 +427,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="{ns:Loc Name of department}" SortMemberPath="NazivKatedre" Binding="{Binding NazivKatedre}">
+                            <DataGridTextColumn Header="{ns:Loc Name of Department}" SortMemberPath="NazivKatedre" Binding="{Binding NazivKatedre}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="{ns:Loc Name of department}" />
+                                                        <TextBlock Text="{ns:Loc Name of Department}" />
                                                         <Image x:Name="SortArrowNaziv" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>

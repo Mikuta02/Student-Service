@@ -78,6 +78,7 @@ namespace GUI.View.Profesor
             }
 
             //apdejtovanje studenata
+            StudentiNaPredmetu.Clear();
             foreach (CLI.Model.Student student in studentsDAO.GetAllStudents())
             {
                 foreach (CLI.Model.Predmet predmet in student.SpisakNepolozenihPredmeta)
@@ -176,47 +177,6 @@ namespace GUI.View.Profesor
                     profesorsDAO.UpdateProfessor(prof);
                     Update();
                 }
-            }
-        }
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            string searchTerm = searchTextBox.Text;
-
-            StudentiDataGrid.ItemsSource = FilterStudent(StudentiNaPredmetu, searchTerm);
-        }
-
-        private ObservableCollection<StudentPredmetDTO> FilterStudent(ObservableCollection<StudentPredmetDTO> originalCollection, string searchTerm)
-        {
-            // Razdvajanje unetog upita na reči i konverzija u mala slova
-            var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
-
-            // Filtriranje na osnovu broja unetih reči
-            switch (terms.Count)
-            {
-                case 1: // Samo predmet
-                    return new ObservableCollection<StudentPredmetDTO>(
-                        originalCollection.Where(studentDto =>
-                            studentDto.Predmet.ToLower().Contains(terms[0]))
-                    );
-
-                case 2: // Prezime i ime
-                    return new ObservableCollection<StudentPredmetDTO>(
-                        originalCollection.Where(studentDto =>
-                            studentDto.Prezime.ToLower().Contains(terms[0]) &&
-                            studentDto.Ime.ToLower().Contains(terms[1]))
-                    );
-
-                case 3: // Indeks, ime i prezime
-                    return new ObservableCollection<StudentPredmetDTO>(
-                        originalCollection.Where(studentDto =>
-                            studentDto.Indeks.ToLower().Contains(terms[0]) &&
-                            studentDto.Ime.ToLower().Contains(terms[1]) &&
-                            studentDto.Prezime.ToLower().Contains(terms[2]))
-                    );
-
-                default:
-                    return originalCollection;
             }
         }
 

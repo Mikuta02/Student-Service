@@ -87,8 +87,8 @@ namespace CLI.Model
         public void FromCSV(string[] values)
         {
             ProfesorId = int.Parse(values[0]);
-            Ime = values[1];
-            Prezime = values[2];
+            Ime = values[2];
+            Prezime = values[1];
             DatumRodjenja = DateTime.Parse(values[3]); 
             AdresaId = int.Parse(values[4]);
             KontaktTelefon = values[5];

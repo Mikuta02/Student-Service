@@ -73,8 +73,7 @@ namespace GUI.View.Student
                    !string.IsNullOrWhiteSpace(txtEmail.Text) &&
                    !string.IsNullOrWhiteSpace(txtIndeks.Text) && IsValidIndex(txtIndeks.Text) &&
                    cmbGodinaStudija.SelectedItem != null &&
-                   cmbStatusStudenta.SelectedItem != null &&
-                   !string.IsNullOrWhiteSpace(txtProsecnaOcena.Text);
+                   cmbStatusStudenta.SelectedItem != null;
         }
 
         private bool IsValidIndex(string input)

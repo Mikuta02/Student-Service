@@ -79,9 +79,6 @@
                         <ComboBoxItem>Budzet</ComboBoxItem>
                         <ComboBoxItem>Samofinansiranje</ComboBoxItem>
                     </ComboBox>
-
-                    <Label Content="{ns:Loc Average}" Grid.Row="9"/>
-                    <TextBox Name="txtProsecnaOcena" Text="{Binding Path=Student.ProsecnaOcena, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="1" Margin="0,0,0,5"/>
                 </Grid>
 
                 <!-- Buttons: Confirm and Cancel in the center -->

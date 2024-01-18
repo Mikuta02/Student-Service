@@ -1,3 +1,20 @@
-0|Nebojsa|Ralevic|01.02.1966|0|1232132|ralecar@gmail.com|1111|redovni profesor|7
-1|Sasa|Popovic|02.02.1922|0|3232134|alexander.pop@gmail.com|22232|programator|3
-2|Sultan|Sulejmanovic|01.01.0001|0|+666|ottomanEmperor@gmail.tr|12345|redovni profesor|99
+0|Raspopovic|Dragoslava|1984-04-01|20|+38168734572|dragoslava.raspopovic@uns.ac.rs|276681361|docent|8
+1|Prvanovic|Stojko|1984-02-14|21|+38164533567|stojko.prvanovic@uns.ac.rs|403390402|redovni profesor|29
+2|Talovic|Budimir|1993-11-13|22|+38163433336|budimir.talovic@uns.ac.rs|176283015|redovni profesor|25
+3|Batrovic|Dobrica|1977-05-31|23|+38163651140|dobrica.batrovic@uns.ac.rs|39606943|docent|26
+4|Balabanovic|Arsenije|1985-11-04|24|+38166421759|arsenije.balabanovic@uns.ac.rs|3296960|docent|16
+5|Bucevac|Rastko|1968-08-31|25|+38166705409|rastko.bucevac@uns.ac.rs|520064301|vanredni profesor|6
+6|Loznjakovic|Bogdanka|1971-11-26|26|+38163904215|bogdanka.loznjakovic@uns.ac.rs|306180424|vanredni profesor|14
+7|Miocinovic|Veljko|1970-06-24|27|+38169997020|veljko.miocinovic@uns.ac.rs|125955509|vanredni profesor|8
+8|Kreckovic|Igor|1986-05-17|28|+3816101030|igor.kreckovic@uns.ac.rs|973133377|redovni profesor|5
+9|Iljanovic|Steva|1973-07-15|29|+38164163699|steva.iljanovic@uns.ac.rs|914012289|vanredni profesor|9
+10|Toskic|Jevrosima|1971-10-17|30|+38165326720|jevrosima.toskic@uns.ac.rs|800155523|redovni profesor|11
+11|Calukovic|Acim|1991-02-25|31|+38165602843|acim.calukovic@uns.ac.rs|884798807|docent|5
+12|Dabarcic|Gaga|1965-12-14|32|+38163466502|gaga.dabarcic@uns.ac.rs|263457325|vanredni profesor|11
+13|Graonic|Stevanija|1962-06-06|33|+38166834413|stevanija.graonic@uns.ac.rs|392506493|docent|5
+14|Oblakovic|Spomenko|1980-10-31|34|+3816757415|spomenko.oblakovic@uns.ac.rs|963528130|redovni profesor|15
+15|Cvorkov|Jakov|1982-08-08|35|+38169416210|jakov.cvorkov@uns.ac.rs|955425450|docent|10
+16|Durikin|Leonora|1980-11-17|36|+38167769265|leonora.durikin@uns.ac.rs|982033521|docent|16
+17|Banjalic|Stojmen|1973-07-29|37|+3816103067|stojmen.banjalic@uns.ac.rs|284423009|redovni profesor|12
+18|Jojcic|Pauna|1960-11-19|38|+38167157490|pauna.jojcic@uns.ac.rs|999930819|docent|19
+19|Serdarevic|Miloje|1993-07-16|39|+38169893744|miloje.serdarevic@uns.ac.rs|904283709|redovni profesor|23

@@ -16,7 +16,7 @@
         <DataGrid
             AutoGenerateColumns="False"
             ItemsSource="{Binding Studenti, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding NaKuracSvojBajndam, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding Bajndam, UpdateSourceTrigger=PropertyChanged}"
             SelectionMode="Single" IsReadOnly="True" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{ns:Loc FirstName}" Width="*" Binding="{Binding Ime}"/>
