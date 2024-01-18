@@ -31,13 +31,6 @@ namespace GUI
         private const string SRB = "sr-RS";
         private const string ENG = "en-US";
 
-        public int TrenutnaStranica { get; set; } = 1;
-        public int UkupnoStranica { get; set; }
-        public int StavkiPoStranici { get; set; } = 16;
-
-
-
-
         public static readonly DependencyProperty CurrentTabProperty =
             DependencyProperty.Register(
                 nameof(CurrentTab),
@@ -532,8 +525,6 @@ namespace GUI
                 SubjectsDataGrid.ItemsSource = FilterSubject(Predmets, searchTerm);
             }
 
-            IzracunajPaginaciju();
-
         }
 
         private ObservableCollection<StudentDTO> FilterStudent(ObservableCollection<StudentDTO> originalCollection, string searchTerm)
@@ -630,100 +621,6 @@ namespace GUI
         {
             App.Current.Shutdown();
         }
-
-        private void IzracunajPaginaciju()
-        {
-            TrenutnaStranica = 1;
-            int ukupnoEntiteta = 0;
-            
-            if(MainTabControl.SelectedContent == StudentsTab)
-            {
-                ukupnoEntiteta = Students.Count;
-                UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
-                PostaviEntitetaZaTrenutnuStranicu(Students);
-
-            }else if (MainTabControl.SelectedContent == ProffesorsTab)
-            {
-                ukupnoEntiteta = Profesors.Count;
-                UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
-                PostaviEntitetaZaTrenutnuStranicu(Profesors);
-            }
-            else
-            {
-                ukupnoEntiteta = Predmets.Count;
-                UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
-                PostaviEntitetaZaTrenutnuStranicu(Predmets);
-            }
-
-
-        }
-
-        private void PostaviEntitetaZaTrenutnuStranicu<T>(ObservableCollection<T> entiteti)
-        {
-            int startIndex = (TrenutnaStranica - 1) * StavkiPoStranici;
-            var filtriraniEntiteti = entiteti.Skip(startIndex).Take(StavkiPoStranici);
-            
-            if(MainTabControl.SelectedContent == StudentsTab)
-            {
-                StudentsDataGrid.ItemsSource = new ObservableCollection<StudentDTO>(filtriraniEntiteti.Cast<StudentDTO>());
-            }else if(MainTabControl.SelectedContent == ProffesorsTab)
-            {
-                ProfesorsDataGrid.ItemsSource = new ObservableCollection<ProfesorDTO>(filtriraniEntiteti.Cast<ProfesorDTO>());
-            }
-            else if(MainTabControl.ItemsSource == SubjectsTab)
-            {
-                SubjectsDataGrid.ItemsSource = new ObservableCollection<PredmetDTO>(filtriraniEntiteti.Cast<PredmetDTO>());
-            }
-        }
-
-
-        public void SledecaStranica()
-        {
-
-            if(TrenutnaStranica < UkupnoStranica)
-            {
-                TrenutnaStranica++;
-                OsveziTrenutnuStranicu();
-            }
-
-
-        }
-
-        public void PrethodnaStranica()
-        {
-            if(TrenutnaStranica > 1)
-            {
-                TrenutnaStranica--;
-                OsveziTrenutnuStranicu();
-            }
-        }
-
-        private void OsveziTrenutnuStranicu()
-        {
-            if(MainTabControl.SelectedContent == StudentsTab)
-            {
-                PostaviEntitetaZaTrenutnuStranicu(Students);
-            }else if(MainTabControl.SelectedContent == ProffesorsTab) {
-
-                PostaviEntitetaZaTrenutnuStranicu(Profesors);
-            
-            }else if(MainTabControl.SelectedContent == SubjectsTab)
-            {
-                PostaviEntitetaZaTrenutnuStranicu(Predmets);
-            }
-        }
-
-        private void PrethodnaStranica_Click(object sender, RoutedEventArgs e)
-        {
-            PrethodnaStranica();
-        }
-        private void NarednaStranica_Click(object sender,RoutedEventArgs e)
-        {
-            SledecaStranica();
-        }
-
-
-
 
     }
 }
