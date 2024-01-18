@@ -95,19 +95,19 @@ namespace GUI
             adressesDAO = new AdressDAO();
             studentSubjectDAO = new StudentSubjectDAO();
             professorDepartmentDAO = new ProfessorDepartmentDAO();
-            fillObjects(studentsDAO, profesorsDAO, predmetsDAO, examGradesDAO, adressesDAO, departmentsDAO, studentSubjectDAO);
+            fillObjects();
             CurrentTab = "Studenti";
             UpdateTabStatus();
             Update();
         }
 
-        private void fillObjects(StudentDAO studentsDAO, ProfessorDAO profesorsDAO, SubjectDAO predmetsDAO, ExamGradesDAO examGradesDAO, AdressDAO adressesDAO, DepartmentDAO departmentsDAO, StudentSubjectDAO studentSubjectDAO)
+        private void fillObjects()
         {
             studentsDAO.fillObjectsAndLists();
             profesorsDAO.fillObjectsAndLists();
             predmetsDAO.fillObjectsAndLists();
             departmentsDAO.fillObjectsAndLists();
-            examGradesDAO.fillObjectsAndLists(studentsDAO, predmetsDAO);
+            examGradesDAO.fillObjectsAndLists();
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)

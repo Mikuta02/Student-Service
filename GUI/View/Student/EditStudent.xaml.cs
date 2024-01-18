@@ -34,9 +34,11 @@ namespace GUI.View.Student
         public StudentDTO Student { get; set; }
         private StudentDAO studentsDAO { get; set; }
         private StudentSubjectDAO studentSubjectDAO {  get; set; }
-        private List<CLI.Model.Predmet> SpisakNepolozenihPredmeta { get; set; }
-        private List<OcenaNaIspitu> SpisakPolozenihPredmeta { get; set; }
-
+        private SubjectDAO subjectDAO { get; set; }
+        public ObservableCollection<PredmetDTO> NepolozeniPredmeti { get; set; }
+        public ObservableCollection<ExamGradeDTO> Ocene { get; set; }
+        public ExamGradeDTO SelectedOcena { get; set; }
+        public PredmetDTO SelectedPredmet { get; set; }
         public ProfesorPredmetDTO SelectedProfesorPredmet { get; set; }
         private double _averageGrade { get; set; }
 
@@ -76,18 +78,23 @@ namespace GUI.View.Student
 
            // Exams = new ObservableCollection<ExamGradeDTO>();
             examGradesDAO = new ExamGradesDAO();
-            examGradesDAO.ExamGradeSubject.Subscribe(this);
+            //examGradesDAO.ExamGradeSubject.Subscribe(this);
 
             Students = new ObservableCollection<StudentDTO>();
             this.studentsDAO = studentsDAO;
             studentSubjectDAO = sbDAO;
+            subjectDAO = new SubjectDAO();
             Student = selectedStudent;
-            studentsDAO.StudentSubject.Subscribe(this);
+            //studentsDAO.StudentSubject.Subscribe(this);
 
-            SpisakPolozenihPredmeta = studentsDAO.LoadSpisakPolozenihPredmeta(selectedStudent.StudentId);
-            SpisakNepolozenihPredmeta = studentsDAO.LoadSpisakNepolozenihPredmeta(selectedStudent.StudentId);
-            NepolozeniDataGrid.ItemsSource = SpisakNepolozenihPredmeta;
-            PolozeniDataGrid.ItemsSource = SpisakPolozenihPredmeta;
+            NepolozeniPredmeti = new ObservableCollection<PredmetDTO>();
+            SelectedPredmet = new PredmetDTO();
+            Ocene = new ObservableCollection<ExamGradeDTO>();
+            SelectedOcena = new ExamGradeDTO();
+            //SpisakPolozenihPredmeta = studentsDAO.LoadSpisakPolozenihPredmeta(selectedStudent.StudentId);
+            //SpisakNepolozenihPredmeta = studentsDAO.LoadSpisakNepolozenihPredmeta(selectedStudent.StudentId);
+            //NepolozeniDataGrid.ItemsSource = SpisakNepolozenihPredmeta;
+            //PolozeniDataGrid.ItemsSource = SpisakPolozenihPredmeta;
             CalculateAverageGradeAndESPBSum();
             Update();
         }
@@ -165,11 +172,8 @@ namespace GUI.View.Student
         private void btnUkloni_Click(object sender, RoutedEventArgs e)
         {
             // Check if an item is selected in the NepolozeniDataGrid
-            if (NepolozeniDataGrid.SelectedItem != null)
+            if (SelectedPredmet != null)
             {
-                CLI.Model.Predmet selectedSubject = (CLI.Model.Predmet)NepolozeniDataGrid.SelectedItem;
-
-                // Show confirmation dialog
                 var confirmationDialog = new ConfirmationWindow("Subject");
                 confirmationDialog.Owner = this;
                 confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -177,33 +181,27 @@ namespace GUI.View.Student
 
                 if (confirmationDialog.UserConfirmed)
                 {
-                    // Remove the selected subject from the data source and update the UI
-                    SpisakNepolozenihPredmeta.Remove(selectedSubject);
-                    studentSubjectDAO.RemoveSubjectFromStudent(selectedSubject.PredmetId, Student.StudentId);
-                    NepolozeniDataGrid.Items.Refresh(); // Refresh the DataGrid
-                }
+                   // NepolozeniPredmeti.Remove(SelectedPredmet);
+                    studentSubjectDAO.RemoveSubjectFromStudent(SelectedPredmet.PredmetId, Student.StudentId);
+                    Student.spisakIDNepolozenihPredmeta.Remove(SelectedPredmet.PredmetId);
+                    // NepolozeniPredmeti.Remove(SelectedPredmet);  
+                }   
             }
             else
             {
                 MessageBox.Show("Please select a subject to remove.", "Selection Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            Update();
         }
 
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
         {
-            var subjectSelectionDialog = new SelectSubjectDialog(GetAvailableSubjects());
+            var subjectSelectionDialog = new AddSubjectToStudent(Student, subjectDAO, studentSubjectDAO);
             subjectSelectionDialog.Owner = this;
             subjectSelectionDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            if (subjectSelectionDialog.ShowDialog() == true)
-            {
-                // Add the selected subject to the data source
-                CLI.Model.Predmet selectedSubject = subjectSelectionDialog.SelectedSubject;
-                SpisakNepolozenihPredmeta.Add(selectedSubject);
-                studentSubjectDAO.AddSubjectToStudent(selectedSubject.PredmetId, Student.StudentId);
-                //SpisakNepolozenihPredmeta = studentsDAO.LoadSpisakNepolozenihPredmeta(Student.StudentId);
-                NepolozeniDataGrid.Items.Refresh(); // Refresh the DataGrid
-            }
+            subjectSelectionDialog.ShowDialog();
+            Update();
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -211,18 +209,44 @@ namespace GUI.View.Student
 
         }
 
-        private List<CLI.Model.Predmet> GetAvailableSubjects()
+ /*       private List<CLI.Model.Predmet> GetAvailableSubjects()
         {
             return studentSubjectDAO.GetAvailableSubjects(SpisakNepolozenihPredmeta, Student.StudentId, Student.TrenutnaGodinaStudija);
         }
-
+*/
         public void Update()
         {
-            Students.Clear();
-            foreach (CLI.Model.Student student in studentsDAO.GetAllStudents()) Students.Add(new StudentDTO(student));
+            studentsDAO.fillObjectsAndLists();
+            examGradesDAO.fillObjectsAndLists();
+            
 
-            //Exams.Clear();
-           // foreach (OcenaNaIspitu exam in examGradesDAO.GetAllGrades()) Exams.Add(new ExamGradeDTO(exam));
+            if (Student.spisakIDNepolozenihPredmeta != null)
+            {
+                NepolozeniPredmeti.Clear();
+                foreach(int i in Student.spisakIDNepolozenihPredmeta)
+                {
+                    NepolozeniPredmeti.Add(new PredmetDTO(subjectDAO.GetPredmetById(i)));
+                }
+            }
+
+            if (Student.spisakIDOcena != null)
+            {
+                Ocene.Clear();
+                foreach (int i in Student.spisakIDOcena)
+                {
+
+                    if (examGradesDAO.GetGradeById(i) != null && examGradesDAO.GetGradeById(i).PredmetStudenta!=null)
+                    {
+                        //MessageBox.Show("nasao je ocenuuu");
+                        Ocene.Add(new ExamGradeDTO(examGradesDAO.GetGradeById(i)));
+                    }
+                    else
+                    {
+                        //MessageBox.Show("ocena nema predmet");
+                    }
+                }
+
+            }
         }
 
         private void NepolozeniDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -237,45 +261,43 @@ namespace GUI.View.Student
 
         private void btnPolaganje_Click(object sender, RoutedEventArgs e)
         {
-            if (NepolozeniDataGrid.SelectedItem != null)
+            if (SelectedPredmet != null)
             {
-                CLI.Model.Predmet selectedPredmet = (CLI.Model.Predmet)NepolozeniDataGrid.SelectedItem;
-
-                var takeExamWindow = new PassExam(selectedPredmet.SifraPredmeta, selectedPredmet.Naziv);
+                var takeExamWindow = new PassExam(SelectedPredmet.SifraPredmeta, SelectedPredmet.Naziv);
                 takeExamWindow.Owner = this;
                 takeExamWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 if (takeExamWindow.ShowDialog() == true)
                 {
                     CLI.Model.OcenaNaIspitu newExam = new CLI.Model.OcenaNaIspitu
                     {
-                        PredmetId = selectedPredmet.PredmetId,
+                        PredmetId = SelectedPredmet.PredmetId,
                         StudentId = Student.StudentId,
                         Ocena = takeExamWindow.Ocena,
                         DatumPolaganja = takeExamWindow.Datum
                     };
-
-                    SpisakPolozenihPredmeta.Add(newExam);
                     examGradesDAO.AddExamGrade(newExam);
+                    //examGradesDAO.fillObjectsAndLists();
 
-                    SpisakNepolozenihPredmeta.Remove(selectedPredmet);
+                   // Ocene.Add(new ExamGradeDTO(newExam));
+                    Student.spisakIDPolozenihPredmeta.Add(SelectedPredmet.PredmetId);
+                    Student.spisakIDOcena.Add(newExam.OcenaNaIspituId);
+
+                    Student.spisakIDNepolozenihPredmeta.Remove(SelectedPredmet.PredmetId);
                     CalculateAverageGradeAndESPBSum();
-                    NepolozeniDataGrid.Items.Refresh();
-                    PolozeniDataGrid.Items.Refresh();
                 }
             }
             else
             {
-                MessageBox.Show("Please select a failed exam to take.", "Selection Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a subject to take exam.", "Selection Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            Update();
         }
 
 
         private void btnPonistiOcenu_Click(object sender, RoutedEventArgs e)
         {
-            if (PolozeniDataGrid.SelectedItem != null)
+            if (SelectedOcena != null)
             {
-                OcenaNaIspitu selectedExam = (OcenaNaIspitu)PolozeniDataGrid.SelectedItem;
-
                 var confirmationDialog = new ConfirmationWindow("Exam");
                 confirmationDialog.Owner = this;
                 confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -283,23 +305,23 @@ namespace GUI.View.Student
 
                 if (confirmationDialog.UserConfirmed)
                 {
-                    SpisakPolozenihPredmeta.Remove(selectedExam);
-                    examGradesDAO.RemoveExamGrade(selectedExam.OcenaNaIspituId);
-                    SpisakNepolozenihPredmeta.Add(selectedExam.PredmetStudenta);
+                    examGradesDAO.RemoveExamGrade(SelectedOcena.OcenaNaIspituId);
+                    Student.spisakIDNepolozenihPredmeta.Add(SelectedOcena.PredmetId);
+                    Student.spisakIDPolozenihPredmeta.Remove(SelectedOcena.PredmetId);
+                    Student.spisakIDOcena.Remove(SelectedOcena.PredmetId);
                     CalculateAverageGradeAndESPBSum();
-                    NepolozeniDataGrid.Items.Refresh();
-                    PolozeniDataGrid.Items.Refresh();
                 }
             }
             else
             {
                 MessageBox.Show("Please select a failed exam to take.", "Selection Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            Update();
         }
 
         private void CalculateAverageGradeAndESPBSum()
         {
-            if (SpisakPolozenihPredmeta.Count > 0)
+/*            if (SpisakPolozenihPredmeta.Count > 0)
             {
                 int sumOfGrades = SpisakPolozenihPredmeta.Sum(exam => exam.Ocena);
                 int sumOfESPB = SpisakPolozenihPredmeta.Sum(exam => exam.PredmetStudenta.ESPB);
@@ -310,7 +332,7 @@ namespace GUI.View.Student
             {
                 AverageGrade = 0;
                 ESPBSum = 0;
-            }
+            }*/
         }
     }
 }

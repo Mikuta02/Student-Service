@@ -107,7 +107,7 @@ namespace GUI.DTO
                 }
             }
         }
-/*        public string sifraPredmeta { get; set; }
+        public string sifraPredmeta { get; set; }
         public string SifraPredmeta
         {
             get
@@ -138,7 +138,24 @@ namespace GUI.DTO
                     OnPropertyChanged("Naziv");
                 }
             }
-        }*/
+        }
+
+        public int espb { get; set; }
+        public int ESPB
+        {
+            get
+            {
+                return espb;
+            }
+            set
+            {
+                if (espb != value)
+                {
+                    espb = value;
+                    OnPropertyChanged("ESPB");
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -161,8 +178,9 @@ namespace GUI.DTO
             datumPolaganja = examGrade.DatumPolaganja;
             studentPolozio = examGrade.StudentPolozio;
             predmetStudenta = examGrade.PredmetStudenta;
-/*            sifraPredmeta = examGrade.PredmetStudenta.SifraPredmeta;
-            naziv = examGrade.PredmetStudenta.Naziv;*/
+            sifraPredmeta = examGrade.PredmetStudenta.SifraPredmeta;
+            naziv = examGrade.PredmetStudenta.Naziv;
+            espb = examGrade.PredmetStudenta.ESPB;
         }
 
         protected virtual void OnPropertyChanged(string name)

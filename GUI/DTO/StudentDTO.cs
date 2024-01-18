@@ -174,19 +174,9 @@ namespace GUI.DTO
             }
         }
 
-        private List<Predmet> spisakNepolozenihPredmeta;
-        public List<Predmet> SpisakNepolozenihPredmeta
-        {
-            get { return spisakNepolozenihPredmeta; }
-            set
-            {
-                if (spisakNepolozenihPredmeta != value)
-                {
-                    spisakNepolozenihPredmeta = value;
-                    OnPropertyChanged("SpisakNepolozenihPredmeta");
-                }
-            }
-        }
+        public List<int> spisakIDNepolozenihPredmeta { get; set; }
+        public List<int> spisakIDPolozenihPredmeta { get; set; }
+        public List<int> spisakIDOcena { get; set; }
 
         public Student toStudent()
         {
@@ -195,6 +185,9 @@ namespace GUI.DTO
 
         public StudentDTO()
         {
+            spisakIDNepolozenihPredmeta = new List<int>();
+            spisakIDPolozenihPredmeta = new List<int>();
+            spisakIDOcena = new List<int>();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -211,8 +204,42 @@ namespace GUI.DTO
             brojIndeksa = student.BrojIndeksa.ToString();
             trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             statusStudenta = student.StatusStudenta.ToString();
+<<<<<<< HEAD
             prosecnaOcena = (float)student.ProsecnaOcena;
             spisakNepolozenihPredmeta = student.SpisakNepolozenihPredmeta;
+=======
+            prosecnaOcena = student.ProsecnaOcena;
+
+            spisakIDNepolozenihPredmeta = new List<int>();
+            spisakIDPolozenihPredmeta = new List<int>();
+            spisakIDOcena = new List<int>();
+
+            if (student.SpisakNepolozenihPredmeta.Any())
+            {
+                foreach (Predmet p in student.SpisakNepolozenihPredmeta)
+                {
+                    if (!spisakIDNepolozenihPredmeta.Contains(p.PredmetId))
+                    {
+                        spisakIDNepolozenihPredmeta.Add(p.PredmetId);
+                    }
+                }
+            }
+
+            if (student.SpisakPolozenihIspita.Any())
+            {
+                foreach (OcenaNaIspitu oi in student.SpisakPolozenihIspita)
+                {
+                    if (!spisakIDPolozenihPredmeta.Contains(oi.PredmetId))
+                    {
+                        spisakIDPolozenihPredmeta.Add(oi.PredmetId);
+                    }
+                    if (!spisakIDOcena.Contains(oi.OcenaNaIspituId))
+                    {
+                        spisakIDOcena.Add(oi.OcenaNaIspituId);
+                    }
+                }
+            }
+>>>>>>> 3093b365d1504961dc6a0964719ae47134b03b27
         }
 
         protected virtual void OnPropertyChanged(string name)
@@ -238,7 +265,9 @@ namespace GUI.DTO
             student.trenutnaGodinaStudija = this.TrenutnaGodinaStudija;
             student.statusStudenta = this.StatusStudenta;
             student.prosecnaOcena = this.ProsecnaOcena;
-            student.spisakNepolozenihPredmeta = this.SpisakNepolozenihPredmeta;
+            student.spisakIDNepolozenihPredmeta = this.spisakIDNepolozenihPredmeta;
+            student.spisakIDPolozenihPredmeta = this.spisakIDPolozenihPredmeta;
+            student.spisakIDOcena = this.spisakIDOcena;
 
             return student;
         }

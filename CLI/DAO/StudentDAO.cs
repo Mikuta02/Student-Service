@@ -103,7 +103,7 @@ namespace CLI.DAO
             return student;
         }
 
-        private Student? GetStudentById(int id)
+        public Student? GetStudentById(int id)
         {
             return _students.Find(s => s.StudentId == id);
         }
@@ -199,8 +199,7 @@ namespace CLI.DAO
             {
                 student.SpisakNepolozenihPredmeta.Add(predmet);
             }
-            StudentSubject.NotifyObservers();
-            //student.SpisakNepolozenihPredmeta.Add(predmet);
+            //StudentSubject.NotifyObservers();
         }
 
         public List<OcenaNaIspitu>? LoadSpisakPolozenihPredmeta(int studentId)

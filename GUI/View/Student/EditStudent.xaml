@@ -102,15 +102,23 @@
                 <Button Content="{ns:Loc Delete grade}" Margin="10,10,305,345" Click="btnPonistiOcenu_Click" Grid.Row="0" RenderTransformOrigin="0.611,0.659" />
 
                 <DataGrid x:Name="PolozeniDataGrid" AutoGenerateColumns="False" Margin="10,36,10,98" Grid.Row="0"
-                                  ItemsSource="{Binding Exams, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedItem="{Binding SelectedExam, UpdateSourceTrigger=PropertyChanged}"
+                                  ItemsSource="{Binding Ocene, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding SelectedOcena, UpdateSourceTrigger=PropertyChanged}"
                                   SelectionMode="Single" IsReadOnly="True" SelectionChanged="PolozeniDataGrid_SelectionChanged">
                     <DataGrid.Columns>
+<<<<<<< HEAD
                         <DataGridTextColumn Header="{ns:Loc Grade code}" Binding="{Binding PredmetStudenta.SifraPredmeta}" />
                         <DataGridTextColumn Header="{ns:Loc Grade title}" Binding="{Binding PredmetStudenta.Naziv}" />
                         <DataGridTextColumn Header="{ns:Loc ECTS}" Binding="{Binding PredmetStudenta.ESPB}" />
                         <DataGridTextColumn Header="{ns:Loc Grade}" Binding="{Binding Ocena}" />
                         <DataGridTextColumn Header="{ns:Loc Date of taking exam}" Binding="{Binding DatumPolaganja}" />
+=======
+                        <DataGridTextColumn Header="Sifra predmeta" Binding="{Binding SifraPredmeta}" />
+                        <DataGridTextColumn Header="Naziv predmeta" Binding="{Binding Naziv}" />
+                        <DataGridTextColumn Header="ESPB" Binding="{Binding ESPB}" />
+                        <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" />
+                        <DataGridTextColumn Header="Datum Polaganja" Binding="{Binding DatumPolaganja}" />
+>>>>>>> 3093b365d1504961dc6a0964719ae47134b03b27
                     </DataGrid.Columns>
 
                 </DataGrid>
@@ -128,16 +136,14 @@
 
         <TabItem Header="{ns:Loc Failed}">
             <Grid>
-                <!-- Buttons: Add, Remove, and Edit -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
                     <Button Content="{ns:Loc Add}" Width="75" Margin="0,0,10,0" Click="btnDodaj_Click" />
                     <Button Content="{ns:Loc Delete}" Width="75" Margin="0,0,10,0" Click="btnUkloni_Click" />
                     <Button Content="{ns:Loc Exam}" Width="75" Margin="0,0,10,0" Click="btnPolaganje_Click" />
                 </StackPanel>
 
-                <!-- DataGrid for listing subjects from List<Predmet> SpisakNepolozenihPredmeta -->
                 <DataGrid x:Name="NepolozeniDataGrid" AutoGenerateColumns="False" Margin="10,50,10,26"
-                                  ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
+                                  ItemsSource="{Binding NepolozeniPredmeti, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
                                   SelectionMode="Single" IsReadOnly="True" SelectionChanged="NepolozeniDataGrid_SelectionChanged">
 
