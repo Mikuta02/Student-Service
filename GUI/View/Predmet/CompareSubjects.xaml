@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:GUI.View.Predmet"
         xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="CompareSubjects" Height="450" Width="413">
+        Title="{ns:Loc CompareSubjects}" Height="450" Width="413">
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
-            <Button Content="All Students" Width="189" Margin="0,0,10,0" Click="btnAllPassed_Click" />
-            <Button Content="Compare Students" Width="182" Margin="0,0,10,00" Click="btnOnlySelectedPassed_Click" Height="26"  />
+            <Button Content="{ns:Loc All Students}" Width="189" Margin="0,0,10,0" Click="btnAllPassed_Click" />
+            <Button Content="{ns:Loc Compare Students}" Width="182" Margin="0,0,10,00" Click="btnOnlySelectedPassed_Click" Height="26"  />
         </StackPanel>
 
         <DataGrid x:Name="PredmetiDataGrid" AutoGenerateColumns="False" Margin="10,50,10,26"
@@ -19,8 +19,8 @@
                                   SelectionMode="Single" IsReadOnly="True" SelectionChanged="PredmetiDataGrid_SelectionChanged">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{ns:Loc Grade code}" Binding="{Binding SifraPredmeta}" />
-                <DataGridTextColumn Header="{ns:Loc Grade title}" Binding="{Binding Naziv}" />
+                <DataGridTextColumn Header="{ns:Loc Course code}" Binding="{Binding SifraPredmeta}" />
+                <DataGridTextColumn Header="{ns:Loc Title}" Binding="{Binding Naziv}" />
                 <DataGridTextColumn Header="{ns:Loc Year of study}" Binding="{Binding GodinaStudija}" />
                 <DataGridTextColumn Header="{ns:Loc Semester}" Binding="{Binding Semestar}" />
             </DataGrid.Columns>

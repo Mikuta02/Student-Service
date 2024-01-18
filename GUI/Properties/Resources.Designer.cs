@@ -133,6 +133,15 @@ namespace GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Svi studenti.
+        /// </summary>
+        internal static string All_Students {
+            get {
+                return ResourceManager.GetString("All Students", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prosek.
         /// </summary>
         internal static string Average {
@@ -192,6 +201,24 @@ namespace GUI.Properties {
         internal static string Code {
             get {
                 return ResourceManager.GetString("Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uporedi studente.
+        /// </summary>
+        internal static string Compare_Students {
+            get {
+                return ResourceManager.GetString("Compare Students", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uporedi predmete.
+        /// </summary>
+        internal static string CompareSubjects {
+            get {
+                return ResourceManager.GetString("CompareSubjects", resourceCulture);
             }
         }
         

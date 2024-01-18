@@ -141,6 +141,9 @@
   <data name="Adress" xml:space="preserve">
     <value>Adresa</value>
   </data>
+  <data name="All Students" xml:space="preserve">
+    <value>Svi studenti</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Prosek</value>
   </data>
@@ -161,6 +164,12 @@
   </data>
   <data name="Code" xml:space="preserve">
     <value>Sifra</value>
+  </data>
+  <data name="Compare Students" xml:space="preserve">
+    <value>Uporedi studente</value>
+  </data>
+  <data name="CompareSubjects" xml:space="preserve">
+    <value>Uporedi predmete</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>Potvrdi</value>
