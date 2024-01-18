@@ -35,8 +35,8 @@ namespace CLI.Console
             foreach (OcenaNaIspitu o in ocene)
             {
                 System.Console.WriteLine(o.PredmetStudenta);
-                System.Console.WriteLine("\nKURAC");
-                System.Console.WriteLine(o.StudentPolozio);
+                //System.Console.WriteLine("\nKURAC");
+                //System.Console.WriteLine(o.StudentPolozio);
             }
             foreach (Student o in students)
             {
@@ -44,10 +44,12 @@ namespace CLI.Console
                 {
                     //System.Console.WriteLine(p);
                 }
-                foreach(OcenaNaIspitu oi in o.SpisakPolozenihIspita)
+                //System.Console.WriteLine("\n");
+                foreach (OcenaNaIspitu oi in o.SpisakPolozenihIspita)
                 {
-                    //System.Console.WriteLine(oi);
+                    System.Console.WriteLine(oi);
                 }
+                //System.Console.WriteLine("\n\n");
             }
             foreach (Profesor p in profesors)
             {
@@ -58,7 +60,7 @@ namespace CLI.Console
             }
             foreach (Katedra k in deps)
             {
-                System.Console.WriteLine(k.Sef);
+               // System.Console.WriteLine(k.Sef);
                 /*                foreach(Profesor p in k.Profesori)
                                 {
                                     System.Console.WriteLine(p);
@@ -72,7 +74,7 @@ namespace CLI.Console
             profesDao.fillObjectsAndLists();
             subjectsDao.fillObjectsAndLists();
             departmentsDao.fillObjectsAndLists();
-            examGradesDao.fillObjectsAndLists(studentsDao, subjectsDao);
+            examGradesDao.fillObjectsAndLists();
         }
 
         public void RunMenu()

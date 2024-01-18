@@ -186,7 +186,7 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Prosek" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena}">
+                            <DataGridTextColumn Header="Prosek" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena, StringFormat=N2}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">

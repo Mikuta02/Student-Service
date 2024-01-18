@@ -99,6 +99,7 @@ namespace CLI.DAO
             oldOcenaNaIspitu.Ocena = ocena.Ocena;
             oldOcenaNaIspitu.DatumPolaganja = ocena.DatumPolaganja;
 
+            fillObjectsAndLists();
             _storage.Save(_ocene);
             ExamGradeSubject.NotifyObservers();
             return oldOcenaNaIspitu;
@@ -119,7 +120,7 @@ namespace CLI.DAO
             ExamGradeSubject.NotifyObservers();
             return ocena;
         }
-        private OcenaNaIspitu? GetGradeById(int id)
+        public OcenaNaIspitu? GetGradeById(int id)
         {
             return _ocene.Find(s => s.OcenaNaIspituId == id);
         }
@@ -129,12 +130,15 @@ namespace CLI.DAO
             return _ocene;
         }
         
-        public void fillObjectsAndLists(StudentDAO studentsDao, SubjectDAO subjectDAO)
+        public void fillObjectsAndLists()
         {
-            List<Student> students = studentsDao.GetAllStudents();
-            List<Predmet> subjects = subjectDAO.GetAllPredmets();
+            Storage<Predmet> _predmetiStorage = new Storage<Predmet>("predmet.txt");
+            List<Predmet> subjects = _predmetiStorage.Load();
 
-            foreach(OcenaNaIspitu ocena in GetAllGrades())
+            Storage<Student> _studentiStorage = new Storage<Student>("students.txt");
+            List<Student> students = _studentiStorage.Load();
+
+            foreach (OcenaNaIspitu ocena in GetAllGrades())
             {
                 ocena.StudentPolozio = students.Find(s => s.StudentId == ocena.StudentId); ;
                 ocena.PredmetStudenta = subjects.Find(s => s.PredmetId == ocena.PredmetId);
