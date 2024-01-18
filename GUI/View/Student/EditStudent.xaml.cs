@@ -28,7 +28,6 @@ namespace GUI.View.Student
     public partial class EditStudent : Window, INotifyPropertyChanged, IObserver
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-      //  public ObservableCollection<ExamGradeDTO> Exams { get; set; }
         private ExamGradesDAO examGradesDAO { get; set; }
         public ObservableCollection<StudentDTO> Students { get; set; }
         public StudentDTO Student { get; set; }
@@ -69,33 +68,25 @@ namespace GUI.View.Student
             }
         }
 
-        private List<CLI.Model.Predmet> AvailableSubjects { get; set; }
-
         public EditStudent(StudentDAO studentsDAO, StudentDTO selectedStudent, StudentSubjectDAO sbDAO)
         {
             InitializeComponent();
             DataContext = this;
 
-           // Exams = new ObservableCollection<ExamGradeDTO>();
             examGradesDAO = new ExamGradesDAO();
-            //examGradesDAO.ExamGradeSubject.Subscribe(this);
 
             Students = new ObservableCollection<StudentDTO>();
             this.studentsDAO = studentsDAO;
             studentSubjectDAO = sbDAO;
             subjectDAO = new SubjectDAO();
             Student = selectedStudent;
-            //studentsDAO.StudentSubject.Subscribe(this);
 
             NepolozeniPredmeti = new ObservableCollection<PredmetDTO>();
             SelectedPredmet = new PredmetDTO();
             Ocene = new ObservableCollection<ExamGradeDTO>();
             SelectedOcena = new ExamGradeDTO();
-            //SpisakPolozenihPredmeta = studentsDAO.LoadSpisakPolozenihPredmeta(selectedStudent.StudentId);
-            //SpisakNepolozenihPredmeta = studentsDAO.LoadSpisakNepolozenihPredmeta(selectedStudent.StudentId);
-            //NepolozeniDataGrid.ItemsSource = SpisakNepolozenihPredmeta;
-            //PolozeniDataGrid.ItemsSource = SpisakPolozenihPredmeta;
-            CalculateAverageGradeAndESPBSum();
+
+            //CalculateAverageGradeAndESPBSum();
             Update();
         }
 
@@ -128,7 +119,6 @@ namespace GUI.View.Student
 
         private bool ValidateFields()
         {
-            // Add validation logic for each field
             return !string.IsNullOrWhiteSpace(txtIme.Text) &&
                    !string.IsNullOrWhiteSpace(txtPrezime.Text) &&
                    dpDatumRodjenja.SelectedDate.HasValue &&
@@ -171,7 +161,6 @@ namespace GUI.View.Student
 
         private void btnUkloni_Click(object sender, RoutedEventArgs e)
         {
-            // Check if an item is selected in the NepolozeniDataGrid
             if (SelectedPredmet != null)
             {
                 var confirmationDialog = new ConfirmationWindow("Subject");
@@ -209,11 +198,7 @@ namespace GUI.View.Student
 
         }
 
- /*       private List<CLI.Model.Predmet> GetAvailableSubjects()
-        {
-            return studentSubjectDAO.GetAvailableSubjects(SpisakNepolozenihPredmeta, Student.StudentId, Student.TrenutnaGodinaStudija);
-        }
-*/
+
         public void Update()
         {
             studentsDAO.fillObjectsAndLists();
@@ -245,8 +230,9 @@ namespace GUI.View.Student
                         //MessageBox.Show("ocena nema predmet");
                     }
                 }
-
             }
+
+            CalculateAverageGradeAndESPBSum();
         }
 
         private void NepolozeniDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -283,7 +269,7 @@ namespace GUI.View.Student
                     Student.spisakIDOcena.Add(newExam.OcenaNaIspituId);
 
                     Student.spisakIDNepolozenihPredmeta.Remove(SelectedPredmet.PredmetId);
-                    CalculateAverageGradeAndESPBSum();
+                    //CalculateAverageGradeAndESPBSum();
                 }
             }
             else
@@ -307,9 +293,9 @@ namespace GUI.View.Student
                 {
                     examGradesDAO.RemoveExamGrade(SelectedOcena.OcenaNaIspituId);
                     Student.spisakIDNepolozenihPredmeta.Add(SelectedOcena.PredmetId);
+                    Student.spisakIDOcena.Remove(SelectedOcena.OcenaNaIspituId);
                     Student.spisakIDPolozenihPredmeta.Remove(SelectedOcena.PredmetId);
-                    Student.spisakIDOcena.Remove(SelectedOcena.PredmetId);
-                    CalculateAverageGradeAndESPBSum();
+                    //CalculateAverageGradeAndESPBSum();
                 }
             }
             else
@@ -321,18 +307,28 @@ namespace GUI.View.Student
 
         private void CalculateAverageGradeAndESPBSum()
         {
-/*            if (SpisakPolozenihPredmeta.Count > 0)
+            if (Ocene.Any())
             {
-                int sumOfGrades = SpisakPolozenihPredmeta.Sum(exam => exam.Ocena);
-                int sumOfESPB = SpisakPolozenihPredmeta.Sum(exam => exam.PredmetStudenta.ESPB);
-                AverageGrade = (double)sumOfGrades / SpisakPolozenihPredmeta.Count;
-                ESPBSum = sumOfESPB;
+                double sumaOcena = 0;
+                int sumaESPB = 0;
+                int count = 0;
+                foreach (int i in Student.spisakIDOcena)
+                {
+                    if (examGradesDAO.GetGradeById(i) != null)
+                    {
+                        sumaOcena += examGradesDAO.GetGradeById(i).Ocena;
+                        sumaESPB += examGradesDAO.GetGradeById(i).PredmetStudenta.ESPB;
+                        ++count;
+                    }
+                }
+                AverageGrade = sumaOcena/ count;
+                ESPBSum = sumaESPB;
             }
             else
             {
                 AverageGrade = 0;
                 ESPBSum = 0;
-            }*/
+            }
         }
     }
 }

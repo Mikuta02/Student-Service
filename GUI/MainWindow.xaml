@@ -192,10 +192,10 @@
                             </DataGridTextColumn>
 
 
-                            <DataGridTextColumn Header="{ns:Loc Average}" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena}">
-                                <DataGridTextColumn.HeaderStyle>
+                            <!-- <DataGridTextColumn Header="{ns:Loc Average, StringFormat=N2}" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena}">
+                            <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="ContentTemplate">
+                            <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -208,7 +208,7 @@
                                         <EventSetter Event="Click" Handler="DataGridColumnHeader_Click" />
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
+                            </DataGridTextColumn> -->
 
                         </DataGrid.Columns>
                     </DataGrid>

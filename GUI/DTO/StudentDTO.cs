@@ -205,8 +205,6 @@ namespace GUI.DTO
             trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             statusStudenta = student.StatusStudenta.ToString();
 
-            prosecnaOcena = student.ProsecnaOcena;
-
             spisakIDNepolozenihPredmeta = new List<int>();
             spisakIDPolozenihPredmeta = new List<int>();
             spisakIDOcena = new List<int>();
@@ -236,6 +234,18 @@ namespace GUI.DTO
                     }
                 }
             }
+
+            double sum = 0;
+            int count = 0;
+            if (student.SpisakPolozenihIspita.Any())
+            {
+                foreach (OcenaNaIspitu oi in student.SpisakPolozenihIspita)
+                {
+                    ++count;
+                    sum += oi.Ocena;
+                }
+            }
+            prosecnaOcena = sum/count;
 
         }
 

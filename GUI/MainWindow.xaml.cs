@@ -414,6 +414,8 @@ namespace GUI
 
         public void Update()
         {
+            //studentsDAO.fillObjectsAndLists();
+
             Students.Clear();
             foreach (Student student in studentsDAO.GetAllStudents()) Students.Add(new StudentDTO(student));
 

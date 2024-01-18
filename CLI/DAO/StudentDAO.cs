@@ -146,22 +146,32 @@ namespace CLI.DAO
             }
 
             //prosjecna
-            int sum = 0;
+            double sumaOcena = 0;
             int count = 0;
-            foreach(Student student in _students)
-            {
-               
-                foreach(OcenaNaIspitu oi in student.SpisakPolozenihIspita)
-                {
-                    sum += oi.Ocena;
-                    count++;
-                }
-                double average = (double)sum / count;
-                student.ProsecnaOcena = average;
-            }
-            
-            //adresa
             foreach(Student s in _students)
+            {
+                foreach (OcenaNaIspitu O in s.SpisakPolozenihIspita)
+                {
+                    if (O != null)
+                    {
+                        sumaOcena += O.Ocena;
+                        ++count;
+                    }
+                }
+                if (count!=0)
+                {
+                    s.ProsecnaOcena = sumaOcena / count;
+                }
+                else
+                {
+                    s.ProsecnaOcena = 0;
+                }
+                
+            }
+
+
+            //adresa
+            foreach (Student s in _students)
             {
                 Adresa? adresa = adresses.Find(p => p.AdresaId == s.AdresaId);
                 s.Adresa = adresa;
@@ -172,14 +182,16 @@ namespace CLI.DAO
         internal void PassOrFailExam(int studentId, int predmetId, OcenaNaIspitu ocena, bool v)
         {
             Student? student = GetStudentById(studentId);
-            Predmet? predmet = student.SpisakNepolozenihPredmeta.Find(s => s.PredmetId == predmetId);
+            
             if (v == true)
             {
+                Predmet? predmet = student.SpisakNepolozenihPredmeta.Find(s => s.PredmetId == predmetId);
                 student.SpisakNepolozenihPredmeta.Remove(predmet);
                 student.SpisakPolozenihIspita.Add(ocena);
             }
             else
             {
+                Predmet? predmet = ocena.PredmetStudenta;
                 student.SpisakPolozenihIspita.Remove(ocena);
                 student.SpisakNepolozenihPredmeta.Add(predmet);
             }
