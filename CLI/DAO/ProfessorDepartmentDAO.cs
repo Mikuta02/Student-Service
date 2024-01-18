@@ -5,23 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace CLI.DAO
 {
-    public class StudentSubjectDAO
+    public class ProfessorDepartmentDAO
     {
-        private readonly List<StudentPredmet> _studsub;
-        private readonly Storage<StudentPredmet> _storage;
+        private readonly List<ProfesorKatedra> _profkat;
+        private readonly Storage<ProfesorKatedra> _storage;
 
 
-        public StudentSubjectDAO()
+        public ProfessorDepartmentDAO()
         {
-            _storage = new Storage<StudentPredmet>("student_subject.txt");
-            _studsub = _storage.Load();
+            _storage = new Storage<ProfesorKatedra>("professor_department.txt");
+            _profkat = _storage.Load();
         }
 
-        public bool AddSubjectToStudent(int subjID, int studID)
+/*        public bool AddSubjectToStudent(int subjID, int studID)
         {
             SubjectDAO subjectDAO = new SubjectDAO();
             List<Predmet> _subjects = subjectDAO.GetAllPredmets();
@@ -39,61 +38,62 @@ namespace CLI.DAO
             //student.SpisakNepolozenihPredmeta.Add(predmet);
             StudentPredmet studentPredmet = new StudentPredmet(studID, subjID);
             //studentPredmet.StudentSubjectId = GenerateId();
-            _studsub.Add(studentPredmet);
-            _storage.Save(_studsub);
+            _profkat.Add(studentPredmet);
+            _storage.Save(_profkat);
             return true;
-        }
-
-/*        private int GenerateId()
-        {
-            if (_studsub.Count == 0) return 0;
-            return _studsub[^1].StudentSubjectId + 1;
         }*/
 
-        public bool RemoveSubjectFromStudent(int subjID, int studID)
+        /*        private int GenerateId()
+                {
+                    if (_studsub.Count == 0) return 0;
+                    return _studsub[^1].StudentSubjectId + 1;
+                }*/
+
+/*        public bool RemoveSubjectFromStudent(int subjID, int studID)
         {
-            int indexToRemove = _studsub.FindIndex(ss => ss.StudentId == studID && ss.SubjectId == subjID);
+            int indexToRemove = _profkat.FindIndex(ss => ss.StudentId == studID && ss.SubjectId == subjID);
             if (indexToRemove == -1) return false;
 
-            _studsub.RemoveAt(indexToRemove);
-            _storage.Save(_studsub);
+            _profkat.RemoveAt(indexToRemove);
+            _storage.Save(_profkat);
             return true;
+        }*/
+
+/*        private bool DoesStudSubExist(int studID, int subjID)
+        {
+            return _profkat.Any(ss => ss.StudentId == studID && ss.SubjectId == subjID);
+        }*/
+
+        public List<ProfesorKatedra> GetAllStudentSubject()
+        {
+            return _profkat;
         }
 
-        private bool DoesStudSubExist(int studID, int subjID)
-         {
-            return _studsub.Any(ss => ss.StudentId == studID && ss.SubjectId == subjID);
-         }
-
-        public List<StudentPredmet> GetAllStudentSubject()
+/*        public void RemoveByStudentID(int id)
         {
-            return _studsub;
-        }
-
-        public void RemoveByStudentID(int id)
-        {
-            foreach (StudentPredmet sp in _studsub)
+            foreach (StudentPredmet sp in _profkat)
             {
-                if(sp.StudentId == id)
+                if (sp.StudentId == id)
                 {
-                    _studsub.Remove(sp);
-                    _storage.Save(_studsub); 
+                    _profkat.Remove(sp);
+                    _storage.Save(_profkat);
                 }
             }
-        }
-        public void RemoveBySubjectID(int id)
+        }*/
+
+/*        public void RemoveBySubjectID(int id)
         {
-            foreach (StudentPredmet sp in _studsub)
+            foreach (StudentPredmet sp in _profkat)
             {
                 if (sp.SubjectId == id)
                 {
-                    _studsub.Remove(sp);
-                    _storage.Save(_studsub);
+                    _profkat.Remove(sp);
+                    _storage.Save(_profkat);
                 }
             }
-        }
+        }*/
 
-        public List<Predmet>? GetAvailableSubjects(List<Predmet>? spisakNepolozenihPredmeta, int studentId, int trenutnaGodinaStudija)
+/*        public List<Predmet>? GetAvailableSubjects(List<Predmet>? spisakNepolozenihPredmeta, int studentId, int trenutnaGodinaStudija)
         {
             // mozada bude bug sa id studenta jer prije kloniranja se salje
             SubjectDAO subjectDAO = new SubjectDAO();
@@ -101,12 +101,12 @@ namespace CLI.DAO
             List<Predmet> availableSubjects = new List<Predmet>();
             foreach (Predmet sp in _subjects)
             {
-                if(!DoesStudSubExist(studentId, sp.PredmetId) && trenutnaGodinaStudija>=sp.GodinaStudija)
+                if (!DoesStudSubExist(studentId, sp.PredmetId) && trenutnaGodinaStudija >= sp.GodinaStudija)
                 {
                     availableSubjects.Add(sp);
                 }
             }
             return availableSubjects;
-        }
+        }*/
     }
 }

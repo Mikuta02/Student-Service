@@ -85,6 +85,8 @@ namespace CLI.DAO
             oldProfesor.Zvanje = profesor.Zvanje;
             oldProfesor.GodineStaza = profesor.GodineStaza;
 
+            fillObjectsAndLists();
+
             _storage.Save(_profesors);
             ProfesorSubject.NotifyObservers();
             return oldProfesor;
@@ -99,7 +101,7 @@ namespace CLI.DAO
             ProfesorSubject.NotifyObservers();
             return profesor;
         }
-        private Profesor? GetProfessorById(int id)
+        public Profesor? GetProfessorById(int id)
         {
             return _profesors.Find(s => s.ProfesorId == id);
         }
@@ -126,10 +128,22 @@ namespace CLI.DAO
             return _profesors;
         }
 
-        public void fillObjectsAndLists(SubjectDAO subjectsDao, AdressDAO addressesDao)
+        public void fillObjectsAndLists()
         {
-            List<Predmet> subjects = subjectsDao.GetAllPredmets();
-            List<Adresa> adresses = addressesDao.GetAllAdress();
+/*            List<Predmet> subjects = subjectsDao.GetAllPredmets();
+            List<Adresa> adresses = addressesDao.GetAllAdress();*/
+
+            Storage<Adresa> _adresaStorage = new Storage<Adresa>("adresses.txt");
+            List<Adresa> adresses = _adresaStorage.Load();
+
+            Storage<Predmet> _predmetiStorage = new Storage<Predmet>("predmet.txt");
+            List<Predmet> subjects = _predmetiStorage.Load();
+
+            //clear
+            foreach (Profesor prof in _profesors)
+            {
+                prof.Predmeti.Clear();
+            }
 
             //adresa
             foreach (Profesor prof in _profesors)
@@ -145,6 +159,27 @@ namespace CLI.DAO
                 Profesor? profesor = GetProfessorById(predmet.ProfesorID);
                 if(profesor == null) continue;
                 profesor.Predmeti.Add(predmet);
+            }
+        }
+
+        public List<Predmet>? LoadSpisakPredmeta(int profesorId)
+        {
+            Profesor? profesor = _profesors.Find(s => s.ProfesorId == profesorId);
+            return profesor.Predmeti;
+        }
+
+        public bool isProfessorEligible(int profesorId)
+        {
+            Profesor? profesor = GetProfessorById(profesorId);
+            if (profesor == null) return false;
+
+            if(profesor.Zvanje=="redovni profesor" && profesor.GodineStaza >= 5)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }   

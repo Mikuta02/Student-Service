@@ -1,4 +1,5 @@
 ﻿using CLI.Model;
+using CLI.Observer;
 using CLI.Storage;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,14 @@ namespace CLI.DAO
     {
         private readonly List<OcenaNaIspitu> _ocene;
         private readonly Storage<OcenaNaIspitu> _storage;
+        public Subject ExamGradeSubject;
 
 
         public ExamGradesDAO()
         {
             _storage = new Storage<OcenaNaIspitu>("grades.txt");
             _ocene = _storage.Load();
+            ExamGradeSubject = new Subject();
         }
 
         private int GenerateId()
@@ -40,12 +43,12 @@ namespace CLI.DAO
             }
             ocena.StudentPolozio = student;
             ocena.PredmetStudenta = subject;
-            // TO DO:
-            // POZVATI METODE IZ STUDENT DAO I PREDMET DAO GDJE SU SALJU ID-EVI PA UKLJANJAJU STUDENTI I PREDMETI SA NEPOLOZENIH LISTI A DODAJU NA POLOZENE LISTE
-            // VRATITI PREDMET ODNOSNO STUDENT NA NEPOLOZENE LISTE KAD SE IZBRISE EXAMGRADE OBJEKAT. TAKODJE FILLOBJECTS URADITI
-            // SAD ME MRZI A I NE TREBA ZA OVU KT2...
+            studentDAO.PassOrFailExam(student.StudentId, subject.PredmetId, ocena, true);
+            subjectDAO.PassOrFailExam(student.StudentId, subject.PredmetId, ocena, true);
+
             _ocene.Add(ocena);
             _storage.Save(_ocene);
+            ExamGradeSubject.NotifyObservers();
             return ocena;
         }
 
@@ -96,19 +99,28 @@ namespace CLI.DAO
             oldOcenaNaIspitu.Ocena = ocena.Ocena;
             oldOcenaNaIspitu.DatumPolaganja = ocena.DatumPolaganja;
 
+            fillObjectsAndLists();
             _storage.Save(_ocene);
+            ExamGradeSubject.NotifyObservers();
             return oldOcenaNaIspitu;
         }
         public OcenaNaIspitu? RemoveExamGrade(int id)
         {
+            StudentDAO studentDAO = new StudentDAO();
+            SubjectDAO subjectDAO = new SubjectDAO();
+
             OcenaNaIspitu? ocena = GetGradeById(id);
             if (ocena == null) return null;
 
+            studentDAO.PassOrFailExam(ocena.StudentId, ocena.PredmetId, ocena, false);
+            subjectDAO.PassOrFailExam(ocena.StudentId, ocena.PredmetId, ocena, false);
+
             _ocene.Remove(ocena);
             _storage.Save(_ocene);
+            ExamGradeSubject.NotifyObservers();
             return ocena;
         }
-        private OcenaNaIspitu? GetGradeById(int id)
+        public OcenaNaIspitu? GetGradeById(int id)
         {
             return _ocene.Find(s => s.OcenaNaIspituId == id);
         }
@@ -117,5 +129,31 @@ namespace CLI.DAO
         {
             return _ocene;
         }
+        
+        public void fillObjectsAndLists()
+        {
+            Storage<Predmet> _predmetiStorage = new Storage<Predmet>("predmet.txt");
+            List<Predmet> subjects = _predmetiStorage.Load();
+
+            Storage<Student> _studentiStorage = new Storage<Student>("students.txt");
+            List<Student> students = _studentiStorage.Load();
+
+            foreach (OcenaNaIspitu ocena in GetAllGrades())
+            {
+                ocena.StudentPolozio = students.Find(s => s.StudentId == ocena.StudentId); ;
+                ocena.PredmetStudenta = subjects.Find(s => s.PredmetId == ocena.PredmetId);
+            }
+        }
+
+        public bool didStudentPass(int studentId, int predmetId)
+        {
+            return _ocene.Any(o => o.StudentId == studentId && o.PredmetId == predmetId);
+        }
+
+        public OcenaNaIspitu GetGradeByStudentAndSubjectIds(int studentId, int predmetId)
+        {
+            return _ocene.FirstOrDefault(o => o.StudentId == studentId && o.PredmetId == predmetId);
+        }
+
     }
 }

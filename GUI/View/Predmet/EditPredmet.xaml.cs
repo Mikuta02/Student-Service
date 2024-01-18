@@ -1,5 +1,7 @@
 ﻿using CLI.DAO;
+using CLI.Model;
 using GUI.DTO;
+using GUI.View.DialogWindows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,15 +28,21 @@ namespace GUI.View.Predmet
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public PredmetDTO Predmet {  get; set; }
+        public PredmetDTO Predmet { get; set; }
         private SubjectDAO predmetsDAO { get; set; }
+        public ProfesorDTO Profesor { get; set; }
 
-        public EditPredmet(SubjectDAO predmetsDAO,PredmetDTO selectPredmet)
+        public EditPredmet(SubjectDAO predmetsDAO, PredmetDTO selectPredmet)
         {
             InitializeComponent();
             DataContext = this;
             this.predmetsDAO = predmetsDAO;
-            Predmet = selectPredmet; 
+            Predmet = selectPredmet;
+        }
+
+        void Update()
+        {
+            Predmet = new PredmetDTO(predmetsDAO.GetPredmetById(Predmet.PredmetId));
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -63,13 +71,53 @@ namespace GUI.View.Predmet
         {
             this.Close();
         }
+
+
+        private void AddProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            if (Predmet.ProfesorID == -1)
+            {
+                var selectProfesorWindow = new AddProfessorToSubject(predmetsDAO, Predmet);
+                selectProfesorWindow.Owner = this;
+                selectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                selectProfesorWindow.ShowDialog();
+                Update();
+            }
+        }
+
+        private void RemoveProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            if (Predmet.ProfesorID != -1)
+            {
+
+                var confirmationDialog = new ConfirmationWindow("Professor");
+                confirmationDialog.Owner = this;
+                confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                confirmationDialog.ShowDialog();
+
+                if (confirmationDialog.UserConfirmed)
+                {
+                    Predmet.ImeProfesoraKojiPredaje = "N/A";
+                    CLI.Model.Predmet pred = Predmet.toPredmet();
+                    pred.PredmetId = Predmet.PredmetId;
+                    pred.ProfesorID = -1;
+
+                    predmetsDAO.UpdatePredmet(pred);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Predmet ne predaje nijedan profesor", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            Update();
+        }
+
         private bool ValidateFields()
         {
             return !string.IsNullOrWhiteSpace(txtSifraPredmeta.Text) &&
                    !string.IsNullOrWhiteSpace(txtNaziv.Text) &&
                    cmbSemestar.SelectedItem != null &&
                    cmbGodinaStudija.SelectedItem != null &&
-                   !string.IsNullOrWhiteSpace(txtProfesorID.Text) &&
                    !string.IsNullOrWhiteSpace(txtESPB.Text);
         }
 

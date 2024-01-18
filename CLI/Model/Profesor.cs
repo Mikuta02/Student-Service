@@ -80,6 +80,8 @@ namespace CLI.Model
             BrojLicneKarte = brojLicneKarte;
             Zvanje = zvanje;
             GodineStaza = godineStaza;
+
+            Predmeti = new List<Predmet>();
         }
 
         public void FromCSV(string[] values)

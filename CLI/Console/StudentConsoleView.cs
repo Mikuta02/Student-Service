@@ -67,7 +67,7 @@ namespace CLI.Console
             System.Console.WriteLine("Uneti prosecnu ocenu studenta: ");
             float Prosjecna = ConsoleViewUtils.SafeInputFloat();
 
-            return new Student(Ime,Prezime,DatumRodjena, Adresa, Kontakt, Email, indeks, Godina, StatusStudenta, Prosjecna);
+            return new Student(Ime,Prezime,DatumRodjena, Adresa, Kontakt, Email, indeks, Godina, StatusStudenta);
         }
 
         private int InputId()

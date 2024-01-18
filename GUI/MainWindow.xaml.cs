@@ -14,6 +14,10 @@ using System.Windows.Threading;
 using CLI.Observer;
 using GUI.View.DialogWindows;
 using GUI.View.Predmet;
+using System.ComponentModel;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+using GUI.View.Katedra;
 
 namespace GUI
 {
@@ -36,13 +40,7 @@ namespace GUI
             set { SetValue(CurrentTabProperty, value); }
         }
 
-        private static void OnCurrentTabChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is MainWindow mainWindow)
-            {
-                mainWindow.UpdateTabStatus();
-            }
-        }
+
         public ObservableCollection<StudentDTO> Students { get; set; }
         public StudentDTO SelectedStudent { get; set; }
         private StudentDAO studentsDAO { get; set; }
@@ -52,10 +50,13 @@ namespace GUI
         public ObservableCollection<PredmetDTO> Predmets {  get; set; }
         public PredmetDTO SelectedPredmet {  get; set; }
         private SubjectDAO predmetsDAO { get; set; }
+        public ObservableCollection<KatedraDTO> Katedre { get; set; }
+        public KatedraDTO SelectedKatedra { get; set; }
+        private DepartmentDAO departmentsDAO { get; set; }
         private ExamGradesDAO examGradesDAO { get; set; }
         private AdressDAO adressesDAO { get; set; }
-        private DepartmentDAO departmentsDAO { get; set; }
         private StudentSubjectDAO studentSubjectDAO { get; set; }
+        private ProfessorDepartmentDAO professorDepartmentDAO { get; set; }
 
         public MainWindow()
         {
@@ -77,22 +78,27 @@ namespace GUI
             predmetsDAO = new SubjectDAO();
             predmetsDAO.PredmetSubject.Subscribe(this);
 
+            Katedre = new ObservableCollection<KatedraDTO>();
+            departmentsDAO = new DepartmentDAO();
+            departmentsDAO.DepartmentSubject.Subscribe(this);
+
             examGradesDAO = new ExamGradesDAO();
             adressesDAO = new AdressDAO();
-            departmentsDAO = new DepartmentDAO();
             studentSubjectDAO = new StudentSubjectDAO();
-
+            professorDepartmentDAO = new ProfessorDepartmentDAO();
+            fillObjects();
             CurrentTab = "Studenti";
-            fillObjects(studentsDAO, profesorsDAO, predmetsDAO, examGradesDAO, adressesDAO, departmentsDAO, studentSubjectDAO);
             UpdateTabStatus();
             Update();
         }
 
-        private void fillObjects(StudentDAO studentsDAO, ProfessorDAO profesorsDAO, SubjectDAO predmetsDAO, ExamGradesDAO examGradesDAO, AdressDAO adressesDAO, DepartmentDAO departmentsDAO, StudentSubjectDAO studentSubjectDAO)
+        private void fillObjects()
         {
-            studentsDAO.fillObjectsAndLists(studentSubjectDAO, predmetsDAO, adressesDAO);
-            profesorsDAO.fillObjectsAndLists(predmetsDAO, adressesDAO);
-            predmetsDAO.fillObjectsAndLists(studentsDAO, studentSubjectDAO, profesorsDAO);
+            studentsDAO.fillObjectsAndLists();
+            profesorsDAO.fillObjectsAndLists();
+            predmetsDAO.fillObjectsAndLists();
+            departmentsDAO.fillObjectsAndLists();
+            examGradesDAO.fillObjectsAndLists();
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
@@ -214,6 +220,13 @@ namespace GUI
                 addPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addPredmetWindow.ShowDialog();
             }
+            else if (MainTabControl.SelectedItem == DepartmentsTab)
+            {
+                var addKatedraWindow = new AddKatedra(departmentsDAO);
+                addKatedraWindow.Owner = this;
+                addKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                addKatedraWindow.ShowDialog();
+            }
         }
 
         private void DeleteEntityButton_Click(object sender, RoutedEventArgs e)
@@ -281,6 +294,25 @@ namespace GUI
                     }
                 }
             }
+            else if (MainTabControl.SelectedItem == DepartmentsTab)
+            {
+                if (SelectedKatedra == null)
+                {
+                    MessageBox.Show(this, "Please choose a department to delete!");
+                }
+                else
+                {
+                    var confirmationDialog = new ConfirmationWindow("Department");
+                    confirmationDialog.Owner = this;
+                    confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    confirmationDialog.ShowDialog();
+
+                    if (confirmationDialog.UserConfirmed)
+                    {
+                        departmentsDAO.RemoveDepartment(SelectedKatedra.katedraId);
+                    }
+                }
+            }
         }
 
         private void EditEntityButton_Click(object sender, RoutedEventArgs e)
@@ -298,7 +330,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editStudentWindow = new EditStudent(studentsDAO, SelectedStudent.Clone());
+                    var editStudentWindow = new EditStudent(studentsDAO, SelectedStudent.Clone(), studentSubjectDAO);
                     editStudentWindow.Owner = this;
                     editStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editStudentWindow.ShowDialog();
@@ -311,7 +343,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editsProfesorWindow = new EditProfesor(profesorsDAO, SelectedProfesor.Clone());
+                    var editsProfesorWindow = new EditProfesor(profesorsDAO, predmetsDAO, SelectedProfesor.Clone());
                     editsProfesorWindow.Owner = this;
                     editsProfesorWindow.WindowStartupLocation= WindowStartupLocation.CenterOwner;
                     editsProfesorWindow.ShowDialog();
@@ -331,13 +363,23 @@ namespace GUI
                     editSubjectWindow.ShowDialog();
                 }
             }
+            else if (MainTabControl.SelectedItem == DepartmentsTab)
+            {
+                if (SelectedKatedra == null)
+                {
+                    MessageBox.Show(this, "Please choose a department to edit!");
+                }
+                else
+                {
+                    var editDepartmentWindpw = new EditKatedra(departmentsDAO, SelectedKatedra.clone(), profesorsDAO);
+                    editDepartmentWindpw.Owner = this;
+                    editDepartmentWindpw.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    editDepartmentWindpw.ShowDialog();
+                }
+            }
             Update();
         }
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Search button clicked!");
-            // Add logic to perform the search based on the criteria
-        }
+       
 
         private void InitializeStatusBar()
         {
@@ -372,6 +414,9 @@ namespace GUI
             Profesors.Clear();
             foreach(Profesor profesor in profesorsDAO.GetAllProfessors()) Profesors.Add(new ProfesorDTO(profesor));
 
+            Katedre.Clear();
+            foreach (Katedra katedra in departmentsDAO.GetAllDepartments()) Katedre.Add(new KatedraDTO(katedra));
+
         }
 
         private void StudentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -404,5 +449,151 @@ namespace GUI
             // Postavite početni tab
             // CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
         }
+
+        private static void OnCurrentTabChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MainWindow mainWindow)
+            {
+                mainWindow.UpdateTabStatus();
+            }
+        }
+        private void DataGridColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridColumnHeader columnHeader = e.OriginalSource as DataGridColumnHeader;
+            if (columnHeader != null)
+            {
+                // Postavite logiku za sortiranje ovde
+
+                // Ako sortirate po ovoj koloni, promenite vidljivost strelice
+                Image sortArrow = FindChild<Image>(columnHeader, "SortArrowIme");
+                if (sortArrow != null)
+                {
+                    sortArrow.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                string controlName = child.GetValue(Control.NameProperty) as string;
+
+                if (controlName == childName)
+                {
+                    return child as T;
+                }
+                else
+                {
+                    T result = FindChild<T>(child, childName);
+                    if (result != null)
+                        return result;
+                }
+            }
+            return null;
+        }
+
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchTerm = searchTextBox.Text;
+
+
+
+            if (MainTabControl.SelectedItem == StudentsTab)
+            {
+                StudentsDataGrid.ItemsSource = FilterStudent(Students, searchTerm);
+            }
+            else if (MainTabControl.SelectedItem == ProffesorsTab)
+            {
+                ProfesorsDataGrid.ItemsSource = FilterProfesor(Profesors, searchTerm);
+            }
+            else
+            {
+                SubjectsDataGrid.ItemsSource = FilterSubject(Predmets, searchTerm);
+            }
+
+        }
+
+        private ObservableCollection<StudentDTO> FilterStudent(ObservableCollection<StudentDTO> originalCollection, string searchTerm)
+        {
+            // Razdvajanje unetog upita na reči i konverzija u mala slova
+            var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
+
+            // Filtriranje na osnovu broja unetih reči
+            switch (terms.Count)
+            {
+                case 1: // Samo prezime
+                    return new ObservableCollection<StudentDTO>(
+                        originalCollection.Where(studentDto =>
+                            studentDto.Prezime.ToLower().Contains(terms[0]))
+                    );
+
+                case 2: // Prezime i ime
+                    return new ObservableCollection<StudentDTO>(
+                        originalCollection.Where(studentDto =>
+                            studentDto.Prezime.ToLower().Contains(terms[0]) &&
+                            studentDto.Ime.ToLower().Contains(terms[1]))
+                    );
+
+                case 3: // Indeks, ime i prezime
+                    return new ObservableCollection<StudentDTO>(
+                        originalCollection.Where(studentDto =>
+                            studentDto.BrojIndeksa.ToLower().Contains(terms[0]) &&
+                            studentDto.Ime.ToLower().Contains(terms[1]) &&
+                            studentDto.Prezime.ToLower().Contains(terms[2]))
+                    );
+
+                default:
+                    return originalCollection;
+            }
+        }
+        private ObservableCollection<ProfesorDTO> FilterProfesor(ObservableCollection<ProfesorDTO> originalCollection, string searchTerm)
+        {
+            var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
+
+
+            switch (terms.Count)
+            {
+                case 1: // Samo prezime
+                    return new ObservableCollection<ProfesorDTO>(
+                        originalCollection.Where(profesorDTO =>
+                            profesorDTO.Prezime.ToLower().Contains(terms[0]))
+                    );
+
+                case 2: // Prezime i ime
+                    return new ObservableCollection<ProfesorDTO>(
+                        originalCollection.Where(profesorDTO =>
+                            profesorDTO.Prezime.ToLower().Contains(terms[0]) &&
+                            profesorDTO.Ime.ToLower().Contains(terms[1]))
+                    );
+
+                default:
+                    return originalCollection;
+            }
+        }
+        private ObservableCollection<PredmetDTO> FilterSubject(ObservableCollection<PredmetDTO> originalCollection, string searchTerm)
+        {
+            var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
+
+            switch (terms.Count())
+            {
+                case 1: // Samo sifra predmeta
+                    return new ObservableCollection<PredmetDTO>(
+                        originalCollection.Where(s => s.SifraPredmeta.ToLower().Contains(terms[0]))
+                        );
+
+                case 2: // Sifra i naziv predmeta
+                    return new ObservableCollection<PredmetDTO>(
+                        originalCollection.Where(s => s.SifraPredmeta.ToLower().Contains(terms[0]) &&
+                        s.Naziv.ToLower().Contains(terms[1]))
+                        );
+
+                default:
+                    return originalCollection;
+            }
+        }
+
     }
 }

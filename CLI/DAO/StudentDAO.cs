@@ -86,6 +86,7 @@ namespace CLI.DAO
             oldStudent.TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             oldStudent.ProsecnaOcena = student.ProsecnaOcena;
 
+            fillObjectsAndLists();
             _storage.Save(_students);
             StudentSubject.NotifyObservers();
             return oldStudent;
@@ -102,7 +103,7 @@ namespace CLI.DAO
             return student;
         }
 
-        private Student? GetStudentById(int id)
+        public Student? GetStudentById(int id)
         {
             return _students.Find(s => s.StudentId == id);
         }
@@ -112,28 +113,99 @@ namespace CLI.DAO
             return _students;
         }
 
-        public void fillObjectsAndLists(StudentSubjectDAO studentSubjectDao, SubjectDAO subjectsDao, AdressDAO addressesDao)
+        public void fillObjectsAndLists()
         {
-            List<Predmet> subjects = subjectsDao.GetAllPredmets();
-            List<StudentPredmet> studentSubjects = studentSubjectDao.GetAllStudentSubject();
-            List<Adresa> adresses = addressesDao.GetAllAdress();
-            //spisak nepolozenih
-            foreach(StudentPredmet sp in studentSubjects)
+            Storage<Predmet> _predmetiStorage = new Storage<Predmet>("predmet.txt");
+            List<Predmet> subjects = _predmetiStorage.Load();
+
+            Storage<StudentPredmet> _studentSubStorage = new Storage<StudentPredmet>("student_subject.txt");
+            List<StudentPredmet> studentSubjects = _studentSubStorage.Load();
+
+            Storage<Adresa> _adresaStorage = new Storage<Adresa>("adresses.txt");
+            List<Adresa> adresses = _adresaStorage.Load();
+
+            ExamGradesDAO examGradesDAO = new ExamGradesDAO();
+
+            //spisak nepolozenih, polozenih
+            foreach (StudentPredmet sp in studentSubjects)
             {
                 Student? student = GetStudentById(sp.StudentId);
                 Predmet? predmet = subjects.Find(s => s.PredmetId == sp.SubjectId);
                 if (student != null && predmet!=null)
                 {
-                    student.SpisakNepolozenihPredmeta.Add(predmet);
+                    if (!examGradesDAO.didStudentPass(student.StudentId, predmet.PredmetId))
+                    {
+                        student.SpisakNepolozenihPredmeta.Add(predmet);
+                    }
+                    else
+                    {
+                        OcenaNaIspitu ocena = examGradesDAO.GetGradeByStudentAndSubjectIds(student.StudentId, predmet.PredmetId);
+                        student.SpisakPolozenihIspita.Add(ocena);
+                    }   
                 }
             }
+
+            //prosjecna
+            int sum = 0;
+            int count = 0;
+            foreach(Student student in _students)
+            {
+               
+                foreach(OcenaNaIspitu oi in student.SpisakPolozenihIspita)
+                {
+                    sum += oi.Ocena;
+                    count++;
+                }
+                double average = (double)sum / count;
+                student.ProsecnaOcena = average;
+            }
+            
             //adresa
             foreach(Student s in _students)
             {
                 Adresa? adresa = adresses.Find(p => p.AdresaId == s.AdresaId);
                 s.Adresa = adresa;
             }
-            
+            StudentSubject.NotifyObservers();
+        }
+
+        internal void PassOrFailExam(int studentId, int predmetId, OcenaNaIspitu ocena, bool v)
+        {
+            Student? student = GetStudentById(studentId);
+            Predmet? predmet = student.SpisakNepolozenihPredmeta.Find(s => s.PredmetId == predmetId);
+            if (v == true)
+            {
+                student.SpisakNepolozenihPredmeta.Remove(predmet);
+                student.SpisakPolozenihIspita.Add(ocena);
+            }
+            else
+            {
+                student.SpisakPolozenihIspita.Remove(ocena);
+                student.SpisakNepolozenihPredmeta.Add(predmet);
+            }
+
+        }
+
+        public List<Predmet>? LoadSpisakNepolozenihPredmeta(int studentId)
+        {
+            Student? student = _students.Find(s => s.StudentId == studentId);
+            return student.SpisakNepolozenihPredmeta;
+        }
+
+        internal void AddSubjectToNonPassed(Predmet predmet, int studentId)
+        {
+            Student? student = GetStudentById(studentId);
+            if(student != null)
+            {
+                student.SpisakNepolozenihPredmeta.Add(predmet);
+            }
+            //StudentSubject.NotifyObservers();
+        }
+
+        public List<OcenaNaIspitu>? LoadSpisakPolozenihPredmeta(int studentId)
+        {
+            Student? student = _students.Find(s => s.StudentId == studentId);
+            return student.SpisakPolozenihIspita;
         }
     }
 }

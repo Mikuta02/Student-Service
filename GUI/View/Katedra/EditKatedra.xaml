@@ -1,0 +1,89 @@
+﻿<Window x:Class="GUI.View.Katedra.EditKatedra"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View.Katedra"
+        mc:Ignorable="d"
+        Title="EditKatedra" Height="420" Width="380">
+    <TabControl>
+        <TabItem Header="Informacije">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Sifra Katedre:" Grid.Row="0"/>
+                    <TextBox Name="txtSifraKatedre" Text="{Binding Path=Katedra.SifraKatedre, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,3,0,5"/>
+
+                    <Label Content="Naziv Katedre:" Grid.Row="1"/>
+                    <TextBox Name="txtNazivKatedre" Text="{Binding Path=Katedra.NazivKatedre, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,3,0,5"/>
+
+                </Grid>
+
+                <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
+                    <Button Name="btnConfirm" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnConfirm_Click" />
+                    <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Profesori">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="31*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.ColumnSpan="2">
+                    <!--<Button Content="Dodaj" Width="75" Margin="0,0,10,0" Click="btnDodaj_Click" />
+                    <Button Content="Ukloni" Width="75" Margin="0,0,10,0" Click="btnUkloni_Click" />-->
+                    <Button Content="Postavi Sefa" Width="75" Margin="0,0,10,0" Click="btnPostavi_Click" />
+                </StackPanel>
+
+                <DataGrid x:Name="ProfesoriDataGrid" AutoGenerateColumns="False" Margin="10,50,10,26"
+                                  ItemsSource="{Binding Profesori, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectionMode="Single" IsReadOnly="True" Grid.ColumnSpan="2">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" />
+                        <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" />
+                        <DataGridTextColumn Header="Zvanje" Binding="{Binding Zvanje}" />
+                        <DataGridTextColumn Header="Godine staza" Binding="{Binding GodineStaza}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Predmeti">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="31*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="PredmetiDataGrid" AutoGenerateColumns="False" Margin="10,10,10,26"
+                                  ItemsSource="{Binding Predmeti, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectionMode="Single" IsReadOnly="True" Grid.ColumnSpan="2">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Sifra Predmeta" Binding="{Binding SifraPredmeta}" />
+                        <DataGridTextColumn Header="Naziv Predmeta" Binding="{Binding NazivPredmeta}" />
+                        <DataGridTextColumn Header="Ime Profesora" Binding="{Binding Profesor}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

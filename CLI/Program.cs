@@ -33,6 +33,7 @@ class Program
         //grades.AddOcenaNaIspitu(ocena1);
 
         ConsoleView view = new ConsoleView(students, professors, subjects, grades, adresses, departments, studentSubjects);
+
         view.RunMenu();
 
     }

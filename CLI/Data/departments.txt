@@ -1,0 +1,3 @@
+0|MM|Matematicka|0
+1|AC|Informaticka|2
+2|dasdsa|dasdasddd|0

@@ -12,7 +12,7 @@ namespace GUI.DTO
     {
         public int PredmetId { get; set; } //dodati get set zbog edita
         private string sifraPredmeta { get; set; }
-        public string  SifraPredmeta
+        public string SifraPredmeta
         {
             get
             {
@@ -20,14 +20,14 @@ namespace GUI.DTO
             }
             set
             {
-                if(sifraPredmeta != value)
+                if (sifraPredmeta != value)
                 {
                     sifraPredmeta = value;
                     OnPropertyChanged("SifraPredmeta");
                 }
             }
         }
-        private string naziv {  get; set; }
+        private string naziv { get; set; }
         public string Naziv
         {
             get
@@ -36,14 +36,14 @@ namespace GUI.DTO
             }
             set
             {
-                if(naziv != value)
+                if (naziv != value)
                 {
                     naziv = value;
                     OnPropertyChanged("Naziv");
                 }
             }
         }
-        private string semestar {  get; set; }
+        private string semestar { get; set; }
         public string Semestar
         {
             get
@@ -52,14 +52,14 @@ namespace GUI.DTO
             }
             set
             {
-                if(semestar != value)
+                if (semestar != value)
                 {
                     semestar = value;
                     OnPropertyChanged("Semestar");
                 }
             }
         }
-        private int godinaStudija {  get; set; }
+        private int godinaStudija { get; set; }
         public int GodinaStudija
         {
             get
@@ -68,14 +68,14 @@ namespace GUI.DTO
             }
             set
             {
-                if(godinaStudija != value)
+                if (godinaStudija != value)
                 {
                     godinaStudija = value;
                     OnPropertyChanged("GodinaStudija");
                 }
             }
         }
-        private int profesorID {  get; set; }
+        private int profesorID { get; set; }
         public int ProfesorID
         {
             get
@@ -84,14 +84,14 @@ namespace GUI.DTO
             }
             set
             {
-                if(profesorID != value)
+                if (profesorID != value)
                 {
                     profesorID = value;
                     OnPropertyChanged("ProfesorID");
                 }
             }
         }
-        private int espb {  get; set; }
+        private int espb { get; set; }
         public int ESPB
         {
             get
@@ -100,10 +100,27 @@ namespace GUI.DTO
             }
             set
             {
-                if(espb != value)
+                if (espb != value)
                 {
                     espb = value;
                     OnPropertyChanged("ESPB");
+                }
+            }
+        }
+
+        private string imeProfesoraKojiPredaje { get; set; }
+        public string ImeProfesoraKojiPredaje
+        {
+            get
+            {
+                return imeProfesoraKojiPredaje;
+            }
+            set
+            {
+                if (imeProfesoraKojiPredaje != value)
+                {
+                    imeProfesoraKojiPredaje = value;
+                    OnPropertyChanged("ImeProfesoraKojiPredaje");
                 }
             }
         }
@@ -128,10 +145,17 @@ namespace GUI.DTO
             naziv = predmet.Naziv;
             semestar = predmet.Semestar.ToString();
             godinaStudija = predmet.GodinaStudija;
-            profesorID= predmet.ProfesorID;
+            profesorID = predmet.ProfesorID;
             espb = predmet.ESPB;
 
-
+            if (predmet.ProfesorID == -1 || predmet.ProfesorPredmeta == null)
+            {
+                imeProfesoraKojiPredaje = "N/A";
+            }
+            else
+            {
+                imeProfesoraKojiPredaje = predmet.ProfesorPredmeta.Ime + " " + predmet.ProfesorPredmeta.Prezime;
+            }
         }
 
         protected virtual void OnPropertyChanged(string name)
@@ -152,6 +176,7 @@ namespace GUI.DTO
             predmet.semestar = this.Semestar;
             predmet.godinaStudija = this.GodinaStudija;
             predmet.profesorID = this.ProfesorID;
+            predmet.imeProfesoraKojiPredaje = this.imeProfesoraKojiPredaje;
             predmet.espb = this.ESPB;
 
             return predmet;
