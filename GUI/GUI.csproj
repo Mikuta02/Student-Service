@@ -20,6 +20,7 @@
     <None Remove="Images\olovka.png" />
     <None Remove="Images\open-in-app.png" />
     <None Remove="Images\pencil.png" />
+    <None Remove="Images\select-compare.png" />
     <None Remove="Images\sort.png" />
   </ItemGroup>
 
@@ -40,6 +41,7 @@
     <Resource Include="Images\olovka.png" />
     <Resource Include="Images\open-in-app.png" />
     <Resource Include="Images\pencil.png" />
+    <Resource Include="Images\select-compare.png" />
     <Resource Include="Images\sort.png" />
   </ItemGroup>
 

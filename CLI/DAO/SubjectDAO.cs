@@ -102,6 +102,8 @@ namespace CLI.DAO
                         List<Profesor> professors = profesDao.GetAllProfessors();*/
 
             ExamGradesDAO examGradesDao = new ExamGradesDAO();
+            Storage<OcenaNaIspitu> _examsStorage = new Storage<OcenaNaIspitu>("grades.txt");
+            List<OcenaNaIspitu> examGrades = _examsStorage.Load();
 
             Storage<Student> _studentStorage = new Storage<Student>("students.txt");
             List<Student> students = _studentStorage.Load();
@@ -117,11 +119,26 @@ namespace CLI.DAO
             {
                 Predmet? predmet = GetPredmetById(sp.SubjectId);
                 Student? student = students.Find(s => s.StudentId == sp.StudentId);
-                if (student != null && predmet != null && !examGradesDao.didStudentPass(student.StudentId, predmet.PredmetId))
+                if (student != null && predmet != null)
                 {
-                    predmet.StudentiNepolozili.Add(student);
+                    if (!examGradesDao.didStudentPass(student.StudentId, predmet.PredmetId))
+                    {
+                        predmet.StudentiNepolozili.Add(student);
+                    }
+                    else
+                    {
+                        OcenaNaIspitu ocena = examGradesDao.GetGradeByStudentAndSubjectIds(student.StudentId, predmet.PredmetId);
+                        predmet.StudentiPolozili.Add(student);
+                    }
                 }
             }
+
+            //spisak koji su polozili
+            foreach(StudentPredmet sp in studentSubjects)
+            {
+
+            }
+
             //profesor
             foreach (Predmet pred in _subjects)
             {

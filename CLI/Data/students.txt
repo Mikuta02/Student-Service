@@ -1,3 +1,4 @@
 0|Matislav|Vlatkovic|02.02.2002|0|066143567|mate@gmail.com|ra-122/2018|2|S
 2|Mihajlo|Djekic|03.06.2001|0|232|esdad|ra-20/2019|3|S
 3|Zvonimir|Vlastimirovic|02.02.2002|0|dasdasd|omajgod|ra-122/2021|3|B
+4|aaa|aaa|01.01.0001|0|aa|3132|ra-12/2000|4|S

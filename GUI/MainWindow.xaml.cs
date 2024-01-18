@@ -622,5 +622,33 @@ namespace GUI
             App.Current.Shutdown();
         }
 
+        private void CompareButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedPredmet == null)
+            {
+                MessageBox.Show(this, "Please choose a subject to compare!");
+            }
+            else
+            {
+                var compareSubjectsWindow = new CompareSubjects(predmetsDAO, SelectedPredmet.Clone(), studentsDAO);
+                compareSubjectsWindow.Owner = this;
+                compareSubjectsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                compareSubjectsWindow.ShowDialog();
+            }
+        }
+
+        private void TabSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainTabControl.SelectedItem == SubjectsTab)
+            {
+   
+                CompareButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CompareButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
     }
 }

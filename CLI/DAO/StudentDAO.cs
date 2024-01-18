@@ -219,5 +219,7 @@ namespace CLI.DAO
             Student? student = _students.Find(s => s.StudentId == studentId);
             return student.SpisakPolozenihIspita;
         }
+
+
     }
 }

@@ -1,7 +1,7 @@
 0|A1|Analiza 1|Letnji|1|9|0
 1|PJISP|prog jez i struk pod|Letnji|1|9|1
-2|A3|Analiza 3|Zimski|3|1562|-1
 3|OOP|Objektno|Letnji|2|8|1
 4|OLL|Osnove Lige Legendi|Letnji|3|8|-1
 5|ULP|Uvod u lizanje pizde|Zimski|2|2|1
 6|A1|Analiza 12|Letnji|1|9|0
+7|A3|Analiza 3|Zimski|2|9|0

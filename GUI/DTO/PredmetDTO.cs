@@ -125,6 +125,9 @@ namespace GUI.DTO
             }
         }
 
+        public List<int> spisakIDStudenataPolozili { get; set; }
+        public List<int> spisakIDStudenataNepolozili { get; set; }
+
         public Predmet toPredmet()
         {
             return new Predmet(sifraPredmeta, naziv, semestar, godinaStudija, profesorID, espb);
@@ -132,7 +135,8 @@ namespace GUI.DTO
 
         public PredmetDTO()
         {
-
+            spisakIDStudenataPolozili = new List<int>();
+            spisakIDStudenataNepolozili = new List<int>();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -156,6 +160,31 @@ namespace GUI.DTO
             {
                 imeProfesoraKojiPredaje = predmet.ProfesorPredmeta.Ime + " " + predmet.ProfesorPredmeta.Prezime;
             }
+
+            spisakIDStudenataPolozili = new List<int>();
+            spisakIDStudenataNepolozili = new List<int>();
+
+            if (predmet.StudentiPolozili.Any())
+            {
+                foreach (Student s in predmet.StudentiPolozili)
+                {
+                    if (!spisakIDStudenataPolozili.Contains(s.StudentId))
+                    {
+                        spisakIDStudenataPolozili.Add(s.StudentId);
+                    }
+                }
+            }
+
+            if (predmet.StudentiNepolozili.Any())
+            {
+                foreach (Student s in predmet.StudentiNepolozili)
+                {
+                    if (!spisakIDStudenataNepolozili.Contains(s.StudentId))
+                    {
+                        spisakIDStudenataNepolozili.Add(s.StudentId);
+                    }
+                }
+            }
         }
 
         protected virtual void OnPropertyChanged(string name)
@@ -178,6 +207,8 @@ namespace GUI.DTO
             predmet.profesorID = this.ProfesorID;
             predmet.imeProfesoraKojiPredaje = this.imeProfesoraKojiPredaje;
             predmet.espb = this.ESPB;
+            predmet.spisakIDStudenataPolozili = this.spisakIDStudenataPolozili;
+            predmet.spisakIDStudenataNepolozili = this.spisakIDStudenataNepolozili;
 
             return predmet;
         }

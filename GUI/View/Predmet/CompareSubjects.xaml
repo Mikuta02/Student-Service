@@ -1,0 +1,29 @@
+﻿<Window x:Class="GUI.View.Predmet.CompareSubjects"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View.Predmet"
+        xmlns:ns="clr-namespace:GUI.Localization"
+        mc:Ignorable="d"
+        Title="CompareSubjects" Height="450" Width="413">
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+            <Button Content="All Students" Width="189" Margin="0,0,10,0" Click="btnAllPassed_Click" />
+            <Button Content="Compare Students" Width="182" Margin="0,0,10,00" Click="btnOnlySelectedPassed_Click" Height="26"  />
+        </StackPanel>
+
+        <DataGrid x:Name="PredmetiDataGrid" AutoGenerateColumns="False" Margin="10,50,10,26"
+                                  ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding SelectedSubjectInCompare, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectionMode="Single" IsReadOnly="True" SelectionChanged="PredmetiDataGrid_SelectionChanged">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{ns:Loc Grade code}" Binding="{Binding SifraPredmeta}" />
+                <DataGridTextColumn Header="{ns:Loc Grade title}" Binding="{Binding Naziv}" />
+                <DataGridTextColumn Header="{ns:Loc Year of study}" Binding="{Binding GodinaStudija}" />
+                <DataGridTextColumn Header="{ns:Loc Semester}" Binding="{Binding Semestar}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

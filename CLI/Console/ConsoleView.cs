@@ -32,9 +32,22 @@ namespace CLI.Console
             List<Student> students = studentsDao.GetAllStudents();
             List<Profesor> profesors = profesDao.GetAllProfessors();
             List<Katedra> deps = departmentsDao.GetAllDepartments();
+            List<Predmet> predmets = subjectsDao.GetAllPredmets();
+            foreach(Predmet predmet in predmets)
+            {
+                System.Console.WriteLine(predmet);
+                foreach (Student student in predmet.StudentiPolozili)
+                {
+                   System.Console.WriteLine(student);
+                }
+                foreach(Student student in predmet.StudentiNepolozili)
+                {
+                   //System.Console.WriteLine(student);
+                }
+            }
             foreach (OcenaNaIspitu o in ocene)
             {
-                System.Console.WriteLine(o.PredmetStudenta);
+               // System.Console.WriteLine(o.PredmetStudenta);
                 //System.Console.WriteLine("\nKURAC");
                 //System.Console.WriteLine(o.StudentPolozio);
             }
@@ -47,7 +60,7 @@ namespace CLI.Console
                 //System.Console.WriteLine("\n");
                 foreach (OcenaNaIspitu oi in o.SpisakPolozenihIspita)
                 {
-                    System.Console.WriteLine(oi);
+                    //System.Console.WriteLine(oi);
                 }
                 //System.Console.WriteLine("\n\n");
             }
