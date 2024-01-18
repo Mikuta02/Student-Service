@@ -6,17 +6,19 @@
         xmlns:local="clr-namespace:GUI"
         xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="500" Width="800"
         KeyDown="MainWindow_KeyDown">
     <Grid>
+        
         <Grid>
+                
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
+            
             <Menu Grid.Row="0">
                 <MenuItem Header="{ns:Loc File}">
                     <MenuItem Header="{ns:Loc New}" InputGestureText="Ctrl+N" Click="CreateEntityButton_Click">
@@ -97,6 +99,7 @@
             </ToolBarTray>
 
             <TabControl Grid.Row="2" x:Name="MainTabControl">
+
                 <TabItem x:Name="StudentsTab" Header="{ns:Loc Students}">
                     <DataGrid Height="350"
                               AutoGenerateColumns="False"
@@ -214,7 +217,7 @@
                     </DataGrid>
                 </TabItem>
                 <TabItem x:Name="ProffesorsTab" Header="{ns:Loc Professors}">
-                        <DataGrid Height="350"
+                    <DataGrid Height="350"
                             AutoGenerateColumns="False"
                             x:Name="ProfesorsDataGrid"
                             ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
@@ -460,13 +463,17 @@
                     </DataGrid>
                 </TabItem>
             </TabControl>
-
             <StatusBar Grid.Row="3" VerticalAlignment="Bottom">
                 <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
                 <TextBlock x:Name="statusTab"  HorizontalAlignment="Right" Margin="0,0,10,0">Tab:</TextBlock>
                 <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
                 <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
             </StatusBar>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Button Content="prethodna" Click="PrethodnaStranica_Click"/>
+                <TextBlock Text="{Binding CurrentPage}"/>
+                <Button Content="naredna" Click="NarednaStranica_Click"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
