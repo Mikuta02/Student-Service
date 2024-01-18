@@ -1,5 +1,6 @@
 ﻿using GUI.DTO;
 using CLI.DAO;
+using GUI.Localization;
 using CLI.Model;
 using GUI.View.MenuBar;
 using GUI.View.Student;
@@ -26,6 +27,10 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window, IObserver
     {
+        private App app;
+        private const string SRB = "sr-RS";
+        private const string ENG = "en-US";
+
         public static readonly DependencyProperty CurrentTabProperty =
             DependencyProperty.Register(
                 nameof(CurrentTab),
@@ -62,6 +67,10 @@ namespace GUI
         {
             InitializeComponent();
             MainTabControl.SelectionChanged += MainTabControl_SelectionChanged;
+
+            app = (App)Application.Current;
+            app.ChangeLanguage(SRB);
+           
 
             InitializeStatusBar();
             DataContext = this;
@@ -593,6 +602,22 @@ namespace GUI
                 default:
                     return originalCollection;
             }
+        }
+
+        private void MenuItem_Click_Serbian(object sender, RoutedEventArgs e)
+        {
+            app.ChangeLanguage(SRB);
+        }
+
+        private void MenuItem_Click_English(object sender, RoutedEventArgs e)
+        {
+            app.ChangeLanguage(ENG);
+        }
+
+
+        private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
         }
 
     }

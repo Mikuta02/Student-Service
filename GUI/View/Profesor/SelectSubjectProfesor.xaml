@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View.Profesor"
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="Izaberi predmet" Height="350" Width="300">
+        Title="{ns:Loc Chose subject}" Height="350" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,7 +14,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Predmeti:" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="0"/>
+        <Label Content="{ns:Loc Subjects}" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="0"/>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="10,5,10,5">
             <DataGrid AutoGenerateColumns="False"
@@ -22,15 +23,15 @@
                       SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
                       SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Sifra predmeta" Binding="{Binding SifraPredmeta}" />
-                    <DataGridTextColumn Header="Naziv predmeta" Binding="{Binding Naziv}" />
+                    <DataGridTextColumn Header="{ns:Loc Grade code}" Binding="{Binding SifraPredmeta}" />
+                    <DataGridTextColumn Header="{ns:Loc Grade title}" Binding="{Binding Naziv}" />
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
 
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10" Grid.Row="2">
-            <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
-            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+            <Button Name="btnAccept" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+            <Button Name="btnCancel" Content="{ns:Loc Cancel}" Width="75" Click="btnCancel_Click" />
         </StackPanel>
     </Grid>
 </Window>

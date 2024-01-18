@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         KeyDown="MainWindow_KeyDown">
@@ -17,51 +18,55 @@
             </Grid.RowDefinitions>
 
             <Menu Grid.Row="0">
-                <MenuItem Header="File">
-                    <MenuItem Header="New" InputGestureText="Ctrl+N" Click="CreateEntityButton_Click">
+                <MenuItem Header="{ns:Loc File}">
+                    <MenuItem Header="{ns:Loc New}" InputGestureText="Ctrl+N" Click="CreateEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/folder-plus.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Save" Click="SaveApp" InputGestureText="Ctrl+S">
+                    <MenuItem Header="{ns:Loc Save}" Click="SaveApp" InputGestureText="Ctrl+S">
                         <MenuItem.Icon>
                             <Image Source="Images/content-save.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Open">
+                    <MenuItem Header="{ns:Loc Open}">
                         <MenuItem.Icon>
                             <Image Source="Images/open-in-app.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
-                        <MenuItem Header="Studenti" InputGestureText="Ctrl+Alt+S" Click="MenuItem_Studenti_Click"></MenuItem>
-                        <MenuItem Header="Predmeti" InputGestureText="Ctrl+Alt+P" Click="MenuItem_Predmeti_Click"></MenuItem>
-                        <MenuItem Header="Profesori" InputGestureText="Ctrl+Alt+R" Click="MenuItem_Profesori_Click"></MenuItem>
-                        <MenuItem Header="Katedre" InputGestureText="Ctrl+Alt+K"></MenuItem>
+                        <MenuItem Header="{ns:Loc Students}" InputGestureText="Ctrl+Alt+S" Click="MenuItem_Studenti_Click"></MenuItem>
+                        <MenuItem Header="{ns:Loc Subjects}" InputGestureText="Ctrl+Alt+P" Click="MenuItem_Predmeti_Click"></MenuItem>
+                        <MenuItem Header="{ns:Loc Professors}" InputGestureText="Ctrl+Alt+R" Click="MenuItem_Profesori_Click"></MenuItem>
+                        <MenuItem Header="{ns:Loc Departments}" InputGestureText="Ctrl+Alt+K"></MenuItem>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem x:Name="CLOSE" Header="Close" Click="CloseApp_Execution" InputGestureText="ALT + F4">
+                    <MenuItem x:Name="CLOSE" Header="{ns:Loc Close}" Click="CloseApp_Execution" InputGestureText="ALT + F4">
                         <MenuItem.Icon>
                             <Image Source="Images/close-box.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Edit">
-                    <MenuItem Header="Edit" InputGestureText="Ctrl+E">
+                <MenuItem Header="{ns:Loc Edit}">
+                    <MenuItem Header="{ns:Loc Edit}" InputGestureText="Ctrl+E">
                         <MenuItem.Icon>
                             <Image Source="Images/pencil.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Delete" InputGestureText="Delete" Click="DeleteEntityButton_Click">
+                    <MenuItem Header="{ns:Loc Delete}" InputGestureText="Delete" Click="DeleteEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/delete.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Help">
-                    <MenuItem Header="About" Click="OpenAboutWindow" InputGestureText="Ctrl + H">
+                <MenuItem Header="{ns:Loc Help}">
+                    <MenuItem Header="{ns:Loc About}" Click="OpenAboutWindow" InputGestureText="Ctrl + H">
                         <MenuItem.Icon>
                             <Image Source="Images/information.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                </MenuItem>
+                <MenuItem Header="{ns:Loc Localization}">
+                    <MenuItem Header="{ns:Loc Serbian}" Click="MenuItem_Click_Serbian" InputGestureText="Ctrl + R"></MenuItem>
+                    <MenuItem Header="{ns:Loc English}" Click="MenuItem_Click_English" InputGestureText="Ctrl + E"></MenuItem>
                 </MenuItem>
             </Menu>
 
@@ -92,7 +97,7 @@
             </ToolBarTray>
 
             <TabControl Grid.Row="2" x:Name="MainTabControl">
-                <TabItem x:Name="StudentsTab" Header="Studenti">
+                <TabItem x:Name="StudentsTab" Header="{ns:Loc Students}">
                     <DataGrid Height="350"
                               AutoGenerateColumns="False"
                               x:Name="StudentsDataGrid"
@@ -100,14 +105,14 @@
                               SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
                               SelectionMode="Single" IsReadOnly="True" SelectionChanged="StudentsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Indeks" SortMemberPath="BrojIndeksa" Binding="{Binding BrojIndeksa}">
+                            <DataGridTextColumn Header="{ns:Loc Index}" SortMemberPath="BrojIndeksa" Binding="{Binding BrojIndeksa}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Indeks" />
+                                                        <TextBlock Text="{ns:Loc Index}" />
                                                         <Image x:Name="SortArrowIndeks" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -117,14 +122,14 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Ime" SortMemberPath="Ime" Binding="{Binding Ime}">
+                            <DataGridTextColumn Header="{ns:Loc Name}" SortMemberPath="Ime" Binding="{Binding Ime}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Ime" />
+                                                        <TextBlock Text="{ns:Loc FirstName}" />
                                                         <Image x:Name="SortArrowIme" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -134,14 +139,14 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Prezime" SortMemberPath="Prezime" Binding="{Binding Prezime}">
+                            <DataGridTextColumn Header="{ns:Loc LastName}" SortMemberPath="Prezime" Binding="{Binding Prezime}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Prezime" />
+                                                        <TextBlock Text="{ns:Loc LastName}" />
                                                         <Image x:Name="SortArrowPrezime" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -151,14 +156,14 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Godina Studija" SortMemberPath="TrenutnaGodinaStudija" Binding="{Binding TrenutnaGodinaStudija}">
+                            <DataGridTextColumn Header="{ns:Loc Year of study}" SortMemberPath="TrenutnaGodinaStudija" Binding="{Binding TrenutnaGodinaStudija}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Godina Studija" />
+                                                        <TextBlock Text="{ns:Loc Year of study}" />
                                                         <Image x:Name="SortArrowGodinaStudija" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -168,14 +173,14 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Status" SortMemberPath="StatusStudenta" Binding="{Binding StatusStudenta}">
+                            <DataGridTextColumn Header="{ns:Loc Status}" SortMemberPath="StatusStudenta" Binding="{Binding StatusStudenta}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Status" />
+                                                        <TextBlock Text="{ns:Loc Status}" />
                                                         <Image x:Name="SortArrowStatus" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -186,14 +191,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Prosek" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena}">
+                            <DataGridTextColumn Header="{ns:Loc Average}" SortMemberPath="ProsecnaOcena" Binding="{Binding ProsecnaOcena}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Prosek" />
+                                                        <TextBlock Text="{ns:Loc Average}" />
                                                         <Image x:Name="SortArrowProsek" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -207,7 +212,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem x:Name="ProffesorsTab" Header="Profesori">
+                <TabItem x:Name="ProffesorsTab" Header="{ns:Loc Professors}">
                         <DataGrid Height="350"
                             AutoGenerateColumns="False"
                             x:Name="ProfesorsDataGrid"
@@ -215,14 +220,14 @@
                             SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
                             SelectionMode="Single" IsReadOnly="True" SelectionChanged="ProfesorsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Ime" SortMemberPath="Ime" Binding="{Binding Ime}">
+                            <DataGridTextColumn Header="{ns:Loc Name}" SortMemberPath="Ime" Binding="{Binding Ime}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Ime" />
+                                                        <TextBlock Text="{ns:Loc FirstName}" />
                                                         <Image x:Name="SortArrowIme" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -233,14 +238,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Prezime" SortMemberPath="Prezime" Binding="{Binding Prezime}">
+                            <DataGridTextColumn Header="{ns:Loc LastName}" SortMemberPath="Prezime" Binding="{Binding Prezime}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Prezime" />
+                                                        <TextBlock Text="{ns:Loc LastName}" />
                                                         <Image x:Name="SortArrowPrezime" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -251,14 +256,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Zvanje" SortMemberPath="Zvanje" Binding="{Binding Zvanje}">
+                            <DataGridTextColumn Header="{ns:Loc Title}" SortMemberPath="Zvanje" Binding="{Binding Zvanje}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Zvanje" />
+                                                        <TextBlock Text="{ns:Loc Title}" />
                                                         <Image x:Name="SortArrowZvanje" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -269,14 +274,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Email" SortMemberPath="Email" Binding="{Binding Email}">
+                            <DataGridTextColumn Header="{ns:Loc Email}" SortMemberPath="Email" Binding="{Binding Email}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Email" />
+                                                        <TextBlock Text="{ns:Loc Email}" />
                                                         <Image x:Name="SortArrowEmail" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -289,7 +294,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem x:Name="SubjectsTab" Header="Predmeti">
+                <TabItem x:Name="SubjectsTab" Header="{ns:Loc Subjects}">
                     <DataGrid Height="350"
                             AutoGenerateColumns="False"
                             x:Name="SubjectsDataGrid"
@@ -297,14 +302,14 @@
                             SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
                             SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Sifra Predmeta" SortMemberPath="SifraPredmeta" Binding="{Binding SifraPredmeta}">
+                            <DataGridTextColumn Header="{ns:Loc Course code}" SortMemberPath="SifraPredmeta" Binding="{Binding SifraPredmeta}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Sifra Predmeta" />
+                                                        <TextBlock Text="{ns:Loc Course code}" />
                                                         <Image x:Name="SortArrowSifraPredmeta" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -315,14 +320,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Naziv" SortMemberPath="Naziv" Binding="{Binding Naziv}">
+                            <DataGridTextColumn Header="{ns:Loc Title}" SortMemberPath="Naziv" Binding="{Binding Naziv}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Naziv" />
+                                                        <TextBlock Text="{ns:Loc Title}" />
                                                         <Image x:Name="SortArrowNaziv" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -333,14 +338,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Semestar" SortMemberPath="Semestar" Binding="{Binding Semestar}">
+                            <DataGridTextColumn Header="{ns:Loc Semester}" SortMemberPath="Semestar" Binding="{Binding Semestar}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Semestar" />
+                                                        <TextBlock Text="{ns:Loc Semester}" />
                                                         <Image x:Name="SortArrowSemestar" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -351,14 +356,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Godina Studija" SortMemberPath="GodinaStudija" Binding="{Binding GodinaStudija}">
+                            <DataGridTextColumn Header="{ns:Loc Year of study}" SortMemberPath="GodinaStudija" Binding="{Binding GodinaStudija}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Godina Studija" />
+                                                        <TextBlock Text="{ns:Loc Year of study}" />
                                                         <Image x:Name="SortArrowGodinaStudija" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -369,14 +374,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="ESPB" SortMemberPath="ESPB" Binding="{Binding ESPB}">
+                            <DataGridTextColumn Header="{ns:Loc ECTS}" SortMemberPath="ESPB" Binding="{Binding ESPB}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="ESPB" />
+                                                        <TextBlock Text="{ns:Loc ECTS}" />
                                                         <Image x:Name="SortArrowESPB" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -390,7 +395,7 @@
 
                     </DataGrid>
                 </TabItem>
-                <TabItem x:Name="DepartmentsTab" Header="Departmani">
+                <TabItem x:Name="DepartmentsTab" Header="{ns:Loc Departments}">
                     <DataGrid Height="350"
                             AutoGenerateColumns="False"
                             x:Name="DepartmentsDataGrid"
@@ -398,14 +403,14 @@
                             SelectedItem="{Binding SelectedKatedra, UpdateSourceTrigger=PropertyChanged}"
                             SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Sifra Katedre" SortMemberPath="SifraKatedre" Binding="{Binding SifraKatedre}">
+                            <DataGridTextColumn Header="{ns:Loc Department code}" SortMemberPath="SifraKatedre" Binding="{Binding SifraKatedre}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Sifra Katedre" />
+                                                        <TextBlock Text="{ns:Loc Department code}" />
                                                         <Image x:Name="SortArrowSifraPredmeta" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -416,14 +421,14 @@
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Naziv Katedre" SortMemberPath="NazivKatedre" Binding="{Binding NazivKatedre}">
+                            <DataGridTextColumn Header="{ns:Loc Name of department}" SortMemberPath="NazivKatedre" Binding="{Binding NazivKatedre}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Naziv" />
+                                                        <TextBlock Text="{ns:Loc Name of department}" />
                                                         <Image x:Name="SortArrowNaziv" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -433,14 +438,14 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Sef" SortMemberPath="Sef" Binding="{Binding Sef}">
+                            <DataGridTextColumn Header="{ns:Loc Manager}" SortMemberPath="Sef" Binding="{Binding Sef}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Sef" />
+                                                        <TextBlock Text="{ns:Loc Manager}" />
                                                         <Image x:Name="SortArrowSifraPredmeta" Source="Images/sort.png" Width="12" Height="12" Margin="5,0,0,0" Visibility="Visible" />
                                                     </StackPanel>
                                                 </DataTemplate>

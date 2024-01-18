@@ -157,8 +157,8 @@ namespace GUI.DTO
                 }
             }
         }
-        private float prosecnaOcena {  get; set; }
-        public float ProsecnaOcena
+        private double prosecnaOcena {  get; set; }
+        public double ProsecnaOcena
         {
             get
             {
@@ -211,7 +211,7 @@ namespace GUI.DTO
             brojIndeksa = student.BrojIndeksa.ToString();
             trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             statusStudenta = student.StatusStudenta.ToString();
-            prosecnaOcena = student.ProsecnaOcena;
+            prosecnaOcena = (float)student.ProsecnaOcena;
             spisakNepolozenihPredmeta = student.SpisakNepolozenihPredmeta;
         }
 

@@ -6,8 +6,9 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:cliModel="clr-namespace:CLI.Model;assembly=CLI"
         xmlns:local="clr-namespace:GUI.View.Predmet"
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="EditPredmet" Height="420" Width="380">
+        Title="{ns:Loc EditSubject}" Height="420" Width="380">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -34,13 +35,13 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Sifra Predmeta:" Grid.Row="0"/>
+            <Label Content="{ns:Loc Grade code}" Grid.Row="0"/>
             <TextBox Name="txtSifraPredmeta" Text="{Binding Path=Predmet.SifraPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="Naziv:" Grid.Row="1"/>
+            <Label Content="{ns:Loc Title}" Grid.Row="1"/>
             <TextBox Name="txtNaziv" Text="{Binding Path=Predmet.Naziv, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="Semestar:" Grid.Row="2"/>
+            <Label Content="{ns:Loc Semester}" Grid.Row="2"/>
             <ComboBox Name="cmbSemestar" SelectedItem="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Width="178" Margin="0,0,0,5">
                 <ComboBox.ItemsSource>
                     <x:Array Type="{x:Type sys:String}">
@@ -50,7 +51,7 @@
                 </ComboBox.ItemsSource>
             </ComboBox>
 
-            <Label Content="Godina Studija:" Grid.Row="3"/>
+            <Label Content="{ns:Loc Year of study}" Grid.Row="3"/>
             <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Width="178" Margin="0,0,0,5">
                 <ComboBox.ItemsSource>
                     <x:Array Type="{x:Type sys:Int32}">
@@ -62,10 +63,10 @@
                 </ComboBox.ItemsSource>
             </ComboBox>
 
-            <Label Content="ESPB:" Grid.Row="4"/>
+            <Label Content="{ns:Loc ECTS}" Grid.Row="4"/>
             <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="Profesor:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+            <Label Content="{ns:Loc Professors }" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
             <TextBox Grid.Row="5"  Text="{Binding Path=Predmet.ImeProfesoraKojiPredaje, UpdateSourceTrigger=PropertyChanged}"
                      Height="20" Margin="6,0,100,0" Name="txtBoxProfesor" VerticalAlignment="Center" Grid.Column="1"/>
 
@@ -76,8 +77,8 @@
 
         <!-- Buttons: Confirm and Cancel in the center -->
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
-            <Button Name="btnConfirm" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnConfirm_Click" />
-            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+            <Button Name="btnConfirm" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnConfirm_Click" />
+            <Button Name="btnCancel" Content="{ns:Loc Cancel}" Width="75" Click="btnCancel_Click" />
         </StackPanel>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUI.Localization;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,9 @@ namespace GUI
     /// </summary>
     public partial class App : Application
     {
+        public void ChangeLanguage(string lang)
+        {
+            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo(lang);
+        }
     }
 }
