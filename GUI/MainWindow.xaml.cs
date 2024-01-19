@@ -63,6 +63,13 @@ namespace GUI
         private StudentSubjectDAO studentSubjectDAO { get; set; }
         private ProfessorDepartmentDAO professorDepartmentDAO { get; set; }
 
+        private int itemsPerPage = 16;
+        private int currentPage = 1;
+        private int totalStudents;
+        private int totalProfessors;
+        private int totalSubjects;
+        private int totalItems { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -236,6 +243,7 @@ namespace GUI
                 addKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addKatedraWindow.ShowDialog();
             }
+            Update();
         }
 
         private void DeleteEntityButton_Click(object sender, RoutedEventArgs e)
@@ -391,7 +399,6 @@ namespace GUI
 
         private void InitializeStatusBar()
         {
-            // Update date and time every second
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             timer.Tick += (sender, e) =>
             {
@@ -427,6 +434,68 @@ namespace GUI
             Katedre.Clear();
             foreach (Katedra katedra in departmentsDAO.GetAllDepartments()) Katedre.Add(new KatedraDTO(katedra));
 
+            totalStudents = Students.Count;
+            totalProfessors = Profesors.Count;
+            totalSubjects = Predmets.Count;
+
+            int totalStudentPages = (int)Math.Ceiling((double)totalStudents / itemsPerPage);
+            int totalProfessorPages = (int)Math.Ceiling((double)totalProfessors / itemsPerPage);
+            int totalSubjectPages = (int)Math.Ceiling((double)totalSubjects / itemsPerPage);
+            //UpdatePageInfo();
+            int startIndexStudents = (currentPage - 1) * itemsPerPage;
+            int endIndexStudents = Math.Min(startIndexStudents + itemsPerPage, totalStudents);
+            StudentsDataGrid.ItemsSource = Students.Skip(startIndexStudents).Take(itemsPerPage).ToList();
+
+            int startIndexProfessors = (currentPage - 1) * itemsPerPage;
+            int endIndexProfessors = Math.Min(startIndexProfessors + itemsPerPage, totalProfessors);
+            ProfesorsDataGrid.ItemsSource = Profesors.Skip(startIndexProfessors).Take(itemsPerPage).ToList();
+
+            int startIndexSubjects = (currentPage - 1) * itemsPerPage;
+            int endIndexSubjects = Math.Min(startIndexSubjects + itemsPerPage, totalSubjects);
+            SubjectsDataGrid.ItemsSource = Predmets.Skip(startIndexSubjects).Take(itemsPerPage).ToList();
+        }
+
+        /*        private void UpdatePageInfo()
+                {
+                    PageInfoText.Text = $"Page {currentPage} of {Math.Max(1, (int)Math.Ceiling((double)totalItems / itemsPerPage))}";
+                }*/
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            int totalItems = 0;
+
+            if (MainTabControl.SelectedItem == StudentsTab)
+            {
+                totalItems = totalStudents;
+            }
+            else if (MainTabControl.SelectedItem == ProffesorsTab)
+            {
+                totalItems = totalProfessors;
+            }
+            else if (MainTabControl.SelectedItem == SubjectsTab)
+            {
+                totalItems = totalSubjects;
+            }
+
+            if (currentPage < Math.Ceiling((double)totalItems / itemsPerPage))
+            {
+                currentPage++;
+                Update();
+            }
+        }
+
+        private void PreviousPage_Click()
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                Update();
+            }
+        }
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            PreviousPage_Click();
         }
 
         private void StudentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -456,7 +525,7 @@ namespace GUI
         }
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            // Postavite početni tab
+            
             // CurrentTab = ((TabItem)MainTabControl.SelectedItem).Header.ToString();
         }
 
@@ -472,9 +541,6 @@ namespace GUI
             DataGridColumnHeader columnHeader = e.OriginalSource as DataGridColumnHeader;
             if (columnHeader != null)
             {
-                // Postavite logiku za sortiranje ovde
-
-                // Ako sortirate po ovoj koloni, promenite vidljivost strelice
                 Image sortArrow = FindChild<Image>(columnHeader, "SortArrowIme");
                 if (sortArrow != null)
                 {
@@ -638,6 +704,10 @@ namespace GUI
 
         private void TabSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (currentPage == 2)
+            {
+                PreviousPage_Click();
+            }
             if (MainTabControl.SelectedItem == SubjectsTab)
             {
    

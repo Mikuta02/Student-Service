@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GUI.View.Predmet"
         xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="{ns:Loc CompareSubjects}" Height="450" Width="413">
+        Title="{ns:Loc CompareSubjects}" Height="450" Width="482">
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
             <Button Content="{ns:Loc All Students}" Width="189" Margin="0,0,10,0" Click="btnAllPassed_Click" />

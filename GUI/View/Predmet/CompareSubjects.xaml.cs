@@ -100,7 +100,7 @@ namespace GUI.View.Predmet
                     }
                     if (counter == 0)
                     {
-                        MessageBox.Show($"NEMA TAKVIH");
+                        MessageBox.Show($"Nema studenata koji slusaju oba predmeta");
                     }
                 }
             }
@@ -137,7 +137,7 @@ namespace GUI.View.Predmet
                     }
                     if (counter1 == 0)
                     {
-                        MessageBox.Show($"NEMA TAKVIH");
+                        MessageBox.Show($"Nema studenata koji su polozili {firstSubject.Naziv} predmet a nisu {SelectedSubjectInCompare.Naziv}");
                     }
 
                     MessageBox.Show($"Studenti koji su polozili {SelectedSubjectInCompare.Naziv} a nisu {firstSubject.Naziv}:");
@@ -157,7 +157,7 @@ namespace GUI.View.Predmet
                     }
                     if (counter2 == 0)
                     {
-                        MessageBox.Show($"NEMA TAKVIH");
+                        MessageBox.Show($"Nema studenata koji su polozili {SelectedSubjectInCompare.Naziv} a nisu {firstSubject.Naziv}");
                     }
                 }
             }

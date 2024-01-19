@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="EditStudent" Height="420" Width="426">
+        Title="EditStudent" Height="420" Width="480">
     <TabControl>
         <TabItem Header="{ns:Loc Informations}">
             <Grid>
@@ -21,7 +21,6 @@
                     <ColumnDefinition Width="220*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Labels and Input Fields in a Grid -->
                 <Grid Grid.Column="1" Margin="10,10,10,10" Grid.ColumnSpan="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -81,7 +80,6 @@
                     </ComboBox>
                 </Grid>
 
-                <!-- Buttons: Confirm and Cancel in the center -->
                 <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="31,0,0,10" Grid.Column="4">
                     <Button Name="btnConfirm" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnConfirm_Click" />
                     <Button Name="btnCancel" Content="{ns:Loc Cancel}" Width="75" Click="btnCancel_Click" />
@@ -115,9 +113,9 @@
                 </DataGrid>
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,301,56,0"/>
-                <TextBlock Text="{ns:Loc Average grade }" Margin="255,286,79,74" />
+                <TextBlock Text="{ns:Loc Average grade }" Margin="237,286,101,74" Width="NaN" />
                 <TextBlock x:Name="txtProsekOcena" Text="{Binding AverageGrade, StringFormat=N2}" Margin="349,286,12,72" />
-                <TextBlock Text="{ns:Loc ECTS sum}" Margin="255,307,93,53" />
+                <TextBlock Text="{ns:Loc ECTS sum}" Margin="237,307,116,53" Width="NaN" />
                 <TextBlock x:Name="txtSumaESPB" Text="{Binding ESPBSum}" Margin="349,307,38,53" />
             </Grid>
         </TabItem>

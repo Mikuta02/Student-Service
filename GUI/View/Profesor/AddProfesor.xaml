@@ -63,7 +63,6 @@
 
         </Grid>
 
-        <!-- Buttons: Confirm and Cancel in the center -->
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
             <Button Name="btnConfirm" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnConfirm_Click" />
             <Button Name="btnCancel" Content="{ns:Loc Cancel}" Width="75" Click="btnCancel_Click" />

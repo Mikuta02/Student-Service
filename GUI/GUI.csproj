@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\arrow-left-bold.png" />
+    <None Remove="Images\arrow-right-bold.png" />
     <None Remove="Images\close-box.png" />
     <None Remove="Images\closewindow.png" />
     <None Remove="Images\content-save.png" />
@@ -29,6 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\arrow-left-bold.png" />
+    <Resource Include="Images\arrow-right-bold.png" />
     <Resource Include="Images\close-box.png" />
     <Resource Include="Images\closewindow.png" />
     <Resource Include="Images\content-save.png" />

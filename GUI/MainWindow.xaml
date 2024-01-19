@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GUI"
         xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="471" Width="800"
         KeyDown="MainWindow_KeyDown">
     <Grid>
         <Grid>
@@ -98,12 +98,22 @@
                             <Image Source="Images/lupa.png" Width="16" Height="16" Margin="0,0,5,0"/>
                         </StackPanel>
                     </Button>
+                    <Button Click="PreviousPage_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/arrow-left-bold.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="NextPage_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/arrow-right-bold.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
                 </ToolBar>
             </ToolBarTray>
 
             <TabControl Grid.Row="2" x:Name="MainTabControl" SelectionChanged="TabSelectionChanged">
                 <TabItem x:Name="StudentsTab" Header="{ns:Loc Students}">
-                    <DataGrid Height="350"
+                    <DataGrid Height="361"
                               AutoGenerateColumns="False"
                               x:Name="StudentsDataGrid"
                               ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"

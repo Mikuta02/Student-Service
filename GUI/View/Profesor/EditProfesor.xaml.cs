@@ -120,7 +120,6 @@ namespace GUI.View.Profesor
 
         private bool ValidateFields()
         {
-            // Add validation logic for each field
             return !string.IsNullOrWhiteSpace(txtIme.Text) &&
                    !string.IsNullOrWhiteSpace(txtPrezime.Text) &&
                    dpDatumRodjenja.SelectedDate.HasValue &&

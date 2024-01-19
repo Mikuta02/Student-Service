@@ -20,7 +20,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{ns:Loc Subject code}" Binding="{Binding SifraPredmeta}" />
                 <DataGridTextColumn Header="{ns:Loc Subject}" Binding="{Binding Naziv}" />
-                <!-- Add more columns as needed -->
 
 
             </DataGrid.Columns>

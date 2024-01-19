@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GUI.View.Predmet.CompareSubjectsWindows"
         xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="CompareStudents" Height="450" Width="382">
+        Title="CompareStudents" Height="450" Width="418">
     <TabControl>
         <TabItem Header="Studenti Polozili 1.">
             <Grid>
