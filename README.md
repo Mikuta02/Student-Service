@@ -2,7 +2,7 @@
 
 ## Project Description
 The project involves modeling and implementing an information system for the student service. Key functionalities include managing entities like students, professors, subjects, and departments, with capabilities for adding, editing, deleting, and displaying these entities.
-Članovi tima:
+
 
 ## Screenshots
 ![primer1](https://github.com/Mikuta02/Student-Service/assets/149141997/4bc1b27e-022d-4504-8686-1ba26b0f83fd)
